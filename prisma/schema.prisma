@@ -1,0 +1,153 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Usuario {
+  id              Int     @id @default(autoincrement())
+  nombre          String
+  apellidoP       String
+  apellidoM       String?
+  email           String  @unique
+  contraseña      String
+  fotoPerfil      String?
+  preferencias    Json?
+  rol             String  @default("usuario")
+  fechaRegistro   DateTime @default(now())
+  nombreUsuario   String  @unique
+
+  recetas         Receta[]
+  comentarios     Comentario[]
+  calificaciones  Calificacion[]
+  favoritos       Favorito[]
+  listasCompra    ListaCompra[]
+  notificaciones  Notificacion[]
+  reportes        Reporte[]
+}
+
+model Receta {
+  id                Int     @id @default(autoincrement())
+  usuarioId         Int
+  titulo            String
+  descripcion       String
+  tiempoPreparacion Int
+  dificultad        String
+  porciones         Int
+  imagen            String
+  fechaCreacion     DateTime @default(now())
+  idTipoComida      Int
+  idTipoSabor       Int
+
+  usuario           Usuario @relation(fields: [usuarioId], references: [id])
+  tipoComida        TipoComida @relation(fields: [idTipoComida], references: [id])
+  tipoSabor         TipoSabor @relation(fields: [idTipoSabor], references: [id])
+  ingredientes      RecetaIngrediente[]
+  comentarios       Comentario[]
+  calificaciones    Calificacion[]
+  favoritos         Favorito[]
+
+  // Relación opuesta con Reporte
+  reportes          Reporte[]
+}
+
+
+model TipoComida {
+  id              Int     @id @default(autoincrement())
+  nombre          String  @unique
+  recetas         Receta[]
+}
+
+model TipoSabor {
+  id              Int     @id @default(autoincrement())
+  nombreSabor     String  @unique
+  recetas         Receta[]
+}
+
+model Ingrediente {
+  id              Int     @id @default(autoincrement())
+  nombre          String  @unique
+  recetas         RecetaIngrediente[]
+}
+
+model RecetaIngrediente {
+  id              Int     @id @default(autoincrement())
+  recetaId        Int
+  ingredienteId   Int
+  cantidad        String
+
+  receta         Receta       @relation(fields: [recetaId], references: [id])
+  ingrediente    Ingrediente  @relation(fields: [ingredienteId], references: [id])
+}
+
+model Comentario {
+  id              Int     @id @default(autoincrement())
+  usuarioId       Int
+  recetaId        Int
+  comentario      String
+  fechaComentario DateTime @default(now())
+
+  usuario         Usuario @relation(fields: [usuarioId], references: [id])
+  receta          Receta  @relation(fields: [recetaId], references: [id])
+
+  // Relación opuesta con Reporte
+  reportes        Reporte[]
+}
+
+model Calificacion {
+  id              Int     @id @default(autoincrement())
+  usuarioId       Int
+  recetaId        Int
+  puntuacion      Int
+  fechaCalificacion DateTime @default(now())
+
+  usuario        Usuario @relation(fields: [usuarioId], references: [id])
+  receta         Receta  @relation(fields: [recetaId], references: [id])
+}
+
+model Favorito {
+  id              Int     @id @default(autoincrement())
+  usuarioId       Int
+  recetaId        Int
+  fechaGuardado   DateTime @default(now())
+
+  usuario        Usuario @relation(fields: [usuarioId], references: [id])
+  receta         Receta  @relation(fields: [recetaId], references: [id])
+}
+
+model ListaCompra {
+  id              Int     @id @default(autoincrement())
+  usuarioId       Int
+  nombreIngrediente String
+  cantidad        Int
+  fechaCreacion   DateTime @default(now())
+
+  usuario        Usuario @relation(fields: [usuarioId], references: [id])
+}
+
+model Notificacion {
+  id              Int     @id @default(autoincrement())
+  usuarioId       Int
+  mensaje         String
+  leida           Boolean @default(false)
+  fechaNotificacion DateTime @default(now())
+
+  usuario        Usuario @relation(fields: [usuarioId], references: [id])
+}
+
+model Reporte {
+  id              Int     @id @default(autoincrement())
+  usuarioId       Int
+  recetaId        Int?
+  comentarioId    Int?
+  motivo         String
+  estado         String @default("pendiente")
+  fechaReporte   DateTime @default(now())
+
+  usuario        Usuario @relation(fields: [usuarioId], references: [id])
+  receta         Receta? @relation(fields: [recetaId], references: [id])
+  comentario     Comentario? @relation(fields: [comentarioId], references: [id])
+}
