@@ -19,6 +19,10 @@ export async function POST(req) {
     if (existingUser) {
       return NextResponse.json({ error: "El usuario ya existe" }, { status: 400 });
     }
+    
+    if (contrase_a.length < 8) {
+      return NextResponse.json({ error: "La contraseña debe tener al menos 8 caracteres" }, { status: 400 });
+    }
 
     // Hashear la contraseña antes de guardarla
     const hashedPassword = await bcrypt.hash(contrase_a, 10);
