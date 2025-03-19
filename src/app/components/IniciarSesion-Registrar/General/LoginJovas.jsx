@@ -1,11 +1,13 @@
 "use client"
 import React, { useState } from "react"
 import { signIn } from "next-auth/react"; // Importar la función signIn de NextAuth.js
+import { useRouter } from "next/navigation";
 
 const LoginJovas = () => {
   const [email, setEmail] = useState("")
   const [contraseña, setCon] = useState("")
   const [error, setError] = useState("")
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -17,6 +19,7 @@ const LoginJovas = () => {
     });
 
     if (result.error) {
+      console.error("Error al iniciar sesión:", result.error);
       setError(result.error);
     } else {
       console.log("Login exitoso", result);
@@ -67,8 +70,23 @@ const LoginJovas = () => {
             Iniciar sesión
           </button>
 
-          {/* Botón para Google */}
-      <button onClick={() => signIn("google")}>Iniciar sesión con Google</button>
+           {/* Contenedor para los botones adicionales */}
+           <div className="space-y-4">
+            {/* Botón para Google */}
+            <button
+              className="w-full px-4 py-2 font-semibold text-white bg-red-500 rounded-lg hover:bg-red-600"
+              onClick={() => signIn("google")}
+            >
+              Iniciar sesión con Google
+            </button>
+            {/* Botón para recuperar contraseña */}
+            <button
+              className="w-full px-4 py-2 font-semibold text-white bg-gray-500 rounded-lg hover:bg-gray-600 mt-4"
+              onClick={() => router.push("/reset-password")}
+            >
+              Recuperar contraseña
+            </button>
+          </div>
         </form>
         <p className="text-sm text-center text-gray-600">
           ¿No tienes cuenta?{" "}

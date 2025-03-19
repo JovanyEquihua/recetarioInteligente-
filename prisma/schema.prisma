@@ -8,27 +8,29 @@ datasource db {
 }
 
 model Usuario {
-  id             Int            @id @default(autoincrement())
-  nombre         String
-  apellidoP      String
-  apellidoM      String?
-  email          String         @unique
-  contraseña    String
-  fotoPerfil     String?
-  preferencias   Json?
-  rol            UserRole         @default(USUARIO)
-  fechaActualizado     DateTime       @updatedAt
-  cuentas                      Cuenta[]
-  fechaRegistro  DateTime       @default(now())
-  nombreUsuario  String         @unique
-  calificaciones Calificacion[]
-  comentarios    Comentario[]
-  favoritos      Favorito[]
-  listasCompra   ListaCompra[]
-  notificaciones Notificacion[]
-  recetas        Receta[]
-  reportes       Reporte[]
+  id               Int            @id @default(autoincrement())
+  nombre           String
+  apellidoP        String
+  apellidoM        String?
+  email            String         @unique
+  contraseña      String
+  fotoPerfil       String?
+  preferencias     Json?
+  fechaRegistro    DateTime       @default(now())
+  nombreUsuario    String         @unique
+  fechaActualizado DateTime       @updatedAt
+  rol              UserRole       @default(USUARIO)
+  verificado       Boolean        @default(false)
+  calificaciones   Calificacion[]
+  comentarios      Comentario[]
+  cuentas          Cuenta[]
+  favoritos        Favorito[]
+  listasCompra     ListaCompra[]
+  notificaciones   Notificacion[]
+  recetas          Receta[]
+  reportes         Reporte[]
 }
+
 model Cuenta {
   idUsuario         Int
   tipo              String
@@ -43,16 +45,16 @@ model Cuenta {
   session_state     String?
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
-  usuario           Usuario     @relation(fields: [idUsuario], references: [id], onDelete: Cascade)
+  usuario           Usuario  @relation(fields: [idUsuario], references: [id], onDelete: Cascade)
 
   @@id([provider, providerAccountId])
 }
 
 model VerificationToken {
-  id      String   @id @default(cuid())
-  email   String
+  email   String   @unique
   token   String   @unique
   expires DateTime
+  id      Int      @id @default(autoincrement())
 
   @@unique([email, token])
 }
@@ -87,7 +89,6 @@ model Receta {
   ingredientes      RecetaIngrediente[]
   reportes          Reporte[]
 }
-
 
 model TipoComida {
   id      Int      @id @default(autoincrement())
@@ -180,5 +181,4 @@ model Reporte {
 enum UserRole {
   ADMIN
   USUARIO
-
 }
