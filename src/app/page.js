@@ -1,5 +1,16 @@
 "use client";
 import { useState } from "react";
+import { z } from "zod";
+
+const registroSchema = z.object({
+  nombre: z.string().min(1, "El nombre es obligatorio"),
+  apellidoP: z.string().min(1, "El apellido paterno es obligatorio"),
+  apellidoM: z.string().min(1, "El apellido materno es obligatorio"),
+  email: z.string().email("El correo debe ser válido"),
+  contrase_a: z.string().min(8, "La contraseña debe tener al menos 8 caracteres"),
+  nombreUsuario: z.string().min(1, "El nombre de usuario es obligatorio"),
+  rol: z.enum(["USUARIO", "ADMIN", "MODERATOR"], "Rol inválido"),
+});
 
 export default function Home() {
   const [formData, setFormData] = useState({
@@ -20,6 +31,11 @@ export default function Home() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(formData);
+    const parseResult = registroSchema.safeParse(formData);
+    if (!parseResult.success) {
+      setMessage(parseResult.error.errors[0].message);
+      return;
+    }
     const res = await fetch("/api/registro", {
       method: "POST",
       headers: { "Content-Type": "application/json" },

@@ -1,14 +1,25 @@
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
+import { z } from "zod"; // Importamos Zod
 
 const prisma = new PrismaClient();
+
+// Esquema Zod para la validación de los datos de verificación
+const verificationSchema = z.object({
+  email: z.string().email("Correo electrónico no válido"),
+  token: z.string().min(6, "El código de verificación es inválido"),
+});
 
 export async function POST(req) {
   try {
     const { email, token } = await req.json();
 
-    if (!email || !token) {
-      return NextResponse.json({ error: "Faltan datos" }, { status: 400 });
+    // Validación con Zod
+    const parsedData = verificationSchema.safeParse({ email, token });
+
+    if (!parsedData.success) {
+      // Si hay errores de validación, devolvemos un error
+      return NextResponse.json({ error: parsedData.error.errors[0].message }, { status: 400 });
     }
 
     // Buscar el código en la base de datos
