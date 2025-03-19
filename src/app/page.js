@@ -28,6 +28,12 @@ export default function Home() {
 
     const data = await res.json();
     setMessage(data.message || data.error);
+
+    if (data.message && data.message.includes("Usuario registrado")) {
+      setTimeout(() => {
+        window.location.href = '/verificar'; // Redirigir a la página de verificación
+      }, 5000); // 5 segundos
+    }
   };
 
   return (
