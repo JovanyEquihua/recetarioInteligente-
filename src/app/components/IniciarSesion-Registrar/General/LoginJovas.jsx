@@ -2,6 +2,7 @@
 import React, { useState } from "react"
 import { signIn } from "next-auth/react"; // Importar la función signIn de NextAuth.js
 import { useRouter } from "next/navigation";
+import RecuperarContra from "./RecuperarContra";
 
 const LoginJovas = () => {
   const [email, setEmail] = useState("")
@@ -80,14 +81,13 @@ const LoginJovas = () => {
               Iniciar sesión con Google
             </button>
             {/* Botón para recuperar contraseña */}
-            <button
-              className="w-full px-4 py-2 font-semibold text-white bg-gray-500 rounded-lg hover:bg-gray-600 mt-4"
-              onClick={() => router.push("/reset-password")}
-            >
-              Recuperar contraseña
-            </button>
+      
+       
           </div>
         </form>
+        <h1>
+              <RecuperarContra/>
+            </h1>
         <p className="text-sm text-center text-gray-600">
           ¿No tienes cuenta?{" "}
           <a href="#" className="text-blue-500 hover:underline">
