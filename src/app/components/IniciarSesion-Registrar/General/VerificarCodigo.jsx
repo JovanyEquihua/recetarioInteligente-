@@ -9,14 +9,28 @@ export default function VerificarCodigo() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
+    console.log("Token enviado:", token);
+    console.log("Email enviado:", email);
+    
+    try {
     const res = await fetch("/api/password/verify-token", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, token, newPassword }),
     });
+   
 
-    const data = await res.json();
-    setMensaje(data.message || data.error);
+    if (!res.ok) {
+      const text = await res.text(); // Capturar error como texto si no es JSON
+      throw new Error(text);
+    } 
+
+   const data = await res.json();
+      setMensaje(data.message);
+    } catch (error) {
+      console.error("Error en la verificación:", error);
+      setMensaje("Error al procesar la solicitud. Verifica el código e intenta de nuevooo.");
+    }
   };
 
   return (

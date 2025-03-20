@@ -10,7 +10,8 @@ export default function RecuperarContraseña() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('/api/password/reset-password',  {
+      const res = await fetch("/api/password/reset-password",  {
+       
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),

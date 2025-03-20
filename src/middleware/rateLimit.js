@@ -30,7 +30,7 @@ const rateLimit = () => {
       }
   
       // Si el número de intentos es mayor o igual a 5, bloquear la solicitud
-      if (data.count >= 20) {
+      if (data.count >= 5) {
         return false;
       }
   
