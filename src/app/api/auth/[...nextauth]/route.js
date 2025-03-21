@@ -6,6 +6,7 @@ import GoogleProvider from "next-auth/providers/google";
 import { db } from "@/libs/db";
 import bcrypt from "bcryptjs";
 import { limiter } from "@/middleware/rateLimit";
+import { getMaxAge } from "next/dist/server/image-optimizer";
 
 // Configuración de opciones de autenticación para NextAuth.js
 export const authOptions = {
@@ -85,6 +86,7 @@ export const authOptions = {
   // Configuración de la estrategia de sesión
   session: {
     strategy: "jwt",
+    maxAge : 1 * 60, // 30 minutos
   },
   // Páginas personalizadas para NextAuth.js
   pages: {
