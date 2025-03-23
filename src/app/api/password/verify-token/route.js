@@ -39,7 +39,7 @@ export async function POST(req) {
         // Actualizar la contraseña del usuario
         await db.usuario.update({
             where: { email },
-            data: { contraseña: hashedPassword },
+            data: { contrase_a: hashedPassword },
         });
 
         // Eliminar el token usado

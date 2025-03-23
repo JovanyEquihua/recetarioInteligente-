@@ -50,7 +50,7 @@ export const authOptions = {
         }
 
         // Comparar contraseñas
-        const passwordMatch = await bcrypt.compare(credentials.contraseña, user.contraseña);
+        const passwordMatch = await bcrypt.compare(credentials.contraseña, user.contrase_a);
         // Si las contraseñas no coinciden, lanzar un error
         if (!passwordMatch) {
           throw new Error("Credenciales inválidas contraseña");
