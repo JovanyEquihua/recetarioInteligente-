@@ -13,24 +13,23 @@ model Usuario {
   apellidoP        String
   apellidoM        String?
   email            String         @unique
-  contraseña      String
+  contrase_a       String         @map("contraseña")
   fotoPerfil       String?
   preferencias     Json?
   fechaRegistro    DateTime       @default(now())
   nombreUsuario    String         @unique
   fechaActualizado DateTime       @updatedAt
   rol              UserRole       @default(USUARIO)
-  verificado       Boolean        @default(false)
-  calificaciones   Calificacion[]
-  comentarios      Comentario[]
-  cuentas          Cuenta[]
-  favoritos        Favorito[]
-  listasCompra     ListaCompra[]
-  notificaciones   Notificacion[]
-  recetas          Receta[]
-  reportes         Reporte[]
+  verificado       Boolean	  @default(false)
+  Calificacion     Calificacion[]
+  Comentario       Comentario[]
+  Cuenta           Cuenta[]
+  Favorito         Favorito[]
+  ListaCompra      ListaCompra[]
+  Notificacion     Notificacion[]
+  Receta           Receta[]
+  Reporte          Reporte[]
 }
-
 model Cuenta {
   idUsuario         Int
   tipo              String

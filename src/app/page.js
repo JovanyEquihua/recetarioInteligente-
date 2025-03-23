@@ -1,6 +1,7 @@
 
-import LoginJovas from "./components/IniciarSesion-Registrar/General/LoginJovas";
 
+import LoginJovas from "./components/IniciarSesion-Registrar/General/LoginJovas";
+import Registrar from "./components/Registrar";
 
 
 export default function Home() {
@@ -8,9 +9,10 @@ export default function Home() {
  
   <div>
     <LoginJovas/>
-    
+    <Registrar/>
     </div>
 
    
   );
 }
+
