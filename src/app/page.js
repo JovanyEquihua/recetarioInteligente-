@@ -1,101 +1,126 @@
-import Image from "next/image";
+"use client";
+import { useState } from "react";
+import { z } from "zod";
+
+const registroSchema = z.object({
+  nombre: z.string().min(1, "El nombre es obligatorio"),
+  apellidoP: z.string().min(1, "El apellido paterno es obligatorio"),
+  apellidoM: z.string().min(1, "El apellido materno es obligatorio"),
+  email: z.string().email("El correo debe ser válido"),
+  contrase_a: z.string().min(8, "La contraseña debe tener al menos 8 caracteres"),
+  nombreUsuario: z.string().min(1, "El nombre de usuario es obligatorio"),
+  rol: z.enum(["USUARIO", "ADMIN", "MODERATOR"], "Rol inválido"),
+});
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [formData, setFormData] = useState({
+    nombre: "",
+    apellidoP: "",
+    apellidoM: "",
+    email: "",
+    contrase_a: "",
+    nombreUsuario: "",
+    rol: "USUARIO",
+  });
+  const [message, setMessage] = useState("");
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(formData);
+    const parseResult = registroSchema.safeParse(formData);
+    if (!parseResult.success) {
+      setMessage(parseResult.error.errors[0].message);
+      return;
+    }
+    const res = await fetch("/api/registro", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
+
+    const data = await res.json();
+    setMessage(data.message || data.error);
+
+    if (data.message && data.message.includes("Usuario registrado")) {
+      setTimeout(() => {
+        window.location.href = '/verificar'; // Redirigir a la página de verificación
+      }, 5000); // 5 segundos
+    }
+  };
+
+  return (
+    <div className="flex flex-col items-center justify-center min-h-screen p-8">
+      <h2 className="text-2xl font-bold mb-4">Registro</h2>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-80">
+        <input
+          type="text"
+          name="nombre"
+          placeholder="Nombre"
+          onChange={handleChange}
+          required
+          className="p-2 border rounded"
+        />
+        <input
+          type="text"
+          name="apellidoP"
+          placeholder="Apellido Paterno"
+          onChange={handleChange}
+          required
+          className="p-2 border rounded"
+        />
+        <input
+          type="text"
+          name="apellidoM"
+          placeholder="Apellido Materno"
+          onChange={handleChange}
+          required
+          className="p-2 border rounded"
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          onChange={handleChange}
+          required
+          className="p-2 border rounded"
+        />
+        <input
+          type="password"
+          name="contrase_a"
+          placeholder="Contraseña"
+          onChange={handleChange}
+          required
+          className="p-2 border rounded"
+        />
+        <input
+          type="text"
+          name="nombreUsuario"
+          placeholder="Nickname"
+          onChange={handleChange}
+          required
+          className="p-2 border rounded"
+        />
+        {/* Campo de selección para el rol */}
+        <select
+          name="rol"
+          value={formData.rol}
+          onChange={handleChange}
+          required
+          className="p-2 border rounded"
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          <option value="USUARIO">Usuario</option>
+          <option value="ADMIN">Administrador</option>
+          <option value="MODERATOR">Moderador</option>
+        </select>
+        <button type="submit" className="p-2 bg-blue-500 text-white rounded">
+          Registrarse
+        </button>
+      </form>
+      {message && <p className="mt-4 text-center">{message}</p>}
     </div>
   );
 }
