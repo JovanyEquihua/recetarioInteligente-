@@ -7,28 +7,29 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
-model Calificacion {
-  id                Int      @id @default(autoincrement())
-  usuarioId         Int
-  recetaId          Int
-  puntuacion        Int
-  fechaCalificacion DateTime @default(now())
-  Receta            Receta   @relation(fields: [recetaId], references: [id])
-  Usuario           Usuario  @relation(fields: [usuarioId], references: [id])
+model Usuario {
+  id               Int            @id @default(autoincrement())
+  nombre           String
+  apellidoP        String
+  apellidoM        String?
+  email            String         @unique
+  contrase_a       String         @map("contraseña")
+  fotoPerfil       String?
+  preferencias     Json?
+  fechaRegistro    DateTime       @default(now())
+  nombreUsuario    String         @unique
+  fechaActualizado DateTime       @updatedAt
+  rol              UserRole       @default(USUARIO)
+  verificado       Boolean	  @default(false)
+  Calificacion     Calificacion[]
+  Comentario       Comentario[]
+  Cuenta           Cuenta[]
+  Favorito         Favorito[]
+  ListaCompra      ListaCompra[]
+  Notificacion     Notificacion[]
+  Receta           Receta[]
+  Reporte          Reporte[]
 }
-
-model Comentario {
-  id              Int       @id @default(autoincrement())
-  usuarioId       Int
-  recetaId        Int
-  comentario      String
-  fechaComentario DateTime  @default(now())
-  Receta          Receta    @relation(fields: [recetaId], references: [id])
-  Usuario         Usuario   @relation(fields: [usuarioId], references: [id])
-  Reporte         Reporte[]
-}
-
 model Cuenta {
   idUsuario         Int
   tipo              String
@@ -42,47 +43,23 @@ model Cuenta {
   id_token          String?
   session_state     String?
   createdAt         DateTime @default(now())
-  updatedAt         DateTime
-  Usuario           Usuario  @relation(fields: [idUsuario], references: [id], onDelete: Cascade)
+  updatedAt         DateTime @updatedAt
+  usuario           Usuario  @relation(fields: [idUsuario], references: [id], onDelete: Cascade)
 
   @@id([provider, providerAccountId])
 }
 
-model Favorito {
-  id            Int      @id @default(autoincrement())
-  usuarioId     Int
-  recetaId      Int
-  fechaGuardado DateTime @default(now())
-  Receta        Receta   @relation(fields: [recetaId], references: [id])
-  Usuario       Usuario  @relation(fields: [usuarioId], references: [id])
-}
+model VerificationToken {
+  email   String   @unique
+  token   String   @unique
+  expires DateTime
+  id      Int      @id @default(autoincrement())
 
-model Ingrediente {
-  id                Int                 @id @default(autoincrement())
-  nombre            String              @unique
-  RecetaIngrediente RecetaIngrediente[]
-}
-
-model ListaCompra {
-  id                Int      @id @default(autoincrement())
-  usuarioId         Int
-  nombreIngrediente String
-  cantidad          Int
-  fechaCreacion     DateTime @default(now())
-  Usuario           Usuario  @relation(fields: [usuarioId], references: [id])
-}
-
-model Notificacion {
-  id                Int      @id @default(autoincrement())
-  usuarioId         Int
-  mensaje           String
-  leida             Boolean  @default(false)
-  fechaNotificacion DateTime @default(now())
-  Usuario           Usuario  @relation(fields: [usuarioId], references: [id])
+  @@unique([email, token])
 }
 
 model PasswordResetToken {
-  id      String   @id
+  id      String   @id @default(cuid())
   email   String
   token   String   @unique
   expires DateTime
@@ -102,14 +79,32 @@ model Receta {
   fechaCreacion     DateTime            @default(now())
   idTipoComida      Int
   idTipoSabor       Int
-  Calificacion      Calificacion[]
-  Comentario        Comentario[]
-  Favorito          Favorito[]
-  TipoComida        TipoComida          @relation(fields: [idTipoComida], references: [id])
-  TipoSabor         TipoSabor           @relation(fields: [idTipoSabor], references: [id])
-  Usuario           Usuario             @relation(fields: [usuarioId], references: [id])
-  RecetaIngrediente RecetaIngrediente[]
-  Reporte           Reporte[]
+  calificaciones    Calificacion[]
+  comentarios       Comentario[]
+  favoritos         Favorito[]
+  tipoComida        TipoComida          @relation(fields: [idTipoComida], references: [id])
+  tipoSabor         TipoSabor           @relation(fields: [idTipoSabor], references: [id])
+  usuario           Usuario             @relation(fields: [usuarioId], references: [id])
+  ingredientes      RecetaIngrediente[]
+  reportes          Reporte[]
+}
+
+model TipoComida {
+  id      Int      @id @default(autoincrement())
+  nombre  String   @unique
+  recetas Receta[]
+}
+
+model TipoSabor {
+  id          Int      @id @default(autoincrement())
+  nombreSabor String   @unique
+  recetas     Receta[]
+}
+
+model Ingrediente {
+  id      Int                 @id @default(autoincrement())
+  nombre  String              @unique
+  recetas RecetaIngrediente[]
 }
 
 model RecetaIngrediente {
@@ -117,8 +112,56 @@ model RecetaIngrediente {
   recetaId      Int
   ingredienteId Int
   cantidad      String
-  Ingrediente   Ingrediente @relation(fields: [ingredienteId], references: [id])
-  Receta        Receta      @relation(fields: [recetaId], references: [id])
+  ingrediente   Ingrediente @relation(fields: [ingredienteId], references: [id])
+  receta        Receta      @relation(fields: [recetaId], references: [id])
+}
+
+model Comentario {
+  id              Int       @id @default(autoincrement())
+  usuarioId       Int
+  recetaId        Int
+  comentario      String
+  fechaComentario DateTime  @default(now())
+  receta          Receta    @relation(fields: [recetaId], references: [id])
+  usuario         Usuario   @relation(fields: [usuarioId], references: [id])
+  reportes        Reporte[]
+}
+
+model Calificacion {
+  id                Int      @id @default(autoincrement())
+  usuarioId         Int
+  recetaId          Int
+  puntuacion        Int
+  fechaCalificacion DateTime @default(now())
+  receta            Receta   @relation(fields: [recetaId], references: [id])
+  usuario           Usuario  @relation(fields: [usuarioId], references: [id])
+}
+
+model Favorito {
+  id            Int      @id @default(autoincrement())
+  usuarioId     Int
+  recetaId      Int
+  fechaGuardado DateTime @default(now())
+  receta        Receta   @relation(fields: [recetaId], references: [id])
+  usuario       Usuario  @relation(fields: [usuarioId], references: [id])
+}
+
+model ListaCompra {
+  id                Int      @id @default(autoincrement())
+  usuarioId         Int
+  nombreIngrediente String
+  cantidad          Int
+  fechaCreacion     DateTime @default(now())
+  usuario           Usuario  @relation(fields: [usuarioId], references: [id])
+}
+
+model Notificacion {
+  id                Int      @id @default(autoincrement())
+  usuarioId         Int
+  mensaje           String
+  leida             Boolean  @default(false)
+  fechaNotificacion DateTime @default(now())
+  usuario           Usuario  @relation(fields: [usuarioId], references: [id])
 }
 
 model Reporte {
@@ -129,54 +172,9 @@ model Reporte {
   motivo       String
   estado       String      @default("pendiente")
   fechaReporte DateTime    @default(now())
-  Comentario   Comentario? @relation(fields: [comentarioId], references: [id])
-  Receta       Receta?     @relation(fields: [recetaId], references: [id])
-  Usuario      Usuario     @relation(fields: [usuarioId], references: [id])
-}
-
-model TipoComida {
-  id     Int      @id @default(autoincrement())
-  nombre String   @unique
-  Receta Receta[]
-}
-
-model TipoSabor {
-  id          Int      @id @default(autoincrement())
-  nombreSabor String   @unique
-  Receta      Receta[]
-}
-
-model Usuario {
-  id               Int            @id @default(autoincrement())
-  nombre           String
-  apellidoP        String
-  apellidoM        String?
-  email            String         @unique
-  contrase_a       String         @map("contraseña")
-  fotoPerfil       String?
-  preferencias     Json?
-  fechaRegistro    DateTime       @default(now())
-  nombreUsuario    String         @unique
-  fechaActualizado DateTime
-  rol              UserRole       @default(USUARIO)
-  verificado       Boolean	  @default(false)
-  Calificacion     Calificacion[]
-  Comentario       Comentario[]
-  Cuenta           Cuenta[]
-  Favorito         Favorito[]
-  ListaCompra      ListaCompra[]
-  Notificacion     Notificacion[]
-  Receta           Receta[]
-  Reporte          Reporte[]
-}
-
-model VerificationToken {
-  id      Int      @id @default(autoincrement())
-  email   String   @unique
-  token   String   @unique
-  expires DateTime
-
-  @@unique([email, token])
+  comentario   Comentario? @relation(fields: [comentarioId], references: [id])
+  receta       Receta?     @relation(fields: [recetaId], references: [id])
+  usuario      Usuario     @relation(fields: [usuarioId], references: [id])
 }
 
 enum UserRole {
