@@ -9,31 +9,36 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@prisma/client": "^6.4.1",
-    "@tailwindcss/postcss7-compat": "^2.2.17",
-    "autoprefixer": "^10.4.21",
+    "@headlessui/react": "^2.2.0",
+    "@heroicons/react": "^2.2.0",
+    "@prisma/client": "^6.5.0",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^3.0.2",
     "framer-motion": "^12.5.0",
+    "install": "^0.13.0",
     "next": "^15.2.1",
     "next-auth": "^4.24.11",
     "nodemailer": "^6.10.0",
+    "npm": "^11.2.0",
     "oidc-token-hash": "^5.1.0",
-    "postcss": "^8.5.3",
     "prisma": "^6.4.1",
     "react": "^19.0.0",
+    "react-awesome-reveal": "^4.3.1",
     "react-dom": "^19.0.0",
-    "tailwindcss": "^4.0.14",
+    "react-slick": "^0.30.3",
+    "slick-carousel": "^1.8.1",
     "zod": "^3.24.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
-    "@tailwindcss/postcss": "^4.0.14",
-    "autoprefixer": "^10.4.20",
+    "@tailwindcss/postcss": "^4.0.15",
+    "@types/node": "22.13.11",
+    "@types/react": "19.0.12",
+    "autoprefixer": "^10.4.21",
     "eslint": "^9",
     "eslint-config-next": "15.2.1",
     "postcss": "^8.5.3",
     "prisma": "^6.5.0",
-    "tailwindcss": "^4.0.9"
+    "tailwindcss": "^3.4.17"
   }
 }
