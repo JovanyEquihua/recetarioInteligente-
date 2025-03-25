@@ -15,8 +15,8 @@ export default function Home() {
  
   <div>
    
-    {/* <LoginJovas/>
-    <Registrar/> */}
+    <LoginJovas/>
+    {/* <Registrar/> */}
     <Banner/>
     <Features/>
     <Cook/>

@@ -33,7 +33,7 @@ const LoginJovas = () => {
     <div className="flex min-h-screen items-center justify-center bg-gray-100">
       <div className="w-full max-w-md p-8 space-y-6 bg-white shadow-md rounded-2xl">
         <h2 className="text-2xl font-bold text-center text-gray-800">
-          Iniciar Sesión 
+          Iniciar Sesión
         </h2>
 
         {error && (
@@ -73,7 +73,7 @@ const LoginJovas = () => {
           </div>
           <button
             type="submit"
-            className="w-full px-4 py-2 font-semibold text-white bg-blue-500 rounded-lg hover:bg-blue-600"
+            className="w-full px-4 py-2 font-semibold text-black bg-blue-500 rounded-lg hover:bg-blue-600"
           >
             Iniciar sesión
           </button>
@@ -82,7 +82,7 @@ const LoginJovas = () => {
            <div className="space-y-4">
             {/* Botón para Google */}
             <button
-              className="w-full px-4 py-2 font-semibold text-white bg-red-500 rounded-lg hover:bg-red-600"
+              className="w-full px-4 py-2 font-semibold text-black bg-red-500 rounded-lg hover:bg-red-600"
               onClick={() => signIn("google")}
             >
               Iniciar sesión con Google

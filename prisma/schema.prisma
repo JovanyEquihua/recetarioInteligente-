@@ -20,7 +20,7 @@ model Usuario {
   nombreUsuario    String         @unique
   fechaActualizado DateTime       @updatedAt
   rol              UserRole       @default(USUARIO)
-  verificado       Boolean	  @default(false)
+  verificado       Boolean        @default(false)
   Calificacion     Calificacion[]
   Comentario       Comentario[]
   Cuenta           Cuenta[]
@@ -30,6 +30,7 @@ model Usuario {
   Receta           Receta[]
   Reporte          Reporte[]
 }
+
 model Cuenta {
   idUsuario         Int
   tipo              String
