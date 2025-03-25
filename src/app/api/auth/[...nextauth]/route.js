@@ -3,10 +3,12 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-import { db } from "@/libs/db";
+import { db } from "../../../../libs/db";
 import bcrypt from "bcryptjs";
-import { limiter } from "@/middleware/rateLimit";
-import { getMaxAge } from "next/dist/server/image-optimizer";
+import { limiter } from "../../../../middleware/rateLimit";
+import logger from "../../../../utils/logger";
+import requestIp from "request-ip";
+
 
 // Configuración de opciones de autenticación para NextAuth.js
 export const authOptions = {
@@ -35,7 +37,7 @@ export const authOptions = {
         }
 
         // Limitar intentos de login a 5 por cada 15 minutos
-        if (!limiter(req)) {
+        if (!(await limiter(req))) {
           throw new Error("Demasiados intentos de inicio de sesión. Intenta más tarde.");
         }
 
@@ -44,8 +46,14 @@ export const authOptions = {
           where: { email: credentials.email },
         });
 
+        // Obtener información de la solicitud
+        const ip = requestIp.getClientIp(req) || "Desconocida";// Obtener IP del usuario
+        const timestamp = new Date().toISOString(); // Obtener timestamp actual
+
+
         // Si el usuario no existe, lanzar un error
         if (!user) {
+          logger.info({ email, ip, timestamp, status: "failed", reason: "Usuario no encontrado" });
           throw new Error("Credenciales inválidas usuario");
         }
 
@@ -53,8 +61,12 @@ export const authOptions = {
         const passwordMatch = await bcrypt.compare(credentials.contraseña, user.contrase_a);
         // Si las contraseñas no coinciden, lanzar un error
         if (!passwordMatch) {
+          logger.info({ email, ip, timestamp, status: "failed", reason: "Contraseña incorrecta" });
           throw new Error("Credenciales inválidas contraseña");
         }
+
+        // Registrar el inicio de sesión exitoso en el archivo de log
+        logger.info({ email: credentials.email, ip, timestamp, status: "success" });
 
         // Retornar los datos del usuario si la autenticación es exitosa
         return { id: user.id, nombre: user.nombre, email: user.email, rol: user.rol };
@@ -86,13 +98,14 @@ export const authOptions = {
   // Configuración de la estrategia de sesión
   session: {
     strategy: "jwt",
-    maxAge : 1 * 60, // 30 minutos
+    maxAge : 30 * 60, // 30 minutos
   },
   // Páginas personalizadas para NextAuth.js
   pages: {
     signIn: "/login", // Página de inicio de sesión
   },
 };
+
 
 // Definir el manejador de NextAuth.js con las opciones de autenticación
 const handler = NextAuth(authOptions);

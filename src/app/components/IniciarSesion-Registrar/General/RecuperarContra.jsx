@@ -47,7 +47,7 @@ export default function RecuperarContraseña() {
             />
             <button
               type="submit"
-              className="w-full mt-3 bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
+              className="w-full mt-3 bg-blue-500 text-black p-2 rounded hover:bg-blue-600"
             >
               Enviar código de verificación
             </button>

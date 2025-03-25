@@ -2,10 +2,11 @@ import nodemailer from "nodemailer";
 
 // Limitar intentos de login a 5 por cada 15 minutos
 
+// Mapa para almacenar los intentos de login por IP
+  const tokenMap = new Map();
+
 // Función para crear un limitador de tasa
 const rateLimit = () => {
-  // Mapa para almacenar los intentos de login por IP
-  const tokenMap = new Map();
 
   // Configuración del transportador de nodemailer
   const transporter = nodemailer.createTransport({
@@ -48,7 +49,7 @@ const rateLimit = () => {
         from: process.env.EMAIL_USER,
         to: email,
         subject: "Alerta de intentos de inicio de sesión",
-        html: `<p>Se han detectado más de 5 intentos fallidos de inicio de sesión en tu cuenta. Si no fuiste tú, por favor, cambia tu contraseña inmediatamente.</p>`,
+        html: `<p>Se han detectado más de 5 intentos fallidos de inicio de sesión en tu cuenta de ChefPick. Si no fuiste tú, por favor, cambia tu contraseña inmediatamente.</p>`,
       });
       return false;
     }
