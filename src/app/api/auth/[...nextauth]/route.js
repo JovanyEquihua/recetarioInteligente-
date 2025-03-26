@@ -3,9 +3,9 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-import { db } from "@/libs/db";
+import { db } from "../../../../libs/db";
 import bcrypt from "bcryptjs";
-import { limiter } from "@/middleware/rateLimit";
+import { limiter } from "../../../../middleware/rateLimit";
 import { getMaxAge } from "next/dist/server/image-optimizer";
 
 // Configuración de opciones de autenticación para NextAuth.js

@@ -1,4 +1,4 @@
-import { db } from "@/libs/db"; // Importar la instancia de la base de datos
+import { db } from "../../../../libs/db"; // Importar la instancia de la base de datos
 import nodemailer from "nodemailer";
 
 export async function POST(req) {

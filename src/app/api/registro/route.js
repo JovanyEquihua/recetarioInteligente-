@@ -61,7 +61,7 @@ export async function POST(req) {
         fechaActualizado: new Date(),
         verificado: false,
       },
-    });
+    })
 
     // Generar el código de verificación
     const verificationCode = Math.floor(100000 + Math.random() * 900000).toString();

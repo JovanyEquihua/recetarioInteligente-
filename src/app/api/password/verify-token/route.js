@@ -1,5 +1,5 @@
 
-import { db } from "@/libs/db"; // Importar la instancia de la base de datos
+import { db } from "../../../../libs/db"; // Importar la instancia de la base de datos
 import bcrypt from "bcrypt"; // Importar bcrypt para hashear contraseñas
 
 export async function POST(req) {
