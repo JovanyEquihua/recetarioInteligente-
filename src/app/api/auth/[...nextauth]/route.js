@@ -29,11 +29,12 @@ export const authOptions = {
       },
       // Función de autorización para validar las credenciales del usuario
       async authorize(credentials, req) {
-        console.log("credentials", credentials.email, credentials.contraseña);
-        
+       
+  
+
         // Verificar que se hayan ingresado email y contraseña
         if (!credentials.email || !credentials.contraseña) {
-          throw new Error("Email y contraseña son obligatorios");
+          throw new Error("Datos inválidas");
         }
 
         // Limitar intentos de login a 5 por cada 15 minutos
@@ -41,32 +42,30 @@ export const authOptions = {
           throw new Error("Demasiados intentos de inicio de sesión. Intenta más tarde.");
         }
 
+         // Obtener información de la solicitud
+         const ip = requestIp.getClientIp(req) || "Desconocida";// Obtener IP del usuario
+         const timestamp = new Date().toISOString(); // Obtener timestamp actual
+
         // Buscar usuario en la base de datos
         const user = await db.usuario.findUnique({
           where: { email: credentials.email },
         });
-
-        // Obtener información de la solicitud
-        const ip = requestIp.getClientIp(req) || "Desconocida";// Obtener IP del usuario
-        const timestamp = new Date().toISOString(); // Obtener timestamp actual
-
-
-        // Si el usuario no existe, lanzar un error
-        if (!user) {
-          logger.info({ email, ip, timestamp, status: "failed", reason: "Usuario no encontrado" });
-          throw new Error("Credenciales inválidas usuario");
+        if (!user) { // Si el usuario no existe, lanzar un error
+          logger.info({ email, ip, timestamp, status: "error", reason: "Usuario erroneo" });
+          throw new Error("Credenciales inválidas");
         }
 
+     
         // Comparar contraseñas
-        const passwordMatch = await bcrypt.compare(credentials.contraseña, user.contrase_a);
-        // Si las contraseñas no coinciden, lanzar un error
+        const passwordMatch = await bcrypt.compare(credentials.contraseña, user.contrase_a); 
+       // Si las contraseñas no coinciden, lanzar un error
         if (!passwordMatch) {
-          logger.info({ email, ip, timestamp, status: "failed", reason: "Contraseña incorrecta" });
-          throw new Error("Credenciales inválidas contraseña");
+          logger.info({ email: credentials.email, ip, timestamp, status: "error", reason: "Contraseña erronea" });
+          throw new Error("Credenciales inválidas ");
         }
 
         // Registrar el inicio de sesión exitoso en el archivo de log
-        logger.info({ email: credentials.email, ip, timestamp, status: "success" });
+        logger.info({ email: credentials.email, ip, timestamp, status: "success", reason: "Ingresar" });
 
         // Retornar los datos del usuario si la autenticación es exitosa
         return { id: user.id, nombre: user.nombre, email: user.email, rol: user.rol };

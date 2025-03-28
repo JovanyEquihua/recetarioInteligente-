@@ -20,10 +20,10 @@ const LoginJovas = () => {
     });
 
     if (result.error) {
-      console.error("Error al iniciar sesión:", result.error);
-      setError(result.error);
+      setError("Usuario y/o contraseña incorrectos.");
+      return;
     } else {
-      console.log("Login exitoso", result);
+      //console.log("Login exitoso", result);
       // Redirigir a la página principal o a la página deseada
       window.location.href = "/hola";
     }

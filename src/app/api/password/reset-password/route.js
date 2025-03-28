@@ -23,6 +23,10 @@ export async function POST(req) {
             },
         });
 
+        await db.passwordResetToken.deleteMany({
+            where: { email }
+        });
+
         // Generar un código de restablecimiento de 6 dígitos
         const resetCode = Math.floor(100000 + Math.random() * 900000); // Código de 6 dígitos
        
@@ -34,7 +38,7 @@ export async function POST(req) {
                 expires: new Date(Date.now() + 10 * 60 * 1000), // El token expira en 10 minutos
             },
         });
-        console.log("Token guardado en la base de datos para:", savedToken);
+        //console.log("Token guardado en la base de datos para:", savedToken);
 
         // Enviar el código de recuperación por correo electrónico
         await transporter.sendMail({
@@ -52,7 +56,7 @@ export async function POST(req) {
 
     } catch (error) {
         // Manejar errores y responder con un mensaje de error
-        console.error("Error al enviar el correo:", error);
+        //console.error("Error al enviar el correo:", error);
         return new Response(JSON.stringify({ error: "Error al enviar el correo" }), {
             status: 500,
             headers: { "Content-Type": "application/json" },
