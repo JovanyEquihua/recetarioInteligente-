@@ -60,7 +60,7 @@ const Navbar = () => {
                                     ))}
                                 </div>
                             </div>
-                            <div className='gap-6 hidden sm:flex'>
+                            <div className='gap-6 hidden lg:flex'>
                               
                                 <Signindialog />
                             </div>

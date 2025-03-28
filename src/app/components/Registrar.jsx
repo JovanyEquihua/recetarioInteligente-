@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { z } from "zod";
 
 // Esquema de validación con Zod
@@ -19,6 +19,7 @@ const registroSchema = z.object({
 });
 
 export default function Registrar() {
+  const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState({
     nombre: "",
     apellidoP: "",
@@ -29,6 +30,11 @@ export default function Registrar() {
     rol: "USUARIO",
   });
   const [message, setMessage] = useState("");
+
+  // Abrir el pop-up al cargar la página
+  useEffect(() => {
+    setIsOpen(true);
+  }, []);
 
   // Manejar cambios en los campos del formulario
   const handleChange = (e) => {
@@ -64,18 +70,36 @@ export default function Registrar() {
     }
   };
 
-  return (
-    <div
-      className="relative flex items-center justify-center min-h-screen bg-cover bg-center p-6"
-      style={{
-        backgroundImage: "url('/images/fondo.jpeg')", // Ruta de la imagen de fondo
-      }}
-    >
-      {/* Superposición con opacidad */}
-      <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+  // Cerrar el pop-up
+  const handleClose = () => {
+    setIsOpen(false);
+  };
 
-      {/* Contenido del formulario */}
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50">
       <div className="relative bg-white shadow-lg rounded-xl p-8 w-full max-w-md">
+        <button
+          onClick={handleClose}
+          className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+
         <h2 className="text-3xl font-bold text-center text-black mb-6">
           Registro
         </h2>
