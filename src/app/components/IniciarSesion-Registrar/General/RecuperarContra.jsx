@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { useState } from "react";
 import VerificarCodigo from "./VerificarCodigo"; // Importar el formulario
 
@@ -7,21 +7,22 @@ export default function RecuperarContraseña() {
   const [mensaje, setMensaje] = useState("");
   const [codigoEnviado, setCodigoEnviado] = useState(false); // Estado para mostrar VerificarCodigo
 
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("/api/password/reset-password",  {
-       
+      const res = await fetch("/api/password/reset-password", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
       });
-  
+
       if (!res.ok) {
         const text = await res.text(); // Capturar error como texto si no es JSON
         throw new Error(text);
       }
-  
+
       const data = await res.json();
       setMensaje(data.message);
       setCodigoEnviado(true);
@@ -32,6 +33,7 @@ export default function RecuperarContraseña() {
   };
 
   return (
+
     <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
       {!codigoEnviado ? (
         <>
@@ -57,6 +59,7 @@ export default function RecuperarContraseña() {
       ) : (
         <VerificarCodigo email={email} />
       )}
+
     </div>
   );
 }

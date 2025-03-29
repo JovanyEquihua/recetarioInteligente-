@@ -8,6 +8,8 @@ import Features from "./components/Work/index";
 import Expert from "./components/Expert/index";
 import Gallery from "./components/Gallery/index";
 import Newsletter from "./components/Newsletter/Newsletter";
+import Login from "./components/IniciarSesion-Registrar/Login";
+import CrearReceta from "./components/CrearReceta";
 
 
 export default function Home() {
@@ -15,12 +17,15 @@ export default function Home() {
  
   <div>
    
-    <LoginJovas/>
-    {/* <Registrar/> */}
+
+  
+    {/* <Registrar/>  */}
+    {/* <CrearReceta/> */}
+
     <Banner/>
     <Features/>
     <Cook/>
-    {/* <Expert/> */}
+    <Expert/>
     <Gallery/>
     <Newsletter/>
     </div>

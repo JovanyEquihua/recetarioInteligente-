@@ -1,17 +1,44 @@
 'use client'
 import { useState } from "react";
+import Link from "next/link";
 
 export default function VerificarCodigo() {
   const [email, setEmail] = useState("");
   const [token, setToken] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [mensaje, setMensaje] = useState("");
+  
+  const [error, setError] = useState("");
+
+  const validarEmail = (email) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  };
+
+  const validarContrasena = (password) => {
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$/;
+    return regex.test(password);
+  };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setMensaje("");
+    setError("");
     
     console.log("Token enviado:", token);
     console.log("Email enviado:", email);
+
+    if (!validarEmail(email)) {
+      setError("Por favor, ingresa un correo electrónico válido.");
+      return;
+    }
+
+    if (!validarContrasena(newPassword)) {
+      setError("La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un carácter especial.");
+      return;
+    }
+
     
     try {
     const res = await fetch("/api/password/verify-token", {
@@ -62,14 +89,18 @@ export default function VerificarCodigo() {
           onChange={(e) => setNewPassword(e.target.value)}
           required
         />
+                  {error && <p className="text-red-600 text-sm font-semibold">{error}</p>}
+                  {mensaje && <p className="text-green-600 text-sm font-semibold">{mensaje}</p>}
+         
         <button
           type="submit"
-          className="w-full mt-3 bg-green-500 text-white p-2 rounded hover:bg-green-600"
+          className="w-full mt-3 bg-[#8B1C62] text-white p-2 rounded-lg hover:bg-green-600"
         >
           Cambiar contraseña
         </button>
+       
       </form>
-      {mensaje && <p className="mt-3 text-sm">{mensaje}</p>}
+    
     </div>
   );
 }

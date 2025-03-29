@@ -6,6 +6,7 @@ import GoogleProvider from "next-auth/providers/google";
 import { db } from "../../../../libs/db";
 import bcrypt from "bcryptjs";
 import { limiter } from "../../../../middleware/rateLimit";
+import { getMaxAge } from "next/dist/server/image-optimizer";
 import logger from "../../../../utils/logger";
 import requestIp from "request-ip";
 
