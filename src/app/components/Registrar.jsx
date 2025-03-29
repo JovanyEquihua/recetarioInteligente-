@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { z } from "zod";
 
@@ -82,7 +83,7 @@ export default function Registrar() {
       <div className="relative bg-white shadow-lg rounded-xl p-8 w-full max-w-md">
         <button
           onClick={handleClose}
-          className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+          className="absolute top-4 right-4 text-gray-500  hover:text-red-500 transition-transform transform hover:rotate-90"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -103,8 +104,16 @@ export default function Registrar() {
         <h2 className="text-3xl font-bold text-center text-black mb-6">
           Registro
         </h2>
+        <div className="flex flex-col items-center">
+          <Image
+            src="/images/Logo/logo.png"
+            alt="logo"
+            width={200}
+            height={200}
+          />
+        </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4 mt-4">
           <div className="grid grid-cols-2 gap-3">
             <input
               type="text"
@@ -156,17 +165,7 @@ export default function Registrar() {
             className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-[#6B8E23] focus:outline-none"
           />
 
-          <select
-            name="rol"
-            value={formData.rol}
-            onChange={handleChange}
-            required
-            className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-[#6B8E23] focus:outline-none cursor-pointer"
-          >
-            <option value="USUARIO">Usuario</option>
-            <option value="ADMIN">Administrador</option>
-            <option value="MODERATOR">Moderador</option>
-          </select>
+        
 
           <button
             type="submit"
