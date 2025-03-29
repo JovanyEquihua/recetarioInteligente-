@@ -17,9 +17,11 @@ export default function Home() {
  
   <div>
    
+
   
     {/* <Registrar/>  */}
     {/* <CrearReceta/> */}
+
     <Banner/>
     <Features/>
     <Cook/>

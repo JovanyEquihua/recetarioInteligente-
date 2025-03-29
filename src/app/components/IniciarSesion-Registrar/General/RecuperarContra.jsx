@@ -33,37 +33,33 @@ export default function RecuperarContraseña() {
   };
 
   return (
-    <div
-      className="relative flex items-center justify-center min-h-screen bg-cover bg-center p-6"
-      style={{ backgroundImage: "url('/images/fondo.jpeg')" }}
-    >
-      <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-      <div className="relative bg-white shadow-lg rounded-xl p-8 w-full max-w-md">
-        {!codigoEnviado ? (
-          <>
-            <h2 className="text-3xl font-bold text-center text-black mb-6">Recuperar contraseña</h2>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <input
-                type="email"
-                className="w-full px-4 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-[#6B8E23] focus:outline-none"
-                placeholder="Ingresa tu correo"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-              <button
-                type="submit"
-                className="w-full py-2 font-semibold text-white bg-[#8B1C62] rounded-lg hover:bg-[#A44572] transition-all duration-300 transform hover:scale-105 shadow-md"
-              >
-                Enviar código de verificación
-              </button>
-            </form>
-            {mensaje && <p className="mt-4 text-center text-sm font-semibold text-red-600">{mensaje}</p>}
-          </>
-        ) : (
-          <VerificarCodigo email={email} />
-        )}
-      </div>
+
+    <div className="max-w-md mx-auto mt-10 p-6 bg-white rounded-lg shadow-md">
+      {!codigoEnviado ? (
+        <>
+          <h2 className="text-2xl font-bold mb-4">Recuperar contraseña</h2>
+          <form onSubmit={handleSubmit}>
+            <input
+              type="email"
+              className="w-full p-2 border rounded"
+              placeholder="Ingresa tu correo"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <button
+              type="submit"
+              className="w-full mt-3 bg-blue-500 text-black p-2 rounded hover:bg-blue-600"
+            >
+              Enviar código de verificación
+            </button>
+          </form>
+          {mensaje && <p className="mt-3 text-sm">{mensaje}</p>}
+        </>
+      ) : (
+        <VerificarCodigo email={email} />
+      )}
+
     </div>
   );
 }

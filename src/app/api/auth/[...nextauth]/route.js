@@ -7,6 +7,9 @@ import { db } from "../../../../libs/db";
 import bcrypt from "bcryptjs";
 import { limiter } from "../../../../middleware/rateLimit";
 import { getMaxAge } from "next/dist/server/image-optimizer";
+import logger from "../../../../utils/logger";
+import requestIp from "request-ip";
+
 
 // Configuración de opciones de autenticación para NextAuth.js
 export const authOptions = {
@@ -27,34 +30,43 @@ export const authOptions = {
       },
       // Función de autorización para validar las credenciales del usuario
       async authorize(credentials, req) {
-        console.log("credentials", credentials.email, credentials.contraseña);
-        
+       
+  
+
         // Verificar que se hayan ingresado email y contraseña
         if (!credentials.email || !credentials.contraseña) {
-          throw new Error("Email y contraseña son obligatorios");
+          throw new Error("Datos inválidas");
         }
 
         // Limitar intentos de login a 5 por cada 15 minutos
-        if (!limiter(req)) {
+        if (!(await limiter(req))) {
           throw new Error("Demasiados intentos de inicio de sesión. Intenta más tarde.");
         }
+
+         // Obtener información de la solicitud
+         const ip = requestIp.getClientIp(req) || "Desconocida";// Obtener IP del usuario
+         const timestamp = new Date().toISOString(); // Obtener timestamp actual
 
         // Buscar usuario en la base de datos
         const user = await db.usuario.findUnique({
           where: { email: credentials.email },
         });
-
-        // Si el usuario no existe, lanzar un error
-        if (!user) {
-          throw new Error("Credenciales inválidas usuario");
+        if (!user) { // Si el usuario no existe, lanzar un error
+          logger.info({ email, ip, timestamp, status: "error", reason: "Usuario erroneo" });
+          throw new Error("Credenciales inválidas");
         }
 
+     
         // Comparar contraseñas
-        const passwordMatch = await bcrypt.compare(credentials.contraseña, user.contrase_a);
-        // Si las contraseñas no coinciden, lanzar un error
+        const passwordMatch = await bcrypt.compare(credentials.contraseña, user.contrase_a); 
+       // Si las contraseñas no coinciden, lanzar un error
         if (!passwordMatch) {
-          throw new Error("Credenciales inválidas contraseña");
+          logger.info({ email: credentials.email, ip, timestamp, status: "error", reason: "Contraseña erronea" });
+          throw new Error("Credenciales inválidas ");
         }
+
+        // Registrar el inicio de sesión exitoso en el archivo de log
+        logger.info({ email: credentials.email, ip, timestamp, status: "success", reason: "Ingresar" });
 
         // Retornar los datos del usuario si la autenticación es exitosa
         return { id: user.id, nombre: user.nombre, email: user.email, rol: user.rol };
@@ -86,13 +98,14 @@ export const authOptions = {
   // Configuración de la estrategia de sesión
   session: {
     strategy: "jwt",
-    maxAge : 1 * 60, // 30 minutos
+    maxAge : 30 * 60, // 30 minutos
   },
   // Páginas personalizadas para NextAuth.js
   pages: {
     signIn: "/login", // Página de inicio de sesión
   },
 };
+
 
 // Definir el manejador de NextAuth.js con las opciones de autenticación
 const handler = NextAuth(authOptions);

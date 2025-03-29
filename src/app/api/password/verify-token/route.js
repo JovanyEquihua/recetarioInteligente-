@@ -1,6 +1,7 @@
 
-import { db } from "../../../../libs/db"; // Importar la instancia de la base de datos
+
 import bcrypt from "bcrypt"; // Importar bcrypt para hashear contraseñas
+import { db } from "../../../../libs/db";
 
 export async function POST(req) {
     try {
@@ -52,7 +53,7 @@ export async function POST(req) {
         });
     } catch (error) {
         // Manejar errores y retornar una respuesta de error
-        console.error("Error al actualizar la contraseña:", error);
+        //console.error("Error al actualizar la contraseña:", error);
         return new Response(JSON.stringify({ error: "Error interno del servidor" }), {
             status: 500,
             headers: { "Content-Type": "application/json" },
