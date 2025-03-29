@@ -19,7 +19,7 @@ export default function Home() {
    
   
     {/* <Registrar/>  */}
-    <CrearReceta/>
+    {/* <CrearReceta/> */}
     <Banner/>
     <Features/>
     <Cook/>
