@@ -81,6 +81,7 @@ export const authOptions = {
       // Agregar el id y rol del usuario al objeto de sesión
       session.user.id = token.id;
       session.user.rol = token.rol;
+      session.user.nombre = token.nombre;
       return session;
     },
     // Callback para personalizar el token JWT
@@ -89,9 +90,17 @@ export const authOptions = {
       if (user) {
         token.id = user.id;
         token.rol = user.rol;
+        token.nombre = user.nombre;
       }
       return token;
     },
+    // async redirect({ url, baseUrl }) {
+    //   // Redirige según el rol del usuario
+    //   if (url.startsWith(baseUrl)) {
+    //     return url;
+    //   }
+    //   return baseUrl;
+    // },
   },
   // Secreto para firmar los tokens JWT
   secret: process.env.NEXTAUTH_SECRET,

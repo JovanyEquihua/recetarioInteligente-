@@ -7,6 +7,7 @@ import Drawerdata from "./Drawerdata";
 import Signindialog from './Signindialog';
 import Image from 'next/image';
 
+
 const navigation = [
     { name: 'Home', href: '#home-section', current: false },
     { name: 'About us', href: '#about-section', current: false },
@@ -20,7 +21,7 @@ function classNames(...classes) {
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = React.useState(false);
-
+   
     return (
         <Disclosure as="nav" className="navbar">
             <>
