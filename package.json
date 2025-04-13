@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
     "@headlessui/react": "^2.2.0",
     "@heroicons/react": "^2.2.0",
     "@prisma/client": "^6.5.0",
@@ -22,10 +23,7 @@
     "multer-storage-cloudinary": "^4.0.0",
     "next": "^15.2.1",
     "next-auth": "^4.24.11",
-
     "next-connect": "^1.0.0",
-
-
     "node-cron": "^3.0.3",
     "nodemailer": "^6.10.0",
     "npm": "^11.2.0",
@@ -34,7 +32,9 @@
     "react-awesome-reveal": "^4.3.1",
     "react-dom": "^19.0.0",
     "react-icons": "^5.5.0",
+    "react-lottie": "^1.2.10",
     "react-slick": "^0.30.3",
+    "react-spinners": "^0.15.0",
     "request-ip": "^3.3.0",
     "slick-carousel": "^1.8.1",
     "winston": "^3.17.0",
