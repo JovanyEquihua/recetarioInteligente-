@@ -20,3 +20,9 @@
 {"level":"info","message":{"email":"aguimtz.2003@gmail.com","ip":"::1","reason":"Ingresar","status":"success","timestamp":"2025-03-28T04:40:57.826Z"}}
 {"level":"info","message":{"email":"aguimtz.2003@gmail.com","ip":"::1","reason":"Contraseña erronea","status":"error","timestamp":"2025-03-28T04:42:28.985Z"}}
 {"level":"info","message":{"email":"aguimtz.2003@gmail.com","ip":"::1","reason":"Contraseña erronea","status":"error","timestamp":"2025-03-28T04:44:37.530Z"}}
+{"level":"info","message":{"email":"l21121545@morelia.tecnm.mx","ip":"::1","reason":"Ingresar","status":"success","timestamp":"2025-04-14T03:19:40.875Z"}}
+{"level":"info","message":{"email":"l21121545@morelia.tecnm.mx","ip":"::1","reason":"Ingresar","status":"success","timestamp":"2025-04-14T03:19:42.311Z"}}
+{"level":"info","message":{"email":"l21121545@morelia.tecnm.mx","ip":"::1","reason":"Ingresar","status":"success","timestamp":"2025-04-14T03:19:41.488Z"}}
+{"level":"info","message":{"email":"l21121545@morelia.tecnm.mx","ip":"::1","reason":"Ingresar","status":"success","timestamp":"2025-04-14T03:19:41.762Z"}}
+{"level":"info","message":{"email":"l21121545@morelia.tecnm.mx","ip":"::1","reason":"Ingresar","status":"success","timestamp":"2025-04-14T03:19:44.520Z"}}
+{"level":"info","message":{"email":"l21121545@morelia.tecnm.mx","ip":"::1","reason":"Usuario no verificado","status":"error","timestamp":"2025-04-14T03:26:52.155Z"}}

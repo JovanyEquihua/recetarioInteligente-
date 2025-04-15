@@ -65,6 +65,12 @@ export const authOptions = {
           throw new Error("Credenciales inválidas ");
         }
 
+        // Verificar si el usuario fue verificado 
+        if (!user.verificado) {
+          logger.info({ email: credentials.email, ip, timestamp, status: "error", reason: "Usuario no verificado" });
+          throw new Error("El usuario no está verificado");
+        }
+
         // Registrar el inicio de sesión exitoso en el archivo de log
         logger.info({ email: credentials.email, ip, timestamp, status: "success", reason: "Ingresar" });
 
