@@ -9,7 +9,7 @@ import Expert from "./components/Expert/index";
 import Gallery from "./components/Gallery/index";
 import Newsletter from "./components/Newsletter/Newsletter";
 import Login from "./components/IniciarSesion-Registrar/Login";
-import CrearReceta from "./components/CrearReceta";
+
 
 
 export default function Home() {

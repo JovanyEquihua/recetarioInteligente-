@@ -6,24 +6,29 @@ export async function middleware(req) {
   const { pathname } = req.nextUrl;
 
   // Rutas públicas permitidas sin autenticación
-  const publicRoutes = ["/login", "/registrarse"];
-  const isStaticAsset = pathname.startsWith("/_next") || 
-                        pathname.startsWith("/api") || 
-                        pathname.includes("."); // Archivos estáticos como favicon.ico
+  const publicRoutes = ["/", "/login", "/registrarse", "/verificar","/restablecer-contrasena"];
+  const isStaticAsset =
+    pathname.startsWith("/_next") ||
+    pathname.startsWith("/api") ||
+    pathname.includes(".");
 
+  // Permitir acceso a rutas públicas o recursos estáticos
   if (publicRoutes.includes(pathname) || isStaticAsset) {
+    // Pero si estás en "/" y ya tienes token, redirige según rol
+    if (pathname === "/" && token) {
+      const expectedPath = token.rol === "ADMIN" ? "/admin" : "/usuario";
+      return NextResponse.redirect(new URL(expectedPath, req.url));
+    }
     return NextResponse.next();
   }
 
-  // Si no hay token, redirigir a login
+  // Si no hay token, redirige a login
   if (!token) {
     return NextResponse.redirect(new URL("/login", req.url));
   }
 
-  // Definir la ruta esperada para cada rol
+  // Redirigir según el rol si intenta ir a otra ruta
   const expectedPath = token.rol === "ADMIN" ? "/admin" : "/usuario";
-
-  // Si el usuario intenta acceder a una ruta que no le corresponde, redirigirlo
   if (!pathname.startsWith(expectedPath)) {
     return NextResponse.redirect(new URL(expectedPath, req.url));
   }
@@ -33,6 +38,6 @@ export async function middleware(req) {
 
 export const config = {
   matcher: [
-    '/((?!_next|api|trpc|[^?]*\\.(?:\\w+$)).*)', // Filtra rutas protegidas
+    "/((?!_next|api|trpc|[^?]*\\.(?:\\w+$)).*)",
   ],
 };

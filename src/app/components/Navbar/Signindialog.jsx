@@ -124,7 +124,7 @@ const LoginModal = () => {
                   <form className="mt-4 space-y-3" onSubmit={handleSubmit}>
                     <input
                       type="email"
-                      className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#] outline-none"
+                      className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#6B8E23] outline-none"
                       placeholder="Correo electrónico"
                       required
                       value={email}

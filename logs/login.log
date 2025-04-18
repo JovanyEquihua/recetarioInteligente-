@@ -78,3 +78,59 @@
 {"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::1","reason":"Contraseña erronea","status":"error","timestamp":"2025-04-13T21:26:41.230Z"}}
 {"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::1","reason":"Ingresar","status":"success","timestamp":"2025-04-13T21:27:03.297Z"}}
 {"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Ingresar","status":"success","timestamp":"2025-04-13T21:29:48.790Z"}}
+{"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Ingresar","status":"success","timestamp":"2025-04-14T06:19:36.048Z"}}
+{"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::1","reason":"Ingresar","status":"success","timestamp":"2025-04-15T05:40:41.550Z"}}
+{"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::1","reason":"Ingresar","status":"success","timestamp":"2025-04-15T06:24:50.477Z"}}
+{"level":"info","message":{"email":"l21121513@morelia.tecnm.mx","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-04-15T07:27:51.687Z"}}
+{"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-04-15T07:28:38.349Z"}}
+{"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-04-15T07:32:48.208Z"}}
+{"level":"info","message":{"email":"l21121513@morelia.tecnm.mx","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-04-15T07:33:34.159Z"}}
+{"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-04-15T07:37:22.278Z"}}
+{"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Contraseña errada","status":"error","timestamp":"2025-04-16T01:25:43.530Z"}}
+{"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-04-16T01:26:01.095Z"}}
+{"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-04-16T02:43:06.682Z"}}
+{"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-04-16T03:03:01.357Z"}}
+{"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Contraseña errada","status":"error","timestamp":"2025-04-16T03:08:08.210Z"}}
+{"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-04-16T03:08:19.788Z"}}
+{"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-04-16T03:34:06.261Z"}}
+{"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-04-16T03:38:03.757Z"}}
+{"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-04-16T03:39:03.914Z"}}
+{"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Contraseña errada","status":"error","timestamp":"2025-04-16T03:39:58.387Z"}}
+{"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-04-16T03:40:22.421Z"}}
+{"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-04-16T03:41:24.728Z"}}
+{"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Contraseña errada","status":"error","timestamp":"2025-04-16T03:42:45.749Z"}}
+{"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-04-16T03:42:57.746Z"}}
+{"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-04-16T06:25:40.762Z"}}
+{"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-04-16T07:24:05.496Z"}}
+{"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-04-16T07:28:02.395Z"}}
+{"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-04-16T07:33:27.527Z"}}
+{"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-04-16T21:42:19.874Z"}}
+{"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-04-16T21:43:09.187Z"}}
+{"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Contraseña errada","status":"error","timestamp":"2025-04-16T22:33:43.140Z"}}
+{"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-04-16T22:34:05.114Z"}}
+{"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-04-16T22:45:09.012Z"}}
+{"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-04-16T22:45:50.170Z"}}
+{"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-04-16T23:07:53.771Z"}}
+{"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-04-17T01:26:05.352Z"}}
+{"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Usuario errado","status":"error","timestamp":"2025-04-17T05:05:12.780Z"}}
+{"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-04-17T05:34:42.143Z"}}
+{"level":"info","message":{"email":"l21121513@morelia.tecnm.mx","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-04-17T05:43:29.774Z"}}
+{"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Contraseña errada","status":"error","timestamp":"2025-04-17T05:51:51.956Z"}}
+{"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Contraseña errada","status":"error","timestamp":"2025-04-17T05:52:02.711Z"}}
+{"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-04-17T05:55:58.471Z"}}
+{"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-04-17T06:15:33.530Z"}}
+{"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-04-17T07:24:06.086Z"}}
+{"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-04-17T08:55:24.705Z"}}
+{"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-04-17T09:12:05.330Z"}}
+{"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-04-17T09:12:55.185Z"}}
+{"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Contraseña errada","status":"error","timestamp":"2025-04-17T17:38:59.803Z"}}
+{"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-04-17T17:39:16.500Z"}}
+{"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-04-17T17:49:59.032Z"}}
+{"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-04-17T18:07:51.222Z"}}
+{"level":"info","message":{"email":"l21121513@morelia.tecnm.mx","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-04-17T18:08:28.308Z"}}
+{"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-04-17T18:12:03.812Z"}}
+{"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-04-17T18:22:31.185Z"}}
+{"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-04-17T20:17:17.959Z"}}
+{"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-04-18T05:08:59.346Z"}}
+{"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-04-18T05:20:45.428Z"}}
+{"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-04-18T05:27:31.133Z"}}

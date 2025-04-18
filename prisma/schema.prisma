@@ -21,6 +21,10 @@ model Usuario {
   fechaActualizado DateTime       @updatedAt
   rol              UserRole       @default(USUARIO)
   verificado       Boolean        @default(false)
+  titulo           String?        
+  biografia        String?        
+  primerInicioSesion Boolean      @default(false) 
+
   Calificacion     Calificacion[]
   Comentario       Comentario[]
   Cuenta           Cuenta[]
@@ -30,6 +34,8 @@ model Usuario {
   Receta           Receta[]
   Reporte          Reporte[]
 }
+
+
 
 model Cuenta {
   idUsuario         Int
@@ -74,7 +80,7 @@ model Receta {
   titulo            String
   descripcion       String
   tiempoPreparacion Int
-  dificultad        String
+  dificultad        DificultadReceta 
   porciones         Int
   imagen            String
   fechaCreacion     DateTime            @default(now())
@@ -98,13 +104,14 @@ model TipoComida {
 
 model TipoSabor {
   id          Int      @id @default(autoincrement())
-  nombreSabor String   @unique
+  nombreSabor NombreSabor
   recetas     Receta[]
 }
 
 model Ingrediente {
   id      Int                 @id @default(autoincrement())
   nombre  String              @unique
+  Tipo    TipoIngrediente
   recetas RecetaIngrediente[]
 }
 
@@ -181,4 +188,26 @@ model Reporte {
 enum UserRole {
   ADMIN
   USUARIO
+}
+
+
+enum TipoIngrediente {
+ Verduras
+ Frutas 
+ Cereales
+ Alimentos_de_origen_animal
+ Leguminosas
+}
+
+enum DificultadReceta {
+Facil 
+Medio
+Dificil
+}
+enum NombreSabor {
+Dulce 
+Salado
+Amargo
+Acido
+Umami
 }
