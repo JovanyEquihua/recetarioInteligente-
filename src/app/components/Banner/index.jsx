@@ -2,12 +2,34 @@
 import Image from "next/image";
 import { Fade } from "react-awesome-reveal";
 import Link from "next/link";
-import React from 'react'
+import React, { useState } from "react";
 
 const index = () => {
+
+  /* Ejemplo de como usar el filtrador (api/filtrar)
+  const [recetas, setRecetas] = useState();
+  const handleFiltrar = async (filtros) => {
+    try {
+      const res = await fetch("/api/filtrar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(filtros), // Envía directamente el objeto
+       
+      }
+    );
+  
+      const data = await res.json();
+     console.log("Recetas filtradas:", data); // Verifica los datos recibidos
+      setRecetas(data);
+    } catch (error) {
+      console.error("Error al filtrar recetas:", error);
+    }
+  };
+*/
   return (
     <div id="home-section" className="bg-[#F8F7F7]">
-
       <div className="mx-auto max-w-7xl  pt-20 sm:pb-24 px-6 ">
         <div className="grid grid-cols-1 lg:grid-cols-12 space-x-1">
           <div className="col-span-6 flex flex-col justify-center">
@@ -42,12 +64,23 @@ const index = () => {
               triggerOnce={true}
             >
               <div className="md:flex align-middle justify-center lg:justify-start">
-                <button className="text-xl w-full md:w-auto font-medium rounded-full text-white py-5 px-6 bg-pink lg:px-14 mr-6">
+                <button className="text-xl w-full md:w-auto font-medium rounded-full text-black py-5 px-6 bg-pink lg:px-14 mr-6">
                   <Link href="#cook-section">Lets cook</Link>
                 </button>
-                <button className="flex border w-full md:w-auto mt-5 md:mt-0 border-pink justify-center rounded-full text-xl font-medium items-center py-5 px-10 text-pink hover:text-white hover:bg-pink">
-                  <Link href="#about-section">Explore now</Link>
+                <button
+                  onClick={() => handleFiltrar({ tipoComida: "Mexicana" })}
+                  className="flex border w-full md:w-auto mt-5 md:mt-0 border-gray-400 justify-center rounded-full text-xl font-medium items-center py-5 px-10 text-pink hover:text-white hover:bg-pink"
+                >
+                 Explore
                 </button>
+                {/* Ejemplo de como usar el filtrador (api/filtrar) */}
+                {/* <button
+                  onClick={() => handleFiltrar({ tipoComida: "Mexicana" })}
+                  className="flex border w-full md:w-auto mt-5 md:mt-0 border-orange-500 justify-center rounded-full text-xl font-medium items-center py-5 px-10 text-pink hover:text-white hover:bg-pink"
+                >
+                  Mexicana
+                </button>
+              */}
               </div>
             </Fade>
           </div>
@@ -74,8 +107,7 @@ const index = () => {
         </div>
       </div>
     </div>
-  
-  )
-}
+  );
+};
 
-export default index
+export default index;
