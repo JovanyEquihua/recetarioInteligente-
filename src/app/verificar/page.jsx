@@ -1,11 +1,13 @@
 "use client";
 import { useState } from "react";
+import { useRouter } from "next/navigation"; // Importa desde next/navigation
 
 export default function VerificarCuenta() {
   const [email, setEmail] = useState("");
   const [token, setToken] = useState("");
   const [message, setMessage] = useState("");
-  const router = useRouter(); // Inicializar useRouter
+  const router = useRouter(); // Inicializar useRouter correctamente
+
   const handleVerify = async (e) => {
     e.preventDefault();
 
@@ -17,12 +19,13 @@ export default function VerificarCuenta() {
 
     const data = await res.json();
     setMessage(data.message || data.error);
-        // Redirigir a la página principal si la verificación es exitosa
-        if (res.ok) {
-          setTimeout(() => {
-            router.push("/"); // Redirigir a la página principal
-          }, 2000); // Esperar 2 segundos antes de redirigir
-        }
+
+    // Redirigir a la página principal si la verificación es exitosa
+    if (res.ok) {
+      setTimeout(() => {
+        router.push("/"); // Redirigir a la página principal
+      }, 2000); // Esperar 2 segundos antes de redirigir
+    }
   };
 
   return (

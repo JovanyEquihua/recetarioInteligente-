@@ -14,7 +14,7 @@ const registroSchema = z.object({
     .min(8, "La contraseña debe tener al menos 8 caracteres")
     .regex(/[A-Z]/, "Debe contener al menos una letra mayúscula")
     .regex(/\d/, "Debe contener al menos un número")
-    .regex(/[@$!%*?&]/, "Debe incluir un carácter especial"),
+    .regex(/[@$!%*?&#]/, "Debe incluir un carácter especial"),
   nombreUsuario: z.string().min(1, "El nombre de usuario es obligatorio"),
   rol: z.enum(["USUARIO", "ADMIN", "MODERATOR"], "Rol inválido"),
 });
