@@ -11,7 +11,7 @@ export async function POST(req) {
   try {
     // Obtener los filtros del cuerpo de la solicitud
     const filtrarRecetas = await req.json();
-
+    console.log("Filtros recibidos:", filtrarRecetas);
    //Verificar los filtros
     const filtros = {};
 
@@ -26,6 +26,7 @@ export async function POST(req) {
       filtros.dificultad = filtrarRecetas.dificultad;
       
     }
+    console.log("Filtros aplicados:", filtros);
 // Si se envía el filtro de tiempo de preparación, lo agrega al objeto de filtros
     if (filtrarRecetas.tiempoPreparacion) {
       filtros.tiempoPreparacion = 
@@ -59,6 +60,7 @@ export async function POST(req) {
         tipoSabor: true, // Incluye información relacionada con el tipo de sabor
       },
     });
+    console.log("Resultados encontrados:", recetas);
 
     return new Response(JSON.stringify(resultados), {
       status: 200,

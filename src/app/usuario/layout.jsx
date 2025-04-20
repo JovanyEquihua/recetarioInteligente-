@@ -106,7 +106,7 @@ export default function Layout({ children }) {
               </button>
               <button
                 className="px-3 py-2 hover:text-[#a32c7a] transition font-medium"
-                onClick={() => router.push("/community")}
+                onClick={() => router.push("/usuario/crearReceta")}
               >
                 Crear Receta 
               </button>
