@@ -1,21 +1,26 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
+import debounce from "lodash/debounce";
 
 export default function Busqueda() {
   const [nombre, setNombre] = useState("");
   const [ingredientes, setIngredientes] = useState("");
   const [resultados, setResultados] = useState([]);
 
-  const buscar = async () => {
+  const buscar = useCallback(debounce(async (nombreActual, ingredientesActual) => {
     try {
-      const res = await fetch(`/api/busqueda?nombre=${nombre}&ingredientes=${ingredientes}`);
+      const res = await fetch(`/api/busqueda?nombre=${nombreActual}&ingredientes=${ingredientesActual}`);
       if (!res.ok) throw new Error("Error al buscar recetas");
       const data = await res.json();
       setResultados(data);
     } catch (error) {
       console.error("Error en la búsqueda:", error);
     }
-  };
+  }, 500), []); // 500ms de espera
+
+  useEffect(() => {
+    buscar(nombre, ingredientes);
+  }, [nombre, ingredientes, buscar]);
 
   return (
     <div className="p-8">
@@ -34,9 +39,6 @@ export default function Busqueda() {
         onChange={(e) => setIngredientes(e.target.value)}
         className="border p-2 mr-2"
       />
-      <button onClick={buscar} className="bg-blue-500 text-white px-4 py-2 rounded">
-        Buscar
-      </button>
 
       <div className="mt-6">
         {resultados.map((r) => (
