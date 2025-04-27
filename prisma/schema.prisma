@@ -8,34 +8,31 @@ datasource db {
 }
 
 model Usuario {
-  id               Int            @id @default(autoincrement())
-  nombre           String
-  apellidoP        String
-  apellidoM        String?
-  email            String         @unique
-  contrase_a       String         @map("contraseña")
-  fotoPerfil       String?
-  preferencias     Json?
-  fechaRegistro    DateTime       @default(now())
-  nombreUsuario    String         @unique
-  fechaActualizado DateTime       @updatedAt
-  rol              UserRole       @default(USUARIO)
-  verificado       Boolean        @default(false)
-  titulo           String?        
-  biografia        String?        
-  primerInicioSesion Boolean      @default(false) 
-
-  Calificacion     Calificacion[]
-  Comentario       Comentario[]
-  Cuenta           Cuenta[]
-  Favorito         Favorito[]
-  ListaCompra      ListaCompra[]
-  Notificacion     Notificacion[]
-  Receta           Receta[]
-  Reporte          Reporte[]
+  id                 Int            @id @default(autoincrement())
+  nombre             String
+  apellidoP          String
+  apellidoM          String?
+  email              String         @unique
+  contrase_a         String         @map("contraseña")
+  fotoPerfil         String?
+  preferencias       Json?
+  fechaRegistro      DateTime       @default(now())
+  nombreUsuario      String         @unique
+  fechaActualizado   DateTime       @updatedAt
+  rol                UserRole       @default(USUARIO)
+  biografia          String?
+  primerInicioSesion Boolean        @default(false)
+  titulo             String?
+  verificado         Boolean        @default(false)
+  Calificacion       Calificacion[]
+  Comentario         Comentario[]
+  Cuenta             Cuenta[]
+  Favorito           Favorito[]
+  ListaCompra        ListaCompra[]
+  Notificacion       Notificacion[]
+  Receta             Receta[]
+  Reporte            Reporte[]
 }
-
-
 
 model Cuenta {
   idUsuario         Int
@@ -80,12 +77,12 @@ model Receta {
   titulo            String
   descripcion       String
   tiempoPreparacion Int
-  dificultad        DificultadReceta 
   porciones         Int
   imagen            String
   fechaCreacion     DateTime            @default(now())
   idTipoComida      Int
   idTipoSabor       Int
+  dificultad        DificultadReceta
   calificaciones    Calificacion[]
   comentarios       Comentario[]
   favoritos         Favorito[]
@@ -103,7 +100,7 @@ model TipoComida {
 }
 
 model TipoSabor {
-  id          Int      @id @default(autoincrement())
+  id          Int         @id @default(autoincrement())
   nombreSabor NombreSabor
   recetas     Receta[]
 }
@@ -190,24 +187,24 @@ enum UserRole {
   USUARIO
 }
 
-
 enum TipoIngrediente {
- Verduras
- Frutas 
- Cereales
- Alimentos_de_origen_animal
- Leguminosas
+  Verduras
+  Frutas
+  Cereales
+  Alimentos_de_origen_animal
+  Leguminosas
 }
 
 enum DificultadReceta {
-Facil 
-Medio
-Dificil
+  Facil
+  Medio
+  Dificil
 }
+
 enum NombreSabor {
-Dulce 
-Salado
-Amargo
-Acido
-Umami
+  Dulce
+  Salado
+  Amargo
+  Acido
+  Umami
 }

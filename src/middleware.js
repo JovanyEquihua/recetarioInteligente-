@@ -38,6 +38,6 @@ export async function middleware(req) {
 
 export const config = {
   matcher: [
-    "/((?!_next|api|trpc|[^?]*\\.(?:\\w+$)).*)",
+    "/((?!_next|api|trpc|[^?]\\.(?:\\w+$)).)",
   ],
 };
