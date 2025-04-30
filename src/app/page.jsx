@@ -1,6 +1,6 @@
 
 
-import Principal from "./components/Principal/index";
+import Principal from "./components/Principal/Principal/page";
 import Cook from "./components/Cook/index";
 import LoginJovas from "./components/IniciarSesion-Registrar/General/LoginJovas";
 import Registrar from "./components/Registrar";
@@ -23,11 +23,11 @@ export default function Home() {
     {/* <CrearReceta/> */}
 
     <Principal/>
-    <Features/>
-    <Cook/>
-    <Expert/>
-    <Gallery/>
-    <Newsletter/>
+    {/* <Features/> */}
+    {/* <Cook/> */}
+    {/* <Expert/> */}
+    {/* <Gallery/> */}
+    {/* <Newsletter/> */}
     </div>
 
    
