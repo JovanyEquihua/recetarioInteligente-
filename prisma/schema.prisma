@@ -75,7 +75,7 @@ model Receta {
   id                Int                 @id @default(autoincrement())
   usuarioId         Int
   titulo            String
-  descripcion       String
+  pasosPreparacion  Json 
   tiempoPreparacion Int
   porciones         Int
   imagen            String

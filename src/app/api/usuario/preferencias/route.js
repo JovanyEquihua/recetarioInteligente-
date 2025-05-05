@@ -53,8 +53,20 @@ export async function GET(req) {
     if (!usuario) {
       return Response.json({ error: "Usuario no encontrado" }, { status: 404 })
     }
+    const recetas = await db.receta.findMany({
+      where: { usuarioId: session.user.id },
+      select: {
+        id: true,
+    titulo: true,
+    imagen: true,
+    fechaCreacion: true,
+    tiempoPreparacion: true,
+    porciones: true,
+    dificultad: true,
+      },
+    });
 
-    return Response.json({ preferencias: usuario.preferencias })
+    return Response.json({ preferencias: usuario.preferencias,recetas })
   } catch (error) {
     console.error("Error al obtener preferencias:", error)
     return Response.json(
