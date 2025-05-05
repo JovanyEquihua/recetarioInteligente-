@@ -11,6 +11,7 @@ export default function Perfil({ user }) {
   const [activeTab, setActiveTab] = useState("saved");
   const [preferencias, setPreferencias] = useState(null);
   const [misRecetas, setMisRecetas] = useState([]); // Estado para las recetas
+  const [recetasFavoritas, setRecetasFavoritas] = useState([]);
   const handleUpdateUser = (updatedUser) => {
     setCurrentUser(updatedUser);
     setMostrarModal(false);
@@ -31,10 +32,25 @@ export default function Perfil({ user }) {
       console.error("Error al obtener preferencias:", error);
     }
   };
+  
+
+
+  const obtenerFavoritos = async () => {
+    try {
+      const res = await fetch("/api/usuario/preferencias?tipo=favoritos");
+      if (!res.ok) throw new Error("No se pudieron obtener las preferencias");
+      const data = await res.json();
+      setRecetasFavoritas(data.recetas)// Guardar las recetas en el estado
+    } catch (error) {
+      console.error("Error al obtener favoritoss:", error);
+    }
+  };
+  
 
   useEffect(() => {
-    if (activeTab === "favorites") {
+    if (activeTab === "favorites" || activeTab === "saved") {
       obtenerPreferencias();
+      obtenerFavoritos();
     }
   }, [activeTab]);
 
@@ -106,14 +122,14 @@ export default function Perfil({ user }) {
                   Ingredientes favoritos
                 </button>
                 <button
-                  onClick={() => setActiveTab("history")}
+                  onClick={() => setActiveTab("favoritos")}
                   className={`pb-2 text-sm font-medium ${
-                    activeTab === "history"
+                    activeTab === "favoritos"
                       ? "text-[#8B1C62] border-b-2 border-[#8B1C62]"
                       : "text-gray-500 hover:text-gray-700"
                   }`}
                 >
-                  Actividad
+                 Favoritos
                 </button>
               </div>
             </div>
@@ -187,12 +203,21 @@ export default function Perfil({ user }) {
             </div>
           )}
 
-          {activeTab === "history" && (
-            <div className="bg-gray-50 p-4 rounded-xl shadow animate-fadeIn">
-              <p className="text-gray-700">
-                Tu historial de actividad aparecerá aquí
-              </p>
+          {activeTab === "favoritos" && (
+            <div>
+            {recetasFavoritas.length > 0 ? (
+             <RecetasGrid recetas={recetasFavoritas} /> // Componente para mostrar las recetas
+            ) : (
+              <div className="text-center py-12">
+              <div className="mx-auto w-24 h-24 bg-[#faf5f9] rounded-full flex items-center justify-center mb-4">
+              
+              </div>
+              <h3 className="text-lg font-medium text-gray-900 mb-1">No tienes recetas en favoritos aún</h3>
+         
+            
             </div>
+          )}
+        </div>
           )}
         </div>
       </div>

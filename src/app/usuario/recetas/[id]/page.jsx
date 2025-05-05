@@ -4,6 +4,8 @@ import IngredientesSection from "@/app/components/recipe/IngredienteSection";
 import PasosSection from "@/app/components/recipe/PasosSection";
 import FavoritoButton from "@/app/components/recipe/FavoritoButton";
 import ModoCocina from "@/app/recetas/ModoCocina";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/libs/authOptions";
 
 async function getReceta(id) {
   const res = await fetch(`http://localhost:3000/api/recetas/${id}`, {
@@ -19,11 +21,25 @@ async function getReceta(id) {
 
 export default async function RecetaPage({ params }) {
   const receta = await getReceta(params.id);
+  const session = await getServerSession(authOptions);
+  const usuarioId = session?.user?.id; // Asegúrate de que el usuario esté autenticado
+
+  let esFavoritoInicial = false;
+
+  if (usuarioId) {
+    const favorito = await prisma.favorito.findFirst({
+      where: {
+        recetaId: parseInt(params.id),
+        usuarioId: parseInt(usuarioId),
+      },
+    });
+    esFavoritoInicial = !!favorito;
+  }
 
   return (
     <div className="max-w-4xl mx-auto p-6 sm:p-10 relative">
       <div className="absolute top-6 right-6 z-10">
-        <FavoritoButton inicial={receta.esFavorita} />
+        <FavoritoButton recetaId={params.id} usuarioId={usuarioId} esFavoritoInicial={esFavoritoInicial} />
       </div>
 
       <HeaderReceta receta={receta} />

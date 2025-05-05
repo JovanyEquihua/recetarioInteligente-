@@ -9,7 +9,7 @@ export default function RecetasGrid({ recetas }) {
           key={receta.id} 
           className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 border border-gray-100"
         >
-          <Link href={`/recetas/${receta.id}`}>
+          <Link href={`/usuario/recetas/${receta.id}`}>
             <div className="relative">
               <img
                 src={receta.imagen || "/placeholder-food.jpg"}

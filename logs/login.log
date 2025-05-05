@@ -174,3 +174,17 @@
 {"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-05T02:56:11.530Z"}}
 {"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-05T03:03:37.296Z"}}
 {"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-05T05:16:25.714Z"}}
+{"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-05T06:12:53.416Z"}}
+{"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-05T06:20:21.230Z"}}
+{"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-05T06:22:33.064Z"}}
+{"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-05T07:24:23.934Z"}}
+{"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-05T07:51:13.687Z"}}
+{"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-05T07:52:02.694Z"}}
+{"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-05T08:07:22.938Z"}}
+{"level":"info","message":{"email":"jovanyequihua@gmail.com","ip":"::1","reason":"Usuario errado","status":"error","timestamp":"2025-05-05T08:16:32.553Z"}}
+{"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-05T08:16:45.504Z"}}
+{"level":"info","message":{"email":"equicerjoal@hotmail.com","ip":"::1","reason":"Usuario errado","status":"error","timestamp":"2025-05-05T08:17:23.185Z"}}
+{"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-05T08:17:33.032Z"}}
+{"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-05T09:21:19.335Z"}}
+{"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-05T09:23:30.387Z"}}
+{"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-05T09:27:58.579Z"}}
