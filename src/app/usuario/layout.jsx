@@ -94,15 +94,15 @@ export default function Layout({ children }) {
               </button>
               <button
                 className="px-3 py-2 hover:text-[#a32c7a] transition font-medium"
-                onClick={() => router.push("/recipes")}
+                onClick={() => router.push("/usuario/mapa")}
               >
-               Planes de comida
+               Mapa global
               </button>
               <button
                 className="px-3 py-2 hover:text-[#a32c7a] transition font-medium"
-                onClick={() => router.push("/ingredients")}
+                onClick={() => router.push("/usuario/listaCompras")}
               >
-                Artículos
+               Lista de compras
               </button>
               <button
                 className="px-3 py-2 hover:text-[#a32c7a] transition font-medium"

@@ -1,57 +1,54 @@
-//API para filtrar recetas
-
 import { db } from "../../../libs/db";
-
-/* Este endpoint se encarga de filtrar 
-  recetas según los criterios proporcionados
-  en el cuerpo de la solicitud */
-
 
 export async function POST(req) {
   try {
     // Obtener los filtros del cuerpo de la solicitud
     const filtrarRecetas = await req.json();
     console.log("Filtros recibidos:", filtrarRecetas);
-   //Verificar los filtros
+
+    // Construir el objeto de filtros
     const filtros = {};
 
-      // Si se envía el filtro de tipo de comida, lo agrega al objeto de filtros
-    if (filtrarRecetas.tipoComida) {
+    // Filtro por tipo de comida
+    if (filtrarRecetas.tipoComida?.length > 0) {
       filtros.tipoComida = {
-        nombre: filtrarRecetas.tipoComida,
+        nombre: { in: filtrarRecetas.tipoComida },
       };
     }
-  // Si se envía el filtro de dificultad, lo agrega al objeto de filtros
+
+    // Filtro por dificultad
     if (filtrarRecetas.dificultad) {
       filtros.dificultad = filtrarRecetas.dificultad;
-      
     }
-    console.log("Filtros aplicados:", filtros);
-// Si se envía el filtro de tiempo de preparación, lo agrega al objeto de filtros
-    if (filtrarRecetas.tiempoPreparacion) {
-      filtros.tiempoPreparacion = 
-        parseInt(filtrarRecetas.tiempoPreparacion);
-      
+
+    // Filtro por rango de tiempo de preparación
+    if (filtrarRecetas.tiempoPreparacionMin || filtrarRecetas.tiempoPreparacionMax) {
+      filtros.tiempoPreparacion = {
+        gte: filtrarRecetas.tiempoPreparacionMin || 0,
+        lte: filtrarRecetas.tiempoPreparacionMax || 999,
+      };
     }
-// Si se envía el filtro de calificaciones, lo agrega al objeto de filtros
+
+    // Filtro por calificaciones
     if (filtrarRecetas.calificaciones) {
       filtros.calificaciones = {
         puntuacion: filtrarRecetas.calificaciones,
       };
     }
-// Si se envía el filtro de tipo de sabor, lo agrega al objeto de filtros
-    if (filtrarRecetas.tipoSabor) {
+
+    // Filtro por tipo de sabor
+    if (filtrarRecetas.tipoSabor?.length > 0) {
       filtros.tipoSabor = {
-        nombreSabor: filtrarRecetas.tipoSabor,
+        nombreSabor: { in: filtrarRecetas.tipoSabor },
       };
     }
- // Si se envía el filtro de porciones, lo agrega al objeto de filtros
+
+    // Filtro por porciones
     if (filtrarRecetas.porciones) {
-      filtros.porciones = parseInt(filtrarRecetas.porciones);
+      filtros.porciones = parseInt(filtrarRecetas.porciones, 10);
     }
 
-  //Realiza la consulta a la base de datos con los filtros construidos
-
+    // Realizar la consulta a la base de datos con los filtros construidos
     const resultados = await db.receta.findMany({
       where: filtros, // Aplica los filtros
       include: {
@@ -60,7 +57,8 @@ export async function POST(req) {
         tipoSabor: true, // Incluye información relacionada con el tipo de sabor
       },
     });
-    console.log("Resultados encontrados:", recetas);
+
+    console.log("Resultados encontrados:", resultados);
 
     return new Response(JSON.stringify(resultados), {
       status: 200,

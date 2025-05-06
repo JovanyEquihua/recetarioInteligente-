@@ -7,16 +7,21 @@ export default function Busqueda() {
   const [ingredientes, setIngredientes] = useState("");
   const [resultados, setResultados] = useState([]);
 
-  const buscar = useCallback(debounce(async (nombreActual, ingredientesActual) => {
-    try {
-      const res = await fetch(`/api/busqueda?nombre=${nombreActual}&ingredientes=${ingredientesActual}`);
-      if (!res.ok) throw new Error("Error al buscar recetas");
-      const data = await res.json();
-      setResultados(data);
-    } catch (error) {
-      console.error("Error en la búsqueda:", error);
-    }
-  }, 500), []); // 500ms de espera
+  const buscar = useCallback(
+    debounce(async (nombreActual, ingredientesActual) => {
+      try {
+        const res = await fetch(
+          `/api/busqueda?nombre=${nombreActual}&ingredientes=${ingredientesActual}`
+        );
+        if (!res.ok) throw new Error("Error al buscar recetas");
+        const data = await res.json();
+        setResultados(data);
+      } catch (error) {
+        console.error("Error en la búsqueda:", error);
+      }
+    }, 500),
+    []
+  ); // 500ms de espera
 
   useEffect(() => {
     buscar(nombre, ingredientes);
@@ -43,8 +48,16 @@ export default function Busqueda() {
       <div className="mt-6">
         {resultados.map((r) => (
           <div key={r.id} className="mb-4 p-4 border rounded">
-            <h2 className="text-xl font-semibold">{r.titulo}</h2>
-            <p>{r.descripcion}</p>
+            <img
+              src={r.imagen}
+              alt={r.titulo}
+              className="w-24 h-24 object-cover rounded"
+            />
+
+            <div>
+              <h2 className="text-xl font-semibold">{r.titulo}</h2>
+              <p>{r.descripcion}</p>
+            </div>
           </div>
         ))}
       </div>

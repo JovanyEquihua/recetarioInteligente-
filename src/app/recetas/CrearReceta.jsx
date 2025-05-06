@@ -23,7 +23,7 @@ export default function CrearReceta({ onSave }) {
     dificultad: "Facil",
     porciones: 2,
     ingredientes: [],
-    preparacion: "", // Esto podría ser parte de la descripción
+    pasosPreparacion: [], // Cambiado a un array para pasos de preparació // Esto podría ser parte de la descripción
     imagen: "/images/default-recipe.png",
     idTipoComida: 1, // Valor por defecto
     idTipoSabor: 1, // Valor por defecto
@@ -35,6 +35,8 @@ export default function CrearReceta({ onSave }) {
   });
   const [subiendo, setSubiendo] = useState(false);
   const [exito, setExito] = useState(false);
+  const [nuevoPaso, setNuevoPaso] = useState({ paso: "", tiempo: "" });
+
 
   useEffect(() => {
     const fetchTipos = async () => {
@@ -124,6 +126,7 @@ export default function CrearReceta({ onSave }) {
       usuarioId: session.user.id, // Asegúrate de que el ID del usuario esté disponible
       tiempoPreparacion: parseInt(formData.tiempoPreparacion, 10), // Convertir a entero
       porciones: parseInt(formData.porciones, 10),
+      pasosPreparacion: formData.pasosPreparacion,
       idTipoComida: formData.idTipoComida,
       idTipoSabor: formData.idTipoSabor, // Convertir a entero
     };
@@ -330,19 +333,7 @@ export default function CrearReceta({ onSave }) {
           </div>
         </div>
 
-        {/* Descripción */}
-        <div>
-          <label className="block text-sm font-medium mb-1">Descripción*</label>
-          <textarea
-            value={formData.descripcion}
-            onChange={(e) =>
-              setFormData({ ...formData, descripcion: e.target.value })
-            }
-            rows={3}
-            className="w-full px-3 py-2 border rounded-md"
-            required
-          />
-        </div>
+       
 
         {/* Ingredientes */}
         <div>
@@ -432,20 +423,82 @@ export default function CrearReceta({ onSave }) {
             )}
           </div>
         </div>
-
-        {/* Preparación */}
+{/* Pasos de Preparación */}
         <div>
-          <label className="block text-sm font-medium mb-1">Preparación*</label>
-          <textarea
-            value={formData.preparacion}
-            onChange={(e) =>
-              setFormData({ ...formData, preparacion: e.target.value })
-            }
-            rows={6}
-            className="w-full px-3 py-2 border rounded-md"
-            required
-          />
-        </div>
+  <label className="block text-sm font-medium mb-2">
+    Pasos de Preparación
+  </label>
+
+  {formData.pasosPreparacion.map((p, idx) => (
+    <div
+      key={idx}
+      className="flex items-start gap-3 mb-2 border p-2 rounded-md"
+    >
+      <div className="flex-1">
+        <p className="font-semibold">Paso {idx + 1}:</p>
+        <p>{p.paso}</p>
+        {p.tiempo && (
+          <p className="text-sm text-gray-600">
+            Tiempo sugerido: {p.tiempo} min
+          </p>
+        )}
+      </div>
+      <button
+        type="button"
+        onClick={() =>
+          setFormData({
+            ...formData,
+            pasosPreparacion: formData.pasosPreparacion.filter((_, i) => i !== idx),
+          })
+        }
+        className="text-red-500 hover:text-red-700"
+      >
+        <Trash size={18} />
+      </button>
+    </div>
+  ))}
+
+  <div className="mt-4 space-y-2">
+    <input
+      type="text"
+      placeholder="Descripción del paso"
+      value={nuevoPaso.paso}
+      onChange={(e) =>
+        setNuevoPaso({ ...nuevoPaso, paso: e.target.value })
+      }
+      className="w-full px-3 py-2 border rounded-md"
+    />
+    <input
+      type="number"
+      placeholder="Tiempo (opcional, en minutos)"
+      value={nuevoPaso.tiempo}
+      onChange={(e) =>
+        setNuevoPaso({ ...nuevoPaso, tiempo: e.target.value })
+      }
+      className="w-full px-3 py-2 border rounded-md"
+      min="0"
+    />
+    <button
+      type="button"
+      onClick={() => {
+        if (nuevoPaso.paso) {
+          setFormData({
+            ...formData,
+            pasosPreparacion: [...formData.pasosPreparacion, {
+              paso: nuevoPaso.paso,
+              tiempo: nuevoPaso.tiempo ? parseInt(nuevoPaso.tiempo) : null,
+            }],
+          });
+          setNuevoPaso({ paso: "", tiempo: "" });
+        }
+      }}
+      className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
+    >
+      Agregar Paso
+    </button>
+  </div>
+</div>
+
 
         {/* Mensaje de éxito */}
         {exito && (

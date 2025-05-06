@@ -1,13 +1,17 @@
 "use client";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import EditarPerfil from "./EditarPerfil";
+import RecetasGrid from "@/app/recetas/RecetasGrid";
 
 export default function Perfil({ user }) {
+  const router = useRouter();
   const [mostrarModal, setMostrarModal] = useState(false);
   const [currentUser, setCurrentUser] = useState(user);
-  const [activeTab, setActiveTab] = useState('saved');
+  const [activeTab, setActiveTab] = useState("saved");
   const [preferencias, setPreferencias] = useState(null);
-
+  const [misRecetas, setMisRecetas] = useState([]); // Estado para las recetas
+  const [recetasFavoritas, setRecetasFavoritas] = useState([]);
   const handleUpdateUser = (updatedUser) => {
     setCurrentUser(updatedUser);
     setMostrarModal(false);
@@ -23,21 +27,41 @@ export default function Perfil({ user }) {
       if (!res.ok) throw new Error("No se pudieron obtener las preferencias");
       const data = await res.json();
       setPreferencias(data.preferencias);
+      setMisRecetas(data.recetas); // Guardar las recetas en el estado
     } catch (error) {
       console.error("Error al obtener preferencias:", error);
     }
   };
+  
+
+
+  const obtenerFavoritos = async () => {
+    try {
+      const res = await fetch("/api/usuario/preferencias?tipo=favoritos");
+      if (!res.ok) throw new Error("No se pudieron obtener las preferencias");
+      const data = await res.json();
+      setRecetasFavoritas(data.recetas)// Guardar las recetas en el estado
+    } catch (error) {
+      console.error("Error al obtener favoritoss:", error);
+    }
+  };
+  
 
   useEffect(() => {
-    if (activeTab === 'favorites') {
+    if (activeTab === "favorites" || activeTab === "saved") {
       obtenerPreferencias();
+      obtenerFavoritos();
     }
   }, [activeTab]);
 
   return (
     <div className="relative max-w-5xl mx-auto px-4 py-8">
       {/* Fondo difuminado si hay modal */}
-      <div className={`${mostrarModal ? "blur-sm pointer-events-none select-none" : ""}`}>
+      <div
+        className={`${
+          mostrarModal ? "blur-sm pointer-events-none select-none" : ""
+        }`}
+      >
         {/* Sección superior del perfil */}
         <div className="flex flex-col md:flex-row gap-6 items-start">
           <img
@@ -45,15 +69,22 @@ export default function Perfil({ user }) {
             alt="Foto de perfil"
             className="w-24 h-24 rounded-full object-cover shadow"
           />
-          
+
           <div className="flex-1">
             <div className="flex justify-between items-start">
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">{nombreCompleto || "Nombre no disponible"}</h1>
-                <p className="text-gray-600">{currentUser.titulo || "Chef en casa"}</p>
-                <p className="text-gray-500 text-sm mt-1">{currentUser.biografia || "Amante de la cocina, el buen vino y las charlas con amigos"}</p>
+                <h1 className="text-2xl font-bold text-gray-900">
+                  {nombreCompleto || "Nombre no disponible"}
+                </h1>
+                <p className="text-gray-600">
+                  {currentUser.titulo || "Chef en casa"}
+                </p>
+                <p className="text-gray-500 text-sm mt-1">
+                  {currentUser.biografia ||
+                    "Amante de la cocina, el buen vino y las charlas con amigos"}
+                </p>
               </div>
-              
+
               <div className="flex gap-2">
                 <button
                   onClick={() => setMostrarModal(true)}
@@ -66,64 +97,78 @@ export default function Perfil({ user }) {
                 </button>
               </div>
             </div>
-            
+
             <div className="border-t border-gray-200 mt-4 pt-4">
               {/* Pestañas */}
               <div className="flex gap-6">
-                <button 
-                  onClick={() => setActiveTab('saved')}
+                <button
+                  onClick={() => setActiveTab("saved")}
                   className={`pb-2 text-sm font-medium ${
-                    activeTab === 'saved' ? 'text-[#8B1C62] border-b-2 border-[#8B1C62]' : 'text-gray-500 hover:text-gray-700'
+                    activeTab === "saved"
+                      ? "text-[#8B1C62] border-b-2 border-[#8B1C62]"
+                      : "text-gray-500 hover:text-gray-700"
                   }`}
                 >
-                  Recetas guardadas
+                  Mis recetas
                 </button>
                 <button
-                  onClick={() => setActiveTab('favorites')}
+                  onClick={() => setActiveTab("favorites")}
                   className={`pb-2 text-sm font-medium ${
-                    activeTab === 'favorites' ? 'text-[#8B1C62] border-b-2 border-[#8B1C62]' : 'text-gray-500 hover:text-gray-700'
+                    activeTab === "favorites"
+                      ? "text-[#8B1C62] border-b-2 border-[#8B1C62]"
+                      : "text-gray-500 hover:text-gray-700"
                   }`}
                 >
                   Ingredientes favoritos
                 </button>
-                <button 
-                  onClick={() => setActiveTab('history')}
+                <button
+                  onClick={() => setActiveTab("favoritos")}
                   className={`pb-2 text-sm font-medium ${
-                    activeTab === 'history' ? 'text-[#8B1C62] border-b-2 border-[#8B1C62]' : 'text-gray-500 hover:text-gray-700'
+                    activeTab === "favoritos"
+                      ? "text-[#8B1C62] border-b-2 border-[#8B1C62]"
+                      : "text-gray-500 hover:text-gray-700"
                   }`}
                 >
-                  Actividad
+                 Favoritos
                 </button>
               </div>
             </div>
           </div>
         </div>
-        
+
         {/* Contenido de las pestañas */}
         <div className="mt-8">
-          {activeTab === 'saved' && (
-            <div className="space-y-4">
-              <div className="border-b border-gray-200 pb-4">
-                <h3 className="text-lg font-semibold">Espagueti a la carbonara</h3>
-                <p className="text-gray-500 text-sm">Hace 2 meses</p>
+          {activeTab === "saved" && (
+            <div>
+              {misRecetas.length > 0 ? (
+               <RecetasGrid recetas={misRecetas} /> // Componente para mostrar las recetas
+              ) : (
+                <div className="text-center py-12">
+                <div className="mx-auto w-24 h-24 bg-[#faf5f9] rounded-full flex items-center justify-center mb-4">
+                  <svg className="w-12 h-12 text-[#8B1C62]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                  </svg>
+                </div>
+                <h3 className="text-lg font-medium text-gray-900 mb-1">No has subido recetas aún</h3>
+                <p className="text-gray-500 mb-4"> Comparte tus creaciones culinarias con la comunidad</p>
+              
+                <button onClick={() => router.push("/usuario/crearReceta")}
+                 className="bg-[#8B1C62] text-white px-6 py-2 rounded-lg hover:bg-[#7a1756] transition-colors">
+                  Crear primera receta
+                </button>
               </div>
-              <div className="border-b border-gray-200 pb-4">
-                <h3 className="text-lg font-semibold">Cazuela de pollo y arroz</h3>
-                <p className="text-gray-500 text-sm">Hace 2 meses</p>
-              </div>
-              <div className="border-b border-gray-200 pb-4">
-                <h3 className="text-lg font-semibold">Sopa de tomate y albahaca</h3>
-                <p className="text-gray-500 text-sm">Hace 2 meses</p>
-              </div>
-            </div>
-          )}
-          
-          {activeTab === 'favorites' && (
+            )}
+          </div>
+        )}
+
+          {activeTab === "favorites" && (
             <div className="space-y-6">
               {preferencias ? (
                 <>
                   <div>
-                    <h3 className="text-lg font-semibold mb-3">Sabores preferidos</h3>
+                    <h3 className="text-lg font-semibold mb-3">
+                      Sabores preferidos
+                    </h3>
                     <div className="flex flex-wrap gap-2">
                       {preferencias.sabores?.map((sabor, i) => (
                         <span
@@ -135,9 +180,11 @@ export default function Perfil({ user }) {
                       ))}
                     </div>
                   </div>
-                  
+
                   <div>
-                    <h3 className="text-lg font-semibold mb-3">Tipos de comida favoritos</h3>
+                    <h3 className="text-lg font-semibold mb-3">
+                      Tipos de comida favoritos
+                    </h3>
                     <div className="flex flex-wrap gap-2">
                       {preferencias.tiposComida?.map((tipo, i) => (
                         <span
@@ -155,15 +202,26 @@ export default function Perfil({ user }) {
               )}
             </div>
           )}
-          
-          {activeTab === 'history' && (
-            <div className="bg-gray-50 p-4 rounded-xl shadow animate-fadeIn">
-              <p className="text-gray-700">Tu historial de actividad aparecerá aquí</p>
+
+          {activeTab === "favoritos" && (
+            <div>
+            {recetasFavoritas.length > 0 ? (
+             <RecetasGrid recetas={recetasFavoritas} /> // Componente para mostrar las recetas
+            ) : (
+              <div className="text-center py-12">
+              <div className="mx-auto w-24 h-24 bg-[#faf5f9] rounded-full flex items-center justify-center mb-4">
+              
+              </div>
+              <h3 className="text-lg font-medium text-gray-900 mb-1">No tienes recetas en favoritos aún</h3>
+         
+            
             </div>
           )}
         </div>
+          )}
+        </div>
       </div>
-      
+
       {/* Modal con animación y fondo difuminado */}
       {mostrarModal && (
         <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-center justify-center p-4">
@@ -188,7 +246,7 @@ export default function Perfil({ user }) {
                 />
               </svg>
             </button>
-    
+
             <EditarPerfil
               user={currentUser}
               onSave={handleUpdateUser}

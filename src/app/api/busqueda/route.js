@@ -1,5 +1,5 @@
 import { db } from "../../../libs/db";
-import { NextResponse } from 'next/server';
+import { NextResponse } from "next/server";
 
 export async function GET(req) {
   const { searchParams } = new URL(req.url);
@@ -25,9 +25,20 @@ export async function GET(req) {
 
     const recetas = await db.receta.findMany({
       where: condiciones,
-      include: {
+      select: {
+        id: true,
+        titulo: true,
+        pasosPreparacion: true,
+        imagen: true,
         ingredientes: {
-          include: { ingrediente: true },
+          select: {
+            cantidad: true,
+            ingrediente: {
+              select: {
+                nombre: true,
+              },
+            },
+          },
         },
       },
     });

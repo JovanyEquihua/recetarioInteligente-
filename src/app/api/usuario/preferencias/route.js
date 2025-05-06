@@ -38,6 +38,9 @@ export async function POST(req) {
 }
 
 export async function GET(req) {
+  const { searchParams } = new URL(req.url);
+const tipo = searchParams.get("tipo"); // puede ser "favoritos"
+
   const session = await getServerSession(authOptions)
 
   if (!session) {
@@ -53,8 +56,43 @@ export async function GET(req) {
     if (!usuario) {
       return Response.json({ error: "Usuario no encontrado" }, { status: 404 })
     }
+    
+    if (tipo === "favoritos") {
+      const recetasFavoritas = await db.receta.findMany({
+        where: {
+          favoritos: {
+            some: { usuarioId: session.user.id },
+          },
+        },
+        select: {
+          id: true,
+          titulo: true,
+          imagen: true,
+          fechaCreacion: true,
+          tiempoPreparacion: true,
+          porciones: true,
+          dificultad: true,
+        },
+      });
+  
+      return Response.json({ recetas: recetasFavoritas });
+    }
+  
 
-    return Response.json({ preferencias: usuario.preferencias })
+    const recetas = await db.receta.findMany({
+      where: { usuarioId: session.user.id },
+      select: {
+        id: true,
+    titulo: true,
+    imagen: true,
+    fechaCreacion: true,
+    tiempoPreparacion: true,
+    porciones: true,
+    dificultad: true,
+      },
+    });
+
+    return Response.json({ preferencias: usuario.preferencias,recetas })
   } catch (error) {
     console.error("Error al obtener preferencias:", error)
     return Response.json(
@@ -66,3 +104,4 @@ export async function GET(req) {
     )
   }
 }
+
