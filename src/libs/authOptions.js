@@ -25,7 +25,8 @@ export const authOptions = {
         if (!(await limiter(req))) {
           throw new Error("Demasiados intentos. Intenta más tarde.")
         }
-        const ip = requestIp.getClientIp(req) || "Desconocida"
+        let ip = requestIp.getClientIp(req) || "Desconocida"
+        if (ip === "::1") ip = "localhost"
         const timestamp = new Date().toISOString()
         const user = await db.usuario.findUnique({
           where: { email: credentials.email },
@@ -40,7 +41,7 @@ export const authOptions = {
 
           throw new Error("Credenciales inválidas")
         }
-        logAction("login", { email: credentials.email, ip, status: "error", reason: "Ingresó correctamente" });
+        logAction("login", { email: credentials.email, ip, status: "success", reason: "Ingresó correctamente" });
         return { id: user.id, nombre: user.nombre, email: user.email, rol: user.rol, primerInicioSesion: user.primerInicioSesion }
       },
     }),

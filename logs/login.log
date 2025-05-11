@@ -200,3 +200,6 @@
 {"level":"info","message":{"email":"ethginrod@gmail.com","ip":"::1","reason":"Contraseña errada","status":"error","timestamp":"2025-05-11T22:27:31.021Z"}}
 {"level":"info","message":{"email":"ethginrod@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"error","timestamp":"2025-05-11T22:27:40.194Z"}}
 {"level":"info","message":{"email":"ethginrod@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"error","timestamp":"2025-05-11T22:30:42.059Z"}}
+{"level":"info","message":{"email":"ethginrod@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"error","timestamp":"2025-05-11T22:48:55.268Z"}}
+{"level":"info","message":{"email":"ethginrod@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"error","timestamp":"2025-05-11T22:56:13.016Z"}}
+{"level":"info","message":{"email":"ethginrod@gmail.com","ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-11T23:06:46.045Z"}}
