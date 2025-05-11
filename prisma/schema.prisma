@@ -75,7 +75,6 @@ model Receta {
   id                Int                 @id @default(autoincrement())
   usuarioId         Int
   titulo            String
-  pasosPreparacion  Json 
   tiempoPreparacion Int
   porciones         Int
   imagen            String
@@ -83,6 +82,7 @@ model Receta {
   idTipoComida      Int
   idTipoSabor       Int
   dificultad        DificultadReceta
+  pasosPreparacion  Json
   calificaciones    Calificacion[]
   comentarios       Comentario[]
   favoritos         Favorito[]
@@ -180,6 +180,16 @@ model Reporte {
   comentario   Comentario? @relation(fields: [comentarioId], references: [id])
   receta       Receta?     @relation(fields: [recetaId], references: [id])
   usuario      Usuario     @relation(fields: [usuarioId], references: [id])
+}
+
+model Log {
+  id        Int      @id @default(autoincrement())
+  userEmail String
+  action    String
+  target    String?      // A qué afectó (puede ser receta, comentario, usuario, etc.)
+  ip        String
+  status    String       // "Éxito", "Error", etc.
+  createdAt DateTime @default(now())
 }
 
 enum UserRole {
