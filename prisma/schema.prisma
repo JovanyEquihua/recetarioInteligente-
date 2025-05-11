@@ -118,7 +118,7 @@ model RecetaIngrediente {
   ingredienteId Int
   cantidad      String
   ingrediente   Ingrediente @relation(fields: [ingredienteId], references: [id])
-  receta        Receta      @relation(fields: [recetaId], references: [id])
+  receta        Receta      @relation(fields: [recetaId], references: [id], onDelete: Cascade)
 }
 
 model Comentario {
@@ -127,7 +127,7 @@ model Comentario {
   recetaId        Int
   comentario      String
   fechaComentario DateTime  @default(now())
-  receta          Receta    @relation(fields: [recetaId], references: [id])
+  receta          Receta    @relation(fields: [recetaId], references: [id], onDelete: Cascade)
   usuario         Usuario   @relation(fields: [usuarioId], references: [id])
   reportes        Reporte[]
 }
@@ -138,7 +138,7 @@ model Calificacion {
   recetaId          Int
   puntuacion        Int
   fechaCalificacion DateTime @default(now())
-  receta            Receta   @relation(fields: [recetaId], references: [id])
+  receta            Receta   @relation(fields: [recetaId], references: [id], onDelete: Cascade)
   usuario           Usuario  @relation(fields: [usuarioId], references: [id])
 }
 
@@ -147,7 +147,7 @@ model Favorito {
   usuarioId     Int
   recetaId      Int
   fechaGuardado DateTime @default(now())
-  receta        Receta   @relation(fields: [recetaId], references: [id])
+  receta        Receta   @relation(fields: [recetaId], references: [id], onDelete: Cascade)
   usuario       Usuario  @relation(fields: [usuarioId], references: [id])
 }
 
@@ -178,18 +178,8 @@ model Reporte {
   estado       String      @default("pendiente")
   fechaReporte DateTime    @default(now())
   comentario   Comentario? @relation(fields: [comentarioId], references: [id])
-  receta       Receta?     @relation(fields: [recetaId], references: [id])
+  receta       Receta?     @relation(fields: [recetaId], references: [id], onDelete: Cascade)
   usuario      Usuario     @relation(fields: [usuarioId], references: [id])
-}
-
-model Log {
-  id        Int      @id @default(autoincrement())
-  userEmail String
-  action    String
-  target    String?      // A qué afectó (puede ser receta, comentario, usuario, etc.)
-  ip        String
-  status    String       // "Éxito", "Error", etc.
-  createdAt DateTime @default(now())
 }
 
 enum UserRole {

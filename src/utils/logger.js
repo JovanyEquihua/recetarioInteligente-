@@ -6,27 +6,42 @@ import cron from "node-cron";
 import fs from "fs";
 
 // Definimos la ruta del archivo de log
-const logFilePath = path.join(process.cwd(), "logs", "login.log");
+const baseLogPath = path.join(process.cwd(), "logs");
 
-// Creamos un logger utilizando winston
-const logger = winston.createLogger({
-  // Nivel de log (info, en este caso)
-  level: "info",
-  // Formato del log (JSON, en este caso)
-  format: winston.format.json(),
-  // Transportes para el logger (dónde se guardarán los logs)
-  transports: [
-    // Guardar los logs en un archivo
-    new winston.transports.File({ filename: logFilePath }),
-  ],
-});
+// Crea loggers por tipo
+const createLogger = (filename) =>
+  winston.createLogger({
+    level: "info",
+    format: winston.format.json(),
+    transports: [
+      new winston.transports.File({ filename: path.join(baseLogPath, filename) }),
+    ],
+  });
 
-// Eliminar logs cada mes
+// Función para loggear según tipo
+export const logAction = (type, message) => {
+  const fileMap = {
+    login: "login.log",
+    receta: "recetas.log",
+    comentario: "comentarios.log",
+    admin: "admin.log",
+  };
+
+  const logger = createLogger(fileMap[type] || "general.log");
+  logger.info({ ...message, timestamp: new Date().toISOString() });
+};
+
+
+// Borrar logs cada mes
 cron.schedule("0 0 1 * *", () => {
-    fs.truncate(logFilePath, 0, () => {
-      console.log("Logs de inicio de sesión eliminados");
+  Object.values({
+    login: "login.log",
+    receta: "recetas.log",
+    comentario: "comentarios.log",
+    admin: "admin.log",
+  }).forEach((file) => {
+    fs.truncate(path.join(baseLogPath, file), 0, () => {
+      console.log(`Logs de ${file} eliminados`);
     });
   });
-  
-// Exportamos el logger para que pueda ser utilizado en otros archivos
-export default logger;
+});

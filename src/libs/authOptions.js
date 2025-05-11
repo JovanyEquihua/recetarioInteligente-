@@ -3,7 +3,7 @@ import GoogleProvider from "next-auth/providers/google"
 import { db } from "../libs/db"
 import bcrypt from "bcryptjs"
 import { limiter } from "../middleware/rateLimit"
-import logger from "../utils/logger"
+import { logAction } from "../utils/logger"
 import requestIp from "request-ip"
 
 export const authOptions = {
@@ -31,15 +31,16 @@ export const authOptions = {
           where: { email: credentials.email },
         })
         if (!user) {
-          logger.info({ email: credentials.email, ip, timestamp, status: "error", reason: "Usuario errado" })
+          logAction("login", { email: credentials.email, ip, status: "error", reason: "Usuario errado" });
           throw new Error("Credenciales inválidas")
         }
         const passwordMatch = await bcrypt.compare(credentials.contraseña, user.contrase_a)
         if (!passwordMatch) {
-          logger.info({ email: credentials.email, ip, timestamp, status: "error", reason: "Contraseña errada" })
+          logAction("login", { email: credentials.email, ip, status: "error", reason: "Contraseña errada" });
+
           throw new Error("Credenciales inválidas")
         }
-        logger.info({ email: credentials.email, ip, timestamp, status: "success", reason: "Ingresó correctamente" })
+        logAction("login", { email: credentials.email, ip, status: "error", reason: "Ingresó correctamente" });
         return { id: user.id, nombre: user.nombre, email: user.email, rol: user.rol, primerInicioSesion: user.primerInicioSesion }
       },
     }),
