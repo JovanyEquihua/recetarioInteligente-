@@ -32,7 +32,7 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      <body
+      <body id="root"
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <SessionProvider>

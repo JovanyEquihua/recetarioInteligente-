@@ -59,17 +59,26 @@ export const authOptions = {
 
       return session
     },
-    async jwt({ token, user,}) {
-      if (user) {
-        token.id = user.id
-        token.rol = user.rol
-        token.nombre = user.nombre
-        token.primerInicioSesion = user.primerInicioSesion
-      
-      }
-  
-      return token
-    },
+   async jwt({ token, user }) {
+  if (user) {
+    token.id = user.id
+    token.rol = user.rol
+    token.nombre = user.nombre
+    token.primerInicioSesion = user.primerInicioSesion
+  } else if (!token.id) {
+    // Esto sucede cuando estás autenticado con Google y se hace una recarga
+    const dbUser = await db.usuario.findUnique({
+      where: { email: token.email },
+    });
+    if (dbUser) {
+      token.id = dbUser.id;
+      token.rol = dbUser.rol;
+      token.nombre = dbUser.nombre;
+      token.primerInicioSesion = dbUser.primerInicioSesion;
+    }
+  }
+  return token;
+}
   },
   secret: process.env.NEXTAUTH_SECRET,
   session: {

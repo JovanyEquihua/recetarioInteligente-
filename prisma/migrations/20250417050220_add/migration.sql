@@ -46,3 +46,5 @@ ADD CONSTRAINT "VerificationToken_pkey" PRIMARY KEY ("id");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "VerificationToken_email_key" ON "VerificationToken"("email");
+ 
+ 
