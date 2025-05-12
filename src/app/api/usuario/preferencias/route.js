@@ -72,6 +72,7 @@ const tipo = searchParams.get("tipo"); // puede ser "favoritos"
           tiempoPreparacion: true,
           porciones: true,
           dificultad: true,
+          
         },
       });
   
@@ -89,6 +90,7 @@ const tipo = searchParams.get("tipo"); // puede ser "favoritos"
     tiempoPreparacion: true,
     porciones: true,
     dificultad: true,
+    usuarioId: true,
       },
     });
 
