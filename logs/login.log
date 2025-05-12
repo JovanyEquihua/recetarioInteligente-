@@ -190,6 +190,7 @@
 {"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-05T09:27:58.579Z"}}
 {"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-05T22:14:31.405Z"}}
 {"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-05T23:45:50.928Z"}}
+
 {"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::ffff:192.168.1.7","reason":"Contraseña errada","status":"error","timestamp":"2025-05-11T17:26:50.708Z"}}
 {"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::ffff:192.168.1.7","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-11T17:27:08.160Z"}}
 {"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-11T17:29:55.409Z"}}
@@ -227,3 +228,4 @@
 {"action":"edit-details","email":"equicerjoal@gmail.com","level":"info","message":"Detalles de receta editados por el usuario","recetaId":"2","status":"success","timestamp":"2025-05-12T04:10:23.293Z","usuarioId":1}
 {"action":"edit-details","email":"equicerjoal@gmail.com","level":"info","message":"Detalles de receta editados por el usuario","recetaId":"2","status":"success","timestamp":"2025-05-12T04:11:11.851Z","usuarioId":1}
 {"action":"edit-details","email":"equicerjoal@gmail.com","level":"info","message":"Detalles de receta editados por el usuario","recetaId":"2","status":"success","timestamp":"2025-05-12T04:11:35.429Z","usuarioId":1}
+
