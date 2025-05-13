@@ -203,3 +203,9 @@
 {"level":"info","message":{"email":"ethginrod@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"error","timestamp":"2025-05-11T22:48:55.268Z"}}
 {"level":"info","message":{"email":"ethginrod@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"error","timestamp":"2025-05-11T22:56:13.016Z"}}
 {"level":"info","message":{"email":"ethginrod@gmail.com","ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-11T23:06:46.045Z"}}
+{"level":"info","message":{"email":"ethginrod@gmail.com","ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-11T23:35:29.987Z"}}
+{"level":"info","message":{"email":"ethginrod@gmail.com","ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-11T23:37:08.508Z"}}
+{"level":"info","message":{"email":"ethginrod@gmail.com","ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-13T02:53:10.963Z"}}
+{"level":"info","message":{"email":"ethginrod@gmail.com","ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-13T04:16:17.977Z"}}
+{"level":"info","message":{"email":"ethginrod@gmail.com","ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-13T06:25:53.744Z"}}
+{"level":"info","message":{"email":"ethginrod@gmail.com","ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-13T06:27:41.541Z"}}
