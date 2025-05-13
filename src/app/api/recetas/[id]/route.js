@@ -161,10 +161,11 @@ export async function PATCH(req, context) {
         headers: { "Content-Type": "application/json" },
       });
     }
-    // ...existing code...
+  
 
     // Actualizar detalles de la receta
     if (
+      body.titulo !== undefined ||
       body.dificultad !== undefined ||
       body.tiempoPreparacion !== undefined ||
       body.porciones !== undefined ||
@@ -174,6 +175,7 @@ export async function PATCH(req, context) {
       const recetaActualizada = await db.receta.update({
         where: { id: parseInt(id, 10) },
         data: {
+          ...(body.titulo !== undefined && { titulo: body.titulo }),
           ...(body.dificultad !== undefined && { dificultad: body.dificultad }),
           ...(body.tiempoPreparacion !== undefined && { tiempoPreparacion: body.tiempoPreparacion }),
           ...(body.porciones !== undefined && { porciones: body.porciones }),

@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 
 export default function CambiarDetallesReceta({ receta, tiposComida, onClose, onDetallesChange }) {
   const [form, setForm] = useState({
+    titulo: receta.titulo || "",
     dificultad: receta.dificultad || "Facil",
     tiempoPreparacion: receta.tiempoPreparacion || 30,
     porciones: receta.porciones || 1,
@@ -43,7 +44,6 @@ export default function CambiarDetallesReceta({ receta, tiposComida, onClose, on
       ...form,
       pasosPreparacion: form.pasosPreparacion.filter((_, i) => i !== idx),
     });
-    // Si estabas editando este paso, cancela edición
     if (editPasoIdx === idx) {
       setEditPasoIdx(null);
       setEditPaso({ paso: "", tiempo: "" });
@@ -75,12 +75,18 @@ export default function CambiarDetallesReceta({ receta, tiposComida, onClose, on
   };
 
   const handleGuardar = async () => {
+    if (!form.titulo) {
+      toast.error("Por favor ingresa un nombre para la receta");
+      return;
+    }
+    
     setSubiendo(true);
     try {
       const res = await fetch(`/api/recetas/${receta.id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          titulo: form.titulo,
           dificultad: form.dificultad,
           tiempoPreparacion: parseInt(form.tiempoPreparacion),
           porciones: parseInt(form.porciones),
@@ -89,203 +95,243 @@ export default function CambiarDetallesReceta({ receta, tiposComida, onClose, on
         }),
       });
       if (res.ok) {
-        toast.success("Detalles actualizados");
+        toast.success("Receta actualizada correctamente");
         onDetallesChange && onDetallesChange(form);
         onClose();
       } else {
-        toast.error("Error al actualizar detalles");
+        toast.error("Error al actualizar la receta");
       }
     } catch (error) {
-      toast.error("Error al actualizar detalles");
+      toast.error("Error al conectar con el servidor");
     } finally {
       setSubiendo(false);
     }
   };
 
   return (
-    <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
-      <div className="bg-white rounded-xl p-6 shadow-lg w-full max-w-lg h-[600px] flex flex-col relative">
+    <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 backdrop-blur-sm">
+      <div className="bg-white rounded-xl p-6 shadow-lg w-full max-w-lg max-h-[90vh] flex flex-col relative">
         <button
           onClick={onClose}
-          className="absolute top-2 right-2 text-gray-400 hover:text-gray-700"
+          className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 transition-colors"
         >
-          <X />
+          <X size={24} />
         </button>
-        <h2 className="text-lg font-semibold mb-4">Editar detalles de la receta</h2>
-        {/* Contenido con scroll */}
-        <div className="flex-1 overflow-y-auto pr-2 space-y-4">
-          <div>
-            <label className="block text-sm font-medium mb-1">Dificultad</label>
-            <select
-              name="dificultad"
-              value={form.dificultad}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border rounded-md"
-            >
-              <option value="Facil">Fácil</option>
-              <option value="Medio">Medio</option>
-              <option value="Dificil">Difícil</option>
-            </select>
-          </div>
-          <div>
-            <label className="block text-sm font-medium mb-1">Tiempo total (minutos)</label>
+        
+        <h2 className="text-2xl font-bold mb-6 text-[#8B1C62] border-b pb-2">
+          Editar receta
+        </h2>
+        
+        <div className="flex-1 overflow-y-auto pr-2 space-y-6">
+          {/* Nombre de la receta */}
+          <div className="space-y-1">
+            <label className="block text-sm font-medium text-gray-700">Nombre de la receta*</label>
             <input
-              type="number"
-              name="tiempoPreparacion"
-              value={form.tiempoPreparacion}
+              type="text"
+              name="titulo"
+              value={form.titulo}
               onChange={handleChange}
-              className="w-full px-3 py-2 border rounded-md"
-              min="1"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B1C62] focus:border-transparent"
+              placeholder="Ej: Pastel de chocolate"
+              required
             />
           </div>
-          <div>
-            <label className="block text-sm font-medium mb-1">Porciones</label>
-            <input
-              type="number"
-              name="porciones"
-              value={form.porciones}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border rounded-md"
-              min="1"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium mb-1">Tipo de comida</label>
-            <select
-              name="idTipoComida"
-              value={form.idTipoComida}
-              onChange={handleChange}
-              className="w-full px-3 py-2 border rounded-md"
-            >
-              <option value="">Seleccione un tipo de comida</option>
-              {tiposComida.map((tipo) => (
-                <option key={tipo.id} value={tipo.id}>
-                  {tipo.nombre}
-                </option>
-              ))}
-            </select>
-          </div>
-          {/* Pasos de preparación */}
-          <div>
-            <label className="block text-sm font-medium mb-2">Pasos de Preparación</label>
-            {form.pasosPreparacion.map((p, idx) => (
-              <div key={idx} className="flex items-start gap-3 mb-2 border p-2 rounded-md">
-                {editPasoIdx === idx ? (
-                  <div className="flex-1 space-y-2">
-                    <input
-                      type="text"
-                      value={editPaso.paso}
-                      onChange={e => setEditPaso({ ...editPaso, paso: e.target.value })}
-                      className="w-full px-2 py-1 border rounded"
-                    />
-                    <input
-                      type="number"
-                      value={editPaso.tiempo}
-                      onChange={e => setEditPaso({ ...editPaso, tiempo: e.target.value })}
-                      className="w-full px-2 py-1 border rounded"
-                      min="0"
-                      placeholder="Tiempo (min)"
-                    />
-                  </div>
-                ) : (
-                  <div className="flex-1">
-                    <p className="font-semibold">Paso {idx + 1}:</p>
-                    <p>{p.paso}</p>
-                    {p.tiempo && (
-                      <p className="text-sm text-gray-600">
-                        Tiempo sugerido: {p.tiempo} min
-                      </p>
-                    )}
-                  </div>
-                )}
-                <div className="flex flex-col gap-1">
-                  {editPasoIdx === idx ? (
-                    <>
-                      <button
-                        type="button"
-                        onClick={() => handleSaveEditPaso(idx)}
-                        className="text-green-600 hover:text-green-800"
-                        title="Guardar"
-                      >
-                        <Check size={18} />
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setEditPasoIdx(null);
-                          setEditPaso({ paso: "", tiempo: "" });
-                        }}
-                        className="text-gray-500 hover:text-gray-700"
-                        title="Cancelar"
-                      >
-                        <X size={18} />
-                      </button>
-                    </>
-                  ) : (
-                    <>
-                      <button
-                        type="button"
-                        onClick={() => handleEditPaso(idx)}
-                        className="text-blue-600 hover:text-blue-800"
-                        title="Editar"
-                      >
-                        <Pencil size={18} />
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => handleRemovePaso(idx)}
-                        className="text-red-500 hover:text-red-700"
-                        title="Eliminar"
-                      >
-                        <X size={18} />
-                      </button>
-                    </>
-                  )}
-                </div>
-              </div>
-            ))}
-            <div className="mt-4 space-y-2">
-              <input
-                type="text"
-                placeholder="Descripción del paso"
-                value={nuevoPaso.paso}
-                onChange={(e) => setNuevoPaso({ ...nuevoPaso, paso: e.target.value })}
-                className="w-full px-3 py-2 border rounded-md"
-              />
+          
+          {/* Grid de detalles básicos */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-1">
+              <label className="block text-sm font-medium text-gray-700">Dificultad</label>
+              <select
+                name="dificultad"
+                value={form.dificultad}
+                onChange={handleChange}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B1C62] focus:border-transparent"
+              >
+                <option value="Facil">Fácil</option>
+                <option value="Medio">Medio</option>
+                <option value="Dificil">Difícil</option>
+              </select>
+            </div>
+            
+            <div className="space-y-1">
+              <label className="block text-sm font-medium text-gray-700">Tiempo (minutos)*</label>
               <input
                 type="number"
-                placeholder="Tiempo (opcional, en minutos)"
-                value={nuevoPaso.tiempo}
-                onChange={(e) => setNuevoPaso({ ...nuevoPaso, tiempo: e.target.value })}
-                className="w-full px-3 py-2 border rounded-md"
-                min="0"
+                name="tiempoPreparacion"
+                value={form.tiempoPreparacion}
+                onChange={handleChange}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B1C62] focus:border-transparent"
+                min="1"
+                required
               />
-              <button
-                type="button"
-                onClick={handleAddPaso}
-                className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
+            </div>
+            
+            <div className="space-y-1">
+              <label className="block text-sm font-medium text-gray-700">Porciones*</label>
+              <input
+                type="number"
+                name="porciones"
+                value={form.porciones}
+                onChange={handleChange}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B1C62] focus:border-transparent"
+                min="1"
+                required
+              />
+            </div>
+            
+            <div className="space-y-1">
+              <label className="block text-sm font-medium text-gray-700">Tipo de comida</label>
+              <select
+                name="idTipoComida"
+                value={form.idTipoComida}
+                onChange={handleChange}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#8B1C62] focus:border-transparent"
               >
-                Agregar Paso
-              </button>
+                <option value="">Seleccionar...</option>
+                {tiposComida.map((tipo) => (
+                  <option key={tipo.id} value={tipo.id}>
+                    {tipo.nombre}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+          
+          {/* Pasos de preparación */}
+          <div className="space-y-4">
+            <div className="flex justify-between items-center">
+              <label className="block text-sm font-medium text-gray-700">Pasos de preparación</label>
+              <span className="text-xs text-gray-500">{form.pasosPreparacion.length} pasos</span>
+            </div>
+            
+            <div className="space-y-3">
+              {form.pasosPreparacion.map((p, idx) => (
+                <div key={idx} className="bg-gray-50 p-3 rounded-lg border border-gray-200">
+                  {editPasoIdx === idx ? (
+                    <div className="space-y-2">
+                      <input
+                        type="text"
+                        value={editPaso.paso}
+                        onChange={e => setEditPaso({ ...editPaso, paso: e.target.value })}
+                        className="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-[#8B1C62]"
+                        placeholder="Descripción del paso"
+                      />
+                      <input
+                        type="number"
+                        value={editPaso.tiempo}
+                        onChange={e => setEditPaso({ ...editPaso, tiempo: e.target.value })}
+                        className="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-[#8B1C62]"
+                        min="0"
+                        placeholder="Tiempo estimado (minutos)"
+                      />
+                      <div className="flex justify-end gap-2">
+                        <button
+                          onClick={() => {
+                            setEditPasoIdx(null);
+                            setEditPaso({ paso: "", tiempo: "" });
+                          }}
+                          className="px-3 py-1 text-sm text-gray-600 hover:text-gray-800"
+                        >
+                          Cancelar
+                        </button>
+                        <button
+                          onClick={() => handleSaveEditPaso(idx)}
+                          className="px-3 py-1 text-sm bg-[#8B1C62] text-white rounded hover:bg-[#6E1450]"
+                        >
+                          Guardar
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="flex items-start gap-3">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2">
+                          <span className="font-semibold text-[#8B1C62]">Paso {idx + 1}</span>
+                          {p.tiempo && (
+                            <span className="text-xs bg-[#8B1C62]/10 text-[#8B1C62] px-2 py-1 rounded-full">
+                              {p.tiempo} min
+                            </span>
+                          )}
+                        </div>
+                        <p className="mt-1 text-gray-700">{p.paso}</p>
+                      </div>
+                      <div className="flex gap-2">
+                        <button
+                          onClick={() => handleEditPaso(idx)}
+                          className="text-gray-500 hover:text-[#8B1C62] transition-colors"
+                          title="Editar"
+                        >
+                          <Pencil size={16} />
+                        </button>
+                        <button
+                          onClick={() => handleRemovePaso(idx)}
+                          className="text-gray-500 hover:text-red-600 transition-colors"
+                          title="Eliminar"
+                        >
+                          <X size={16} />
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+            
+            <div className="bg-gray-50 p-4 rounded-lg border border-dashed border-gray-300">
+              <h3 className="text-sm font-medium text-gray-700 mb-3">Agregar nuevo paso</h3>
+              <div className="space-y-3">
+                <input
+                  type="text"
+                  placeholder="Descripción del paso*"
+                  value={nuevoPaso.paso}
+                  onChange={(e) => setNuevoPaso({ ...nuevoPaso, paso: e.target.value })}
+                  className="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-[#8B1C62]"
+                />
+                <input
+                  type="number"
+                  placeholder="Tiempo estimado (minutos, opcional)"
+                  value={nuevoPaso.tiempo}
+                  onChange={(e) => setNuevoPaso({ ...nuevoPaso, tiempo: e.target.value })}
+                  className="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-[#8B1C62]"
+                  min="0"
+                />
+                <button
+                  onClick={handleAddPaso}
+                  disabled={!nuevoPaso.paso}
+                  className="w-full px-4 py-2 bg-[#8B1C62] text-white rounded-md hover:bg-[#6E1450] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                >
+                  Agregar Paso
+                </button>
+              </div>
             </div>
           </div>
         </div>
-        {/* Botones abajo, fuera del scroll */}
-        <div className="mt-6 flex justify-end gap-2">
+        
+        {/* Botones de acción */}
+        <div className="mt-6 pt-4 border-t flex justify-end gap-3">
           <button
             onClick={onClose}
-            className="px-4 py-2 text-sm border rounded text-gray-700"
             disabled={subiendo}
+            className="px-5 py-2 text-sm border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors"
           >
             Cancelar
           </button>
           <button
             onClick={handleGuardar}
             disabled={subiendo}
-            className="px-4 py-2 bg-[#8B1C62] text-white rounded text-sm flex items-center gap-2 disabled:opacity-50"
+            className="px-5 py-2 bg-[#8B1C62] text-white rounded-lg text-sm font-medium hover:bg-[#6E1450] transition-colors flex items-center gap-2 disabled:opacity-70"
           >
-            {subiendo ? <Loader2 className="animate-spin" size={18} /> : <Check size={18} />}
-            Guardar
+            {subiendo ? (
+              <>
+                <Loader2 className="animate-spin" size={18} />
+                Guardando...
+              </>
+            ) : (
+              <>
+                <Check size={18} />
+                Guardar cambios
+              </>
+            )}
           </button>
         </div>
       </div>
