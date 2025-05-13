@@ -68,7 +68,7 @@ export default function CambiarIngredientesReceta({ receta, onClose, onIngredien
         >
           <X />
         </button>
-        <h2 className="text-lg font-semibold mb-4">Editar ingredientes</h2>
+        <h2 className="text-lg font-semibold text-[#8B1C62] mb-4">Editar ingredientes</h2>
         <div className="space-y-3 max-h-96 overflow-y-auto">
           {ingredientes.map((ing, idx) => (
             <div key={idx} className="flex gap-2 items-center">
