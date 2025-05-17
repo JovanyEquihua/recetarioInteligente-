@@ -16,6 +16,7 @@ import {
   FiClock,
   FiSearch,
 } from "react-icons/fi";
+import RecetaAleatoria from "../recetas/RecetaAleatoria";
 
 
 export default function Layout({ children }) {
@@ -24,9 +25,17 @@ export default function Layout({ children }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const [showWizard, setShowWizard] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
 
-
-
+useEffect(() => {
+  if (session && typeof window !== "undefined") {
+    const alreadyShown = sessionStorage.getItem("recetaAleatoriaMostrada");
+    if (!alreadyShown) {
+      setShowPopup(true);
+      sessionStorage.setItem("recetaAleatoriaMostrada", "true");
+    }
+  }
+}, [session]);
 
   // Consulta el estado de primerInicioSesion
   useEffect(() => {
@@ -48,6 +57,7 @@ export default function Layout({ children }) {
           // Si `primerInicioSesion` es false, muestra el wizard
           if (data.primerInicioSesion === false) {
             setShowWizard(true);
+           
           }
         } catch (error) {
           console.error("Error al verificar el primer inicio de sesión:", error);
@@ -61,6 +71,7 @@ export default function Layout({ children }) {
   const handleSignOut = async () => {
     await signOut({ redirect: false });
     router.push("/");
+    sessionStorage.removeItem("recetaAleatoriaMostrada");
   };
  
 
@@ -72,6 +83,9 @@ export default function Layout({ children }) {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      
+      {showPopup && <RecetaAleatoria onClose={() => setShowPopup(false)} />}
+      
       {/* Navbar moderno y minimalista */}
       <header className="bg-white border-b border-gray-200 text-gray-700">
         <div className="container mx-auto px-4 py-4">
@@ -88,7 +102,7 @@ export default function Layout({ children }) {
             <nav className="hidden md:flex space-x-8">
               <button
                 className="px-3 py-2 hover:text-[#a32c7a] transition font-medium"
-                onClick={() => router.push("/explore")}
+                onClick={() => router.push("/usuario")}
               >
                 Recetas
               </button>

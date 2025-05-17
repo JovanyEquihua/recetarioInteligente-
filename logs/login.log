@@ -234,3 +234,18 @@
 {"action":"edit-details","email":"equicerjoal@gmail.com","level":"info","message":"Detalles de receta editados por el usuario","recetaId":"10","status":"success","timestamp":"2025-05-13T00:02:28.707Z","usuarioId":1}
 {"action":"edit-details","email":"equicerjoal@gmail.com","level":"info","message":"Detalles de receta editados por el usuario","recetaId":"2","status":"success","timestamp":"2025-05-13T00:03:29.133Z","usuarioId":1}
 {"action":"edit-details","email":"equicerjoal@gmail.com","level":"info","message":"Detalles de receta editados por el usuario","recetaId":"2","status":"success","timestamp":"2025-05-13T00:03:50.575Z","usuarioId":1}
+{"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-17T05:38:53.672Z"}}
+{"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-17T06:42:51.921Z"}}
+{"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-17T07:04:30.213Z"}}
+{"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-17T07:12:47.112Z"}}
+{"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-17T07:19:44.226Z"}}
+{"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-17T07:20:10.553Z"}}
+{"level":"info","message":{"email":"equicejoal@gmail.com","ip":"::1","reason":"Usuario errado","status":"error","timestamp":"2025-05-17T07:20:58.049Z"}}
+{"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-17T07:24:00.717Z"}}
+{"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-17T07:24:55.581Z"}}
+{"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-17T07:27:49.627Z"}}
+{"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::1","reason":"Contraseña errada","status":"error","timestamp":"2025-05-17T07:30:37.403Z"}}
+{"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-17T07:30:52.634Z"}}
+{"action":"edit-details","email":"equicerjoal@gmail.com","level":"info","message":"Detalles de receta editados por el usuario","recetaId":"2","status":"success","timestamp":"2025-05-17T07:31:38.051Z","usuarioId":1}
+{"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-17T07:36:35.844Z"}}
+{"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-17T07:37:38.392Z"}}
