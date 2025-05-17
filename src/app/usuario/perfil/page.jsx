@@ -8,7 +8,7 @@ const DynamicPerfil = dynamic(
   () => import('@/app/components/EditarPerfil/Perfil'),
   {
     loading: () => <p>Cargando perfil...</p>,
-    ssr: false // Solo si el componente usa APIs del navegador
+  
   }
 )
 
