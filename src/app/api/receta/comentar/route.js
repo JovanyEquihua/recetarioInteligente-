@@ -1,5 +1,6 @@
 //API para comentar receta
-import { db } from "../../../../libs/db";
+import { db } from "@/libs/db";
+
 
 // Manejador para solicitudes POST
 export async function POST(req) {
