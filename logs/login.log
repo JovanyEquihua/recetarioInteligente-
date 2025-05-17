@@ -249,3 +249,4 @@
 {"action":"edit-details","email":"equicerjoal@gmail.com","level":"info","message":"Detalles de receta editados por el usuario","recetaId":"2","status":"success","timestamp":"2025-05-17T07:31:38.051Z","usuarioId":1}
 {"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-17T07:36:35.844Z"}}
 {"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-17T07:37:38.392Z"}}
+{"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-17T22:06:45.147Z"}}
