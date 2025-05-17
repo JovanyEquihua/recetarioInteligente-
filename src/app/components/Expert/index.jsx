@@ -1,80 +1,28 @@
 "use client";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import Slider from "react-slick";
-import Image from "next/image";
+import dynamic from 'next/dynamic';
 import { Fade } from "react-awesome-reveal";
+import Image from "next/image";
 
-// CAROUSEL DATA (igual que antes)
+// Carga react-slick solo en el cliente
+const Slider = dynamic(() => import('react-slick'), {
+  ssr: false,
+  loading: () => <div className="text-center p-8">Cargando carrusel...</div>
+});
+
+// Carga los estilos dinámicamente solo en el cliente
+if (typeof window !== 'undefined') {
+  import('slick-carousel/slick/slick.css');
+  import('slick-carousel/slick/slick-theme.css');
+}
+
+// CAROUSEL DATA
 const postData = [
-  {
-    profession: "Senior Chef",
-    name: "Shoo Thar Mien",
-    imgSrc: "/images/Expert/boyone.svg",
-  },
-  {
-    profession: "Junior Chef",
-    name: "Shoo Thar Mien",
-    imgSrc: "/images/Expert/girl.png",
-  },
-  {
-    profession: "Junior Chef",
-    name: "Shoo Thar Mien",
-    imgSrc: "/images/Expert/boytwo.svg",
-  },
-  {
-    profession: "Junior Chef",
-    name: "Shoo Thar Mien",
-    imgSrc: "/images/Expert/girl.png",
-  },
-  {
-    profession: "Junior Chef",
-    name: "Shoo Thar Mien",
-    imgSrc: "/images/Expert/girl.png",
-  },
-  {
-    profession: "Junior Chef",
-    name: "Shoo Thar Mien",
-    imgSrc: "/images/Expert/girl.png",
-  },
+  // ... (mantén tu array postData igual)
 ];
 
-
-// CAROUSEL SETTINGS - CONFIGURACIÓN MEJORADA
+// CAROUSEL SETTINGS
 const settings = {
-  dots: false,
-  infinite: true,
-  slidesToShow: 3,
-  slidesToScroll: 1,
-  arrows: false,
-  autoplay: true, // Si quieres autoplay, cambia a true
-  speed: 500, // Reducido de 4000 a 500 (ms)
-  cssEase: "ease-out", // Cambiado de "linear"
-  centerMode: true,
-  centerPadding: "0",
-  responsive: [
-    {
-      breakpoint: 1200,
-      settings: {
-        slidesToShow: 3,
-        centerPadding: "0",
-      },
-    },
-    {
-      breakpoint: 800,
-      settings: {
-        slidesToShow: 2,
-        centerPadding: "0",
-      },
-    },
-    {
-      breakpoint: 450,
-      settings: {
-        slidesToShow: 1,
-        centerPadding: "0",
-      },
-    },
-  ],
+  // ... (mantén tu objeto settings igual)
 };
 
 const Expert = () => {
