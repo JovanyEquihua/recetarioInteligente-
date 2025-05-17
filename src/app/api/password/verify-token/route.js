@@ -1,7 +1,8 @@
 
 
 import bcrypt from "bcrypt"; // Importar bcrypt para hashear contraseñas
-import { db } from "../../../../libs/db";
+import { db } from "@/libs/db";
+
 
 export async function POST(req) {
     try {
