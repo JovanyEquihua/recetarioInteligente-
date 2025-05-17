@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import Lottie from "react-lottie";
+import Lottie from "lottie-react";
 
 function CookingLoader() {
   const defaultOptions = {
