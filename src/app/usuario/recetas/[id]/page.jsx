@@ -6,6 +6,7 @@ import FavoritoButton from "@/app/components/recipe/FavoritoButton";
 import ModoCocina from "@/app/recetas/ModoCocina";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/libs/authOptions";
+import { prisma } from "@/libs/db";
 
 async function getReceta(id) {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/recetas/${id}`, {
