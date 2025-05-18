@@ -8,7 +8,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/libs/authOptions";
 
 async function getReceta(id) {
-  const res = await fetch(`http://localhost:3000/api/recetas/${id}`, {
+  const res = await fetch(`/api/recetas/${id}`, {
     cache: "no-store",
   });
 
