@@ -1,5 +1,5 @@
 // app/not-found.js
-"use client"; // Esto soluciona el error de document
+"use client"; 
 
 export default function NotFound() {
   return (
