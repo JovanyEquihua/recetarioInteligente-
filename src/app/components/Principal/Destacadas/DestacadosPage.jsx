@@ -7,34 +7,34 @@ import { Fade } from "react-awesome-reveal";
 const cardData = [
   {
     imgSrc: "/images/Features/featureOne.svg",
-    heading: "Menu variations",
-    subheading: "Sed ut perspiciatis unde omnis iste natus error",
-    link: "Learn more",
+    heading: "Saladas",
+    subheading:  "",
+    link: "Ir",
   },
   {
     imgSrc: "/images/Features/featureTwo.svg",
-    heading: "Cooking warw",
-    subheading: "Sed ut perspiciatis unde omnis iste natus error",
-    link: "Learn more",
+    heading: "Dulces",
+    subheading: "",
+    link: "Ir",
   },
   {
     imgSrc: "/images/Features/featureThree.svg",
-    heading: "Best chef",
-    subheading: "Sed ut perspiciatis unde omnis iste natus error",
-    link: "Learn more",
+    heading: "Amargas",
+    subheading: "",
+    link: "Ir",
   },
   {
     imgSrc: "/images/Features/featureFour.svg",
-    heading: "Fast food",
-    subheading: "Sed ut perspiciatis unde omnis iste natus error",
-    link: "Learn more",
+    heading: "Acidas",
+    subheading: "",
+    link: "Ir",
   },
 ];
 
-const Work = () => {
+const DestacadosPage = () => {
   return (
     <div>
-      <div className="mx-auto max-w-7xl py-40 px-6" id="about-section">
+      <div className="mx-auto max-w-7xl py-20 px-6" id="about-section">
         <div className="text-center mb-14">
           <Fade
             direction={"up"}
@@ -44,7 +44,7 @@ const Work = () => {
             triggerOnce={true}
           >
             <h3 className="text-pink text-lg font-normal mb-3 ls-51 uppercase">
-              Features
+            Recetas
             </h3>
           </Fade>
           <Fade
@@ -55,7 +55,7 @@ const Work = () => {
             triggerOnce={true}
           >
             <p className="text-3xl lg:text-5xl font-semibold text-lightgrey">
-              Get a many of interesting <br /> features.
+             Destacadas por sabor <br /> 
             </p>
           </Fade>
         </div>
@@ -70,7 +70,8 @@ const Work = () => {
           >
             {cardData.map((items, i) => (
               <div className="card-b p-8 relative rounded-3xl" key={i}>
-                <div className="work-img-bg rounded-full flex justify-center absolute top-[-50%] sm:top-[-40%] md:top-[-55%] lg:top-[-45%] left-[0%]">
+                <div className="work-img-bg rounded-full flex justify-center absolute top-[-50%] 
+                sm:top-[-40%] md:top-[-55%] lg:top-[-45%] left-[0%]">
                   <Image
                     src={items.imgSrc}
                     alt={items.imgSrc}
@@ -101,4 +102,4 @@ const Work = () => {
   );
 };
 
-export default Work;
+export default DestacadosPage;
