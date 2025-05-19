@@ -105,6 +105,12 @@ export default function ListaCompras({ usuarioId }) {
     }
   };
   
+  reconocimientoVoz.current.onerror = (event) => {
+  if (event.error === 'not-allowed') {
+    console.error("Permiso denegado para usar el micrófono.");
+    mostrarNotificacion('Permiso denegado para usar el micrófono', 'error');
+  }
+};
   // Nueva función para agregar directamente un ítem
   const agregarItemDirecto = async (cantidad, nombreIngrediente) => {
     if (!nombreIngrediente.trim()) {

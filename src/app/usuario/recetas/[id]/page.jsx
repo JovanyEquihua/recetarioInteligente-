@@ -14,8 +14,14 @@ async function getReceta(id) {
       id: parseInt(id),
     },
     include: {
-      ingredientes: true,
-      //pasosPreparacion: true,
+      ingredientes: {
+        include: {
+          ingrediente: true, // Incluye los detalles del ingrediente
+        },
+      },
+      usuario: true, // Incluye los detalles del usuario
+      tipoComida: true, // Incluye los detalles del tipo de comida
+      
     },
   });
 
@@ -28,6 +34,7 @@ async function getReceta(id) {
 
 export default async function RecetaPage({ params }) {
   const receta = await getReceta(params.id);
+  //console.log("Receta:", receta);
   const session = await getServerSession(authOptions);
   const usuarioId = session?.user?.id;
 
