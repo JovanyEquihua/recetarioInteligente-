@@ -6,7 +6,7 @@ import FavoritoButton from "@/app/components/recipe/FavoritoButton";
 import ModoCocina from "@/app/recetas/ModoCocina";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/libs/authOptions";
-import { prisma } from "@/libs/db";
+import { db as prisma } from "@/libs/db";
 
 async function getReceta(id) {
   const receta = await prisma.receta.findUnique({
@@ -15,7 +15,7 @@ async function getReceta(id) {
     },
     include: {
       ingredientes: true,
-      pasosPreparacion: true,
+      //pasosPreparacion: true,
     },
   });
 
