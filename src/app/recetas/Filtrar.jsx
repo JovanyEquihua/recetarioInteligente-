@@ -100,10 +100,10 @@ const Filtrar = () => {
   ];
 
   return (
-    <div className="relative flex min-h-screen flex-col bg-[#f8f8f8] overflow-x-hidden">
-      <div className="flex flex-col lg:flex-row gap-6 p-6">
+    <div className="relative flex  flex-col  ">
+      <div className="flex flex-col lg:flex-row  ">
         {/* Panel de Filtros */}
-        <div className="bg-white rounded-lg shadow-md p-6 w-full lg:w-80">
+        <div className="rounded-lg shadow-md p-6 w-full lg:w-80">
           <h1 className="text-[#1b0e11] text-2xl font-bold mb-6">
             Filtrar Recetas
           </h1>
@@ -217,7 +217,7 @@ const Filtrar = () => {
         </div>
 
         {/* Resultados */}
-        <div className="flex-1">
+        <div className="flex-1 w-[550px]">
           <h2 className="text-2xl font-bold mb-6">Resultados</h2>
           {resultados.length > 0 ? (
             <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">

@@ -9,32 +9,32 @@ const cardData = [
     imgSrc: "/images/Features/featureOne.svg",
     heading: "Saladas",
     subheading:  "",
-    link: "Ir",
+    link: "Ir >",
   },
   {
     imgSrc: "/images/Features/featureTwo.svg",
     heading: "Dulces",
     subheading: "",
-    link: "Ir",
+    link: "Ir >",
   },
   {
     imgSrc: "/images/Features/featureThree.svg",
     heading: "Amargas",
     subheading: "",
-    link: "Ir",
+    link: "Ir >",
   },
   {
     imgSrc: "/images/Features/featureFour.svg",
     heading: "Acidas",
     subheading: "",
-    link: "Ir",
+    link: "Ir >",
   },
 ];
 
 const DestacadosPage = () => {
   return (
     <div>
-      <div className="mx-auto max-w-7xl py-20 px-6" id="about-section">
+      <div className="   mx-auto max-w-7xl py-20 px-6" id="about-section">
         <div className="text-center mb-14">
           <Fade
             direction={"up"}
@@ -85,11 +85,11 @@ const DestacadosPage = () => {
                 <p className="text-lg font-normal text-black text-center text-opacity-50 mt-2">
                   {items.subheading}
                 </p>
-                <div className="flex items-center justify-center">
+                <div className="flex items-center justify-center ">
                   <Link href="/">
-                    <p className="text-center text-lg font-medium text-pink mt-2 hover-underline">
+                    <p className="text-center text-lg font-medium  mt-2  text-[#8B1C62]">
                       {items.link}
-                      <ChevronRightIcon width={20} height={20} />
+                  
                     </p>
                   </Link>
                 </div>

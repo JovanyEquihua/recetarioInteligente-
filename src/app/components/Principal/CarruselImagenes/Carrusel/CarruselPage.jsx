@@ -21,7 +21,7 @@ function CarruselPage() {
         return () => clearInterval(interval);
       }, [images.length]);
   return (
-    <div className="relative mx-auto w-full max-w-6xl h-[500px] bg-black/90 rounded-xl shadow-2xl">
+    <div className="relative mx-auto w-full max-w-6xl h-[500px] bg-black/90 rounded-xl shadow-2xl ">
      
       {images.map((src, index) => (
             <img

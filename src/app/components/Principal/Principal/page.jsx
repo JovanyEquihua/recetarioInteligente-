@@ -5,14 +5,12 @@ import DestacadosPage from "../Destacadas/DestacadosPage";
 
 const index = () => {
   return (
-    <div>
-      <div>
-        <CarruselImagenes />
+    <div className="flex flex-col">
+      <CarruselImagenes />
+      <div className="-z-50">
+ <DestacadosPage />
       </div>
-      <div >
-      <DestacadosPage/>
-      </div>
-    
+     
     </div>
   );
 };
