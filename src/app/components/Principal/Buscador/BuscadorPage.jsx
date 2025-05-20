@@ -48,8 +48,8 @@ const BuscadorPage = () => {
   }, [query, buscar]);
 
   return (
-      <div className="w-full"> {/* Contenedor principal modificado */}
-      <div className="w-[550px] flex items-center gap-2 border border-gray-300 bg-white bg-opacity-90 rounded-full px-3 py-2 shadow-md">
+      <div className=" w-full"> {/* Contenedor principal modificado */}
+      <div className=" w-[550px] flex items-center gap-2 border border-gray-300 bg-white bg-opacity-90 rounded-full px-3 py-2 shadow-md">
       <input
           type="text"
           value={query}

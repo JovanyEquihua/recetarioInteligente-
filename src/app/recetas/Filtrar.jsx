@@ -217,7 +217,7 @@ const Filtrar = () => {
         </div>
 
         {/* Resultados */}
-        <div className="flex-1 w-[550px]">
+        {/* <div className="flex-1 w-[550px]">
           <h2 className="text-2xl font-bold mb-6">Resultados</h2>
           {resultados.length > 0 ? (
             <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
@@ -299,7 +299,7 @@ const Filtrar = () => {
               </p>
             </div>
           )}
-        </div>
+        </div> */}
       </div>
     </div>
   );
