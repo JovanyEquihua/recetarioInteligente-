@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+import ResultadosPage from "../components/Principal/Resultados/ResultadosPage";
 const Filtrar = () => {
   const router = useRouter();
 
@@ -100,7 +101,7 @@ const Filtrar = () => {
   ];
 
   return (
-    <div className="relative flex  flex-col  ">
+    <div className="relative flex  flex-col z-0 ">
       <div className="flex flex-col lg:flex-row  ">
         {/* Panel de Filtros */}
         <div className="rounded-lg shadow-md p-6 w-full lg:w-80">
@@ -217,89 +218,18 @@ const Filtrar = () => {
         </div>
 
         {/* Resultados */}
-        {/* <div className="flex-1 w-[550px]">
-          <h2 className="text-2xl font-bold mb-6">Resultados</h2>
-          {resultados.length > 0 ? (
-            <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-              {resultados.map((receta) => (
-                <div
-                  key={receta.id}
-                  className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group"
-                >
-                  <div className="relative h-60 overflow-hidden">
-                    <img
-                      src={receta.imagen || "/placeholder-food.jpg"}
-                      alt={receta.titulo}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
-                      <span className="inline-block bg-[#8B1C62] text-white text-xs font-bold px-2 py-1 rounded-full">
-                        {receta.tiempoPreparacion} min
-                      </span>
-                      <span className="ml-2 inline-block bg-white/90 text-[#8B1C62] text-xs font-bold px-2 py-1 rounded-full">
-                        {receta.dificultad}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="p-5">
-                    <h3 className="text-xl font-bold text-gray-800 mb-2 group-hover:text-[#8B1C62] transition-colors">
-                      {receta.titulo}
-                    </h3>
-                    <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-                      {receta.descripcion}
-                    </p>
-                    <div className="flex justify-between items-center">
-                      <span className="text-xs bg-[#f8f0f5] text-[#8B1C62] px-2 py-1 rounded">
-                        {receta.tipoComida?.nombre}
-                      </span>
-                      <button
-                    onClick={() => handleViewRecipe(receta.id)}
-                    className="text-[#8B1C62] hover:text-[#A32C7A] font-medium text-sm flex items-center"
-                  >
-                    Ver receta
-                        <svg
-                          className="w-4 h-4 ml-1"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="bg-white rounded-xl p-8 text-center shadow-md">
-              <div className="text-[#8B1C62] mb-4">
-                <svg
-                  className="w-16 h-16 mx-auto"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="1.5"
-                    d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-gray-800 mb-2">
-                No se encontraron recetas
-              </h3>
-              <p className="text-gray-600">
-                Prueba ajustando tus filtros de búsqueda
-              </p>
-            </div>
-          )}
-        </div> */}
+        <div >
+          {resultados.length > 0 && (
+  <div className="absolute left-1/2 transform translate-x-52 top-[250px] z-20 w-[900px] ">
+    <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+      {resultados.map((receta) => (
+        <ResultadosPage key={receta.id} receta={receta} />
+      ))}
+    </div>
+  </div>
+)}
+
+        </div>
       </div>
     </div>
   );

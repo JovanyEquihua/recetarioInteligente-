@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect, useCallback } from "react";
 import debounce from "lodash/debounce";
-import CajaRecetaPage from "../components/Principal/CajasReceta/CajaRecetaPage";
+import CajaRecetaPage from "../components/Principal/Resultados/ResultadosPage";
 
 export default function Busqueda() {
   const [nombre, setNombre] = useState("");
