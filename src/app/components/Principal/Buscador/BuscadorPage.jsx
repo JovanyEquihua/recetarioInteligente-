@@ -77,10 +77,10 @@ const BuscadorPage = ({ isFiltered }) => {
 
       {/* Resultados */}
       {loading ? (
-        <p className="text-center mt-6">Buscando...</p>
+        <p className="text-center mt-4">Buscando...</p>
       ) : (
         mostrarResultados && (
-          <div className="absolute mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 z-50">
+          <div className="absolute mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 z-50">
               {resultados
                 .filter((item) => item && item.imagen)
                 .map((item) => (

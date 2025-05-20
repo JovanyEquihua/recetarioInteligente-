@@ -74,8 +74,8 @@ const CarruselGeneral = () => {
 
               {/* Buscador y botón */}
               <div
-                className={`mt-8 px-2 ${
-                  mostrarFiltrar ? "max-w-md mx-auto  flex justify-center items-center mt-0 " : ""
+                className={` px-2 ${
+                  mostrarFiltrar ? "max-w-md mx-auto  flex justify-center items-center mt-0 " : "mt-16"
                 }`}
               >
                 <div className="flex justify-between items-center">
