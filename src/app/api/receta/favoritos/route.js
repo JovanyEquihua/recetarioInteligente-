@@ -2,9 +2,6 @@ import { NextResponse } from 'next/server';
 import { db } from "@/libs/db";
 
 
-
-
-
 export async function POST(req) {
   try {
     const { recetaId, usuarioId } = await req.json();
@@ -26,6 +23,25 @@ export async function POST(req) {
         usuarioId: parseInt(usuarioId),
       },
     });
+
+    const receta = await db.receta.findUnique({
+  where: { id: parseInt(recetaId) },
+  select: { usuarioId: true },
+});
+
+ const usuario = await db.usuario.findUnique({
+      where: { id: parseInt(usuarioId) },
+      select: { nombreUsuario: true },
+    });
+
+if (receta.usuarioId !== parseInt(usuarioId)) {
+  await db.notificacion.create({
+    data: {
+      usuarioId: receta.usuarioId, // dueño de la receta
+      mensaje: `A ${usuario.nombreUsuario} le gustó tu receta.`,
+    },
+  });
+}
 
     return NextResponse.json(nuevoFavorito, { status: 201 });
   } catch (error) {
