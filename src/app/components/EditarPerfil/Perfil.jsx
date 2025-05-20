@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import EditarPerfil from "./EditarPerfil";
 import RecetasGrid from "@/app/recetas/RecetasGrid";
+import RecetasGridUsuario from "@/app/recetas/RecetasGridUsuario";
 
 export default function Perfil({ user }) {
   const router = useRouter();
@@ -141,7 +142,7 @@ export default function Perfil({ user }) {
           {activeTab === "saved" && (
             <div>
               {misRecetas.length > 0 ? (
-               <RecetasGrid recetas={misRecetas} /> // Componente para mostrar las recetas
+               <RecetasGridUsuario recetas={misRecetas} /> // Componente para mostrar las recetas
               ) : (
                 <div className="text-center py-12">
                 <div className="mx-auto w-24 h-24 bg-[#faf5f9] rounded-full flex items-center justify-center mb-4">

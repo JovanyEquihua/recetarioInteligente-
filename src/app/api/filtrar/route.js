@@ -1,4 +1,5 @@
-import { db } from "../../../libs/db";
+import { db } from "@/libs/db";
+
 
 export async function POST(req) {
   try {

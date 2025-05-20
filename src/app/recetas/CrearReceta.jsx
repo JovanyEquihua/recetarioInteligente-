@@ -18,13 +18,12 @@ export default function CrearReceta({ onSave }) {
   const [tiposSabor, setTiposSabor] = useState([]);
   const [formData, setFormData] = useState({
     titulo: "",
-    descripcion: "",
     tiempoPreparacion: 30,
     dificultad: "Facil",
     porciones: 2,
     ingredientes: [],
     pasosPreparacion: [], // Cambiado a un array para pasos de preparació // Esto podría ser parte de la descripción
-    imagen: "/images/default-recipe.png",
+    imagen: "/images/default-recipe.jpg",
     idTipoComida: 1, // Valor por defecto
     idTipoSabor: 1, // Valor por defecto
   });
@@ -156,6 +155,7 @@ export default function CrearReceta({ onSave }) {
           tiempoPreparacion: 30,
           dificultad: "Facil",
           porciones: 2,
+          pasosPreparacion: [],
           imagen: "/images/default-recipe.png",
        
     

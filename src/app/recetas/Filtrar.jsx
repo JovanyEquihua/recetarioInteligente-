@@ -1,7 +1,10 @@
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
+
 import ResultadosPage from "../components/Principal/Resultados/ResultadosPage";
+
+
 const Filtrar = () => {
   const router = useRouter();
 
@@ -218,6 +221,7 @@ const Filtrar = () => {
         </div>
 
         {/* Resultados */}
+
         <div >
           {resultados.length > 0 && (
   <div className="absolute left-1/2 transform translate-x-52 top-[250px] z-20 w-[900px] ">
