@@ -1,7 +1,10 @@
 "use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import RecetaCard from "./RecetaCard";
+
+import ResultadosPage from "../components/Principal/Resultados/ResultadosPage";
+
+
 const Filtrar = () => {
   const router = useRouter();
 
@@ -101,10 +104,10 @@ const Filtrar = () => {
   ];
 
   return (
-    <div className="relative flex min-h-screen flex-col bg-[#f8f8f8] overflow-x-hidden">
-      <div className="flex flex-col lg:flex-row gap-6 p-6">
+    <div className="relative flex  flex-col z-0 ">
+      <div className="flex flex-col lg:flex-row  ">
         {/* Panel de Filtros */}
-        <div className="bg-white rounded-lg shadow-md p-6 w-full lg:w-80">
+        <div className="rounded-lg shadow-md p-6 w-full lg:w-80">
           <h1 className="text-[#1b0e11] text-2xl font-bold mb-6">
             Filtrar Recetas
           </h1>
@@ -218,43 +221,18 @@ const Filtrar = () => {
         </div>
 
         {/* Resultados */}
-        <div className="flex-1">
-          <h2 className="text-2xl font-bold mb-6">Resultados</h2>
-          {resultados.length > 0 ? (
-            <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-              {resultados.map((receta) => (
-                <RecetaCard
-                  key={receta.id}
-                  receta={receta}
-                  onViewRecipe={handleViewRecipe}
-                />
-              ))}
-            </div>
-          ) : (
-            <div className="bg-white rounded-xl p-8 text-center shadow-md">
-              <div className="text-[#8B1C62] mb-4">
-                <svg
-                  className="w-16 h-16 mx-auto"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="1.5"
-                    d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-              </div>
-              <h3 className="text-xl font-bold text-gray-800 mb-2">
-                No se encontraron recetas
-              </h3>
-              <p className="text-gray-600">
-                Prueba ajustando tus filtros de búsqueda
-              </p>
-            </div>
-          )}
+
+        <div >
+          {resultados.length > 0 && (
+  <div className="absolute left-1/2 transform translate-x-52 top-[250px] z-20 w-[900px] ">
+    <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+      {resultados.map((receta) => (
+        <ResultadosPage key={receta.id} receta={receta} />
+      ))}
+    </div>
+  </div>
+)}
+
         </div>
       </div>
     </div>
