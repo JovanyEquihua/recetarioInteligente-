@@ -203,3 +203,11 @@
 {"level":"info","message":{"email":"ethginrod@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"error","timestamp":"2025-05-11T22:48:55.268Z"}}
 {"level":"info","message":{"email":"ethginrod@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"error","timestamp":"2025-05-11T22:56:13.016Z"}}
 {"level":"info","message":{"email":"ethginrod@gmail.com","ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-11T23:06:46.045Z"}}
+{"level":"info","message":{"email":"floresvegadiegoadrian@gmail.com","ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-11T23:54:27.016Z"}}
+{"level":"info","message":{"email":"floresvegadiegoadrian@gmail.com","ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-14T04:23:13.478Z"}}
+{"level":"info","message":{"email":"floresvegadiegoadrian@gmail.com","ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-14T07:53:56.099Z"}}
+{"level":"info","message":{"email":"floresvegadiegoadrian@gmail.com","ip":"localhost","reason":"Contraseña errada","status":"error","timestamp":"2025-05-20T02:07:01.661Z"}}
+{"level":"info","message":{"email":"a@b.com","ip":"localhost","reason":"Usuario errado","status":"error","timestamp":"2025-05-20T02:07:09.370Z"}}
+{"level":"info","message":{"email":"floresvegadiegoadrian@gmail.com","ip":"localhost","reason":"Contraseña errada","status":"error","timestamp":"2025-05-20T03:41:05.022Z"}}
+{"level":"info","message":{"email":"floresvegadiegoadrian@gmail.com","ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-20T03:41:19.559Z"}}
+{"level":"info","message":{"email":"floresvegadiegoadrian@gmail.com","ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-20T05:44:46.366Z"}}
