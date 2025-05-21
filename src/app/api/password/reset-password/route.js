@@ -1,5 +1,6 @@
 
-import { db } from "../../../../libs/db";
+import { db } from "@/libs/db";
+
 
 import nodemailer from "nodemailer";
 

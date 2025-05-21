@@ -10,6 +10,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import CookingLoader from "../Animaciones/CookingLoader"; // Asegúrate de que la ruta sea correcta
 
+
 const LoginModal = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [email, setEmail] = useState("");

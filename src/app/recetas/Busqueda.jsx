@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect, useCallback } from "react";
 import debounce from "lodash/debounce";
+import CajaRecetaPage from "../components/Principal/Resultados/ResultadosPage";
 
 export default function Busqueda() {
   const [nombre, setNombre] = useState("");
@@ -45,9 +46,18 @@ export default function Busqueda() {
         className="border p-2 mr-2"
       />
 
-      <div className="mt-6">
+      <div className="mt-6 ">
+        HOLAAAAA
         {resultados.map((r) => (
           <div key={r.id} className="mb-4 p-4 border rounded">
+            <CajaRecetaPage
+              id={r.id}
+              titulo={r.titulo}
+              pasosPreparacion={r.pasosPreparacion}
+              ingredientes={r.ingredientes.map((i) => i.ingrediente.nombre)}
+              imagen={r.imagen}   
+>
+            </CajaRecetaPage>
             <img
               src={r.imagen}
               alt={r.titulo}

@@ -105,6 +105,7 @@ export default function ListaCompras({ usuarioId }) {
     }
   };
   
+
   // Nueva función para agregar directamente un ítem
   const agregarItemDirecto = async (cantidad, nombreIngrediente) => {
     if (!nombreIngrediente.trim()) {

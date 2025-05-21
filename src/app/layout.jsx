@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation"; // Importa el hook usePathname
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
-import Navbar from "./components/Navbar/index";
+import SafeNavbarin from "./components/SafeNavbarin";
 import Footer from "./components/Footer/Footer";
 
 
@@ -32,12 +32,12 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      <body
+      <body id="root"
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <SessionProvider>
          {/* Renderiza el Navbar solo si no estás en una ruta de usuario */}
-         {!isUsuarioRoute && <Navbar />}
+         {!isUsuarioRoute && <SafeNavbarin />}
           {children}
           {!isUsuarioRoute && <Footer />}
         </SessionProvider>

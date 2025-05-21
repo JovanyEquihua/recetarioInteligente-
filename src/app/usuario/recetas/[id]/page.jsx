@@ -6,23 +6,37 @@ import FavoritoButton from "@/app/components/recipe/FavoritoButton";
 import ModoCocina from "@/app/recetas/ModoCocina";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/libs/authOptions";
+import { db as prisma } from "@/libs/db";
 
 async function getReceta(id) {
-  const res = await fetch(`http://localhost:3000/api/recetas/${id}`, {
-    cache: "no-store",
+  const receta = await prisma.receta.findUnique({
+    where: {
+      id: parseInt(id),
+    },
+    include: {
+      ingredientes: {
+        include: {
+          ingrediente: true, // Incluye los detalles del ingrediente
+        },
+      },
+      usuario: true, // Incluye los detalles del usuario
+      tipoComida: true, // Incluye los detalles del tipo de comida
+      
+    },
   });
 
-  if (!res.ok) {
-    throw new Error("No se pudo cargar la receta.");
+  if (!receta) {
+    throw new Error("Receta no encontrada");
   }
 
-  return res.json();
+  return receta;
 }
 
 export default async function RecetaPage({ params }) {
   const receta = await getReceta(params.id);
+  //console.log("Receta:", receta);
   const session = await getServerSession(authOptions);
-  const usuarioId = session?.user?.id; // Asegúrate de que el usuario esté autenticado
+  const usuarioId = session?.user?.id;
 
   let esFavoritoInicial = false;
 

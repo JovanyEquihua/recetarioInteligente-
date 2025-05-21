@@ -1,10 +1,19 @@
-import MapaRecetas from '@/app/recetas/MapaRecetas'
+'use client'
+
+import dynamic from 'next/dynamic'
 import React from 'react'
 
-const page = () => {
+// Importa el componente de forma dinámica sin SSR
+const MapaRecetas = dynamic(() => import('@/app/recetas/MapaRecetas'), {
+  ssr: false,
+})
+
+const Page = () => {
   return (
-    <div><MapaRecetas/></div>
+    <div>
+      <MapaRecetas />
+    </div>
   )
 }
 
-export default page
+export default Page

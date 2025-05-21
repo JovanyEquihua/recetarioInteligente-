@@ -3,6 +3,13 @@
 @tailwind utilities;
 
 
+@keyframes spin-slow {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
 
 
 
@@ -81,7 +88,7 @@ html:not([data-scroll="0"]) .navbar {
   height: 1px;
   bottom: 0;
   left: 0;
-  background-color: #DF6751;
+  background-color: #8B1C62;
   transform-origin: bottom right;
   transition: transform .25s ease-out;
 }
