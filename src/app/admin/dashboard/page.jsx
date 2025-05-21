@@ -1,5 +1,43 @@
 "use client";
 import { useEffect, useState } from "react";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
+
+async function generarPDF() {
+  const res = await fetch("/api/logs/login");
+  const data = await res.json();
+
+  const doc = new jsPDF();
+  doc.text("Reporte de Conexiones", 14, 10);
+
+  autoTable(doc, {
+    startY: 20,
+    head: [["Usuario", "IP", "Fecha/Hora"]],
+    body: data.map((log) => [
+      log.email || "-",
+      log.ip || "-",
+      new Date(log.timestamp).toLocaleString(),
+    ]),
+  });
+
+  const blob = doc.output("blob");
+
+  // Descargar el archivo
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "reporte_conexiones.pdf";
+  a.click();
+
+  // Subida al servidor (para luego Google Drive)
+  const formData = new FormData();
+  formData.append("file", blob, "reporte_conexiones.pdf");
+
+  await fetch("/api/upload-to-drive", {
+    method: "POST",
+    body: formData,
+  });
+}
 
 const logTypes = {
   login: "Inicios de sesión",
@@ -52,7 +90,14 @@ export default function DashboardPage() {
             {label}
           </button>
         ))}
+        <button
+  className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300"
+  onClick={generarPDF}
+>
+  Descargar PDF y subir a Drive
+</button>
       </div>
+      
 
       {/* Tabla */}
       {logs.length > 0 ? (
