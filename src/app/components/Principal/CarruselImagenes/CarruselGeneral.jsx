@@ -6,14 +6,14 @@ import CarruselPage from "./Carrusel/CarruselPage";
 import BuscadorPage from "../Buscador/BuscadorPage";
 import Filtrar from "@/app/recetas/Filtrar";
 
-const CarruselGeneral = () => {
-  const [mostrarFiltrar, setMostrarFiltrar] = useState(false);
+const CarruselGeneral = ({ mostrarFiltrar, setMostrarFiltrar }) => {
+  // const [mostrarFiltrar, setMostrarFiltrar] = useState(false);
 
   return (
-    <div className="relative w-full max-w-7xl mx-auto mt-10 flex transition-all duration-500">
+    <div className="relative  w-full max-w-7xl mx-auto mt-10 flex transition-all duration-500">
       {/* Panel de filtrado */}
       {mostrarFiltrar && (
-        <div className="relative z-50 bg-white rounded-xl shadow-2xl p-6 min-w-[300px] max-w-[350px] transition-all duration-500">
+        <div className="relative  bg-white rounded-xl shadow-2xl p-6 min-w-[300px] max-w-[350px] transition-all duration-500">
           <button
             className="text-gray-500 hover:text-[#8B1C62] text-2xl font-bold mb-2 translate-x-72"
             onClick={() => setMostrarFiltrar(false)}
@@ -27,9 +27,9 @@ const CarruselGeneral = () => {
 
       {/* Carrusel y contenido principal */}
       <div
-        className={`transition-all duration-500 ${
+        className={`transition-all duration-500  ${
           mostrarFiltrar
-            ? "w-[calc(100%-350px)] scale-[0.95] translate-x-4"
+            ? "w-[calc(100%-350px)] scale-[0.95] translate-x-4 h-64 "
             : "w-full"
         }`}
       >
@@ -85,7 +85,8 @@ const CarruselGeneral = () => {
                   {!mostrarFiltrar && (
                     <div className="ml-4">
                       <button
-                        className="w-40 h-10 bg-[#8B1C62] text-white rounded-md hover:bg-[#8b1c62d2] transition duration-300 text-lg"
+                        className="w-40 h-10 bg-[#8B1C62] text-white rounded-md hover:bg-[#8b1c62d2] 
+                        transition duration-300 text-lg"
                         onClick={() => setMostrarFiltrar(true)}
                       >
                         Filtrar Recetas

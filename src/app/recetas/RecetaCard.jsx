@@ -1,10 +1,11 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 
 const RecetaCard = ({ receta, onViewRecipe }) => {
   return (
-    <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group">
+    <div className=" bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group">
       <div className="relative h-60 overflow-hidden">
         <img
           src={receta.imagen || "/placeholder-food.jpg"}
@@ -31,23 +32,26 @@ const RecetaCard = ({ receta, onViewRecipe }) => {
           <span className="text-xs bg-[#f8f0f5] text-[#8B1C62] px-2 py-1 rounded">
             {receta.tipoComida?.nombre}
           </span>
-          <button
-            onClick={() => onViewRecipe(receta.id)}
-            className="text-[#8B1C62] hover:text-[#A32C7A] font-medium text-sm flex items-center"
-          >
-            Ver receta
-            <svg
-              className="w-4 h-4 ml-1"
-              fill="currentColor"
-              viewBox="0 0 20 20"
+
+          <Link href={`/usuario/recetas/${receta.id}`}>
+            <button
+              // onClick={() => onViewRecipe(receta.id)}
+              className="text-[#8B1C62] hover:text-[#A32C7A] font-medium text-sm flex items-center"
             >
-              <path
-                fillRule="evenodd"
-                d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
-                clipRule="evenodd"
-              />
-            </svg>
-          </button>
+              Ver receta
+              <svg
+                className="w-4 h-4 ml-1"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </button>
+          </Link>
         </div>
       </div>
     </div>
