@@ -50,7 +50,7 @@ export default function AdminLayout({ children }) {
                       onClick={() => router.push("/admin/dashboard")}
                     >
                       <FiBarChart2 />
-                      <span>Dashboard</span>
+                      <span>Logs</span>
                     </button>
                     <button 
                       className="px-3 py-2 hover:bg-gray-700 rounded-lg transition flex items-center space-x-1"
@@ -61,10 +61,10 @@ export default function AdminLayout({ children }) {
                     </button>
                     <button 
                       className="px-3 py-2 hover:bg-gray-700 rounded-lg transition flex items-center space-x-1"
-                      onClick={() => router.push("/admin/config")}
+                      onClick={() => router.push("/admin/reportes")}
                     >
                       <FiShield />
-                      <span>Seguridad</span>
+                      <span>Reportes</span>
                     </button>
                   </nav>
 

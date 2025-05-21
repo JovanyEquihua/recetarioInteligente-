@@ -1,3 +1,4 @@
+
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import { db } from "../libs/db";
@@ -5,6 +6,7 @@ import bcrypt from "bcryptjs";
 import { limiter } from "../middleware/rateLimit";
 import logger from "../utils/logger";
 import requestIp from "request-ip";
+
 
 // Configuración de opciones de autenticación para NextAuth
 export const authOptions = {
@@ -33,6 +35,7 @@ export const authOptions = {
         if (!(await limiter(req))) {
           throw new Error("Demasiados intentos. Intenta más tarde.");
         }
+
      // Obtiene la IP del usuario y la hora del intento
         const ip = requestIp.getClientIp(req) || "Desconocida";
         const timestamp = new Date().toISOString();
@@ -93,6 +96,7 @@ export const authOptions = {
           primerInicioSesion: user.primerInicioSesion,
           fotoPerfil: user.fotoPerfil,
         };
+
       },
     }),
   ],

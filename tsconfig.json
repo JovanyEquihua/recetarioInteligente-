@@ -25,6 +25,6 @@
     "**/*.ts",
     "**/*.tsx",
     "src/app/components/Footer/Footer.jsx"
-  ],
+, "src/app/api/usuarios/route.js"  ],
   "exclude": ["node_modules"]
 }
