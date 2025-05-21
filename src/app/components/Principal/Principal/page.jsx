@@ -1,18 +1,26 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import CarruselImagenes from "../CarruselImagenes/CarruselGeneral";
 import DestacadosPage from "../Destacadas/DestacadosPage";
 
-const index = () => {
+const Index = () => {
+  const [mostrarFiltrar, setMostrarFiltrar] = useState(false);
+
   return (
-    <div className="flex flex-col ">
-      <CarruselImagenes />
-      <div className="z-50">
- <DestacadosPage />
-      </div>
-     
+    <div className="flex flex-col">
+      <CarruselImagenes
+        mostrarFiltrar={mostrarFiltrar}
+        setMostrarFiltrar={setMostrarFiltrar}
+      />
+      
+      {/* Condicional: si no se está filtrando, muestra los destacados */}
+      {!mostrarFiltrar && (
+        <div className="transition-all duration-500">
+          <DestacadosPage />
+        </div>
+      )}
     </div>
   );
 };
 
-export default index;
+export default Index;

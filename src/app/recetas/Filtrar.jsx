@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 
 import ResultadosPage from "../components/Principal/Resultados/ResultadosPage";
 
-
 const Filtrar = () => {
   const router = useRouter();
 
@@ -104,7 +103,7 @@ const Filtrar = () => {
   ];
 
   return (
-    <div className="relative flex  flex-col z-0 ">
+    <div className="relative flex  flex-col  ">
       <div className="flex flex-col lg:flex-row  ">
         {/* Panel de Filtros */}
         <div className="rounded-lg shadow-md p-6 w-full lg:w-80">
@@ -219,22 +218,22 @@ const Filtrar = () => {
             Aplicar Filtros
           </button>
         </div>
-
-        {/* Resultados */}
-
-        <div >
-          {resultados.length > 0 && (
-  <div className="absolute left-1/2 transform translate-x-52 top-[250px] z-20 w-[900px] ">
-    <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-      {resultados.map((receta) => (
-        <ResultadosPage key={receta.id} receta={receta} />
-      ))}
-    </div>
-  </div>
-)}
-
-        </div>
       </div>
+      {/* Resultados */}
+      <div className=" ">
+      
+        {resultados.length > 0 && (
+          <div className="absolute  left-1/2 transform translate-x-52 top-[200px]  w-[900px] 
+           overflow-hidden">
+            <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+              {resultados.map((receta) => (
+                <ResultadosPage key={receta.id} receta={receta} />
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+      
     </div>
   );
 };
