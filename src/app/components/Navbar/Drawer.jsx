@@ -29,7 +29,7 @@ const Drawer = ({ children, isOpen, setIsOpen }) => {
                 height={36}
               />
               <Link href="/" className="text-2xl font-semibold text-black ml-4">
-                Chef&apos;s Kitchen.
+                ChefPick
               </Link>
             </div>
 

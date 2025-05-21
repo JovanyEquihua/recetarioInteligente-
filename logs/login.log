@@ -307,3 +307,8 @@
 {"level":"info","message":{"email":"aguimtz.2003@gmail.com","ip":"::1","reason":"Contraseña errada","status":"error","timestamp":"2025-05-21T01:58:44.789Z"}}
 {"level":"info","message":{"email":"aguimtz.2003@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-21T01:59:12.299Z"}}
 
+{"level":"info","message":{"email":"l21121513@morelia.tecnm.mx","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-21T06:41:36.375Z"}}
+{"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-21T06:44:17.149Z"}}
+{"level":"info","message":{"email":"l21121513@morelia.tecnm.mx","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-21T07:05:09.701Z"}}
+{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-21T07:15:52.892Z","usuario":"Alex  "}}
+{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-21T07:25:29.361Z","usuario":"Jenifers  "}}

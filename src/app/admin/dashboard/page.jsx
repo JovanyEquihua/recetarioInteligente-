@@ -14,7 +14,7 @@ async function generarPDF() {
     startY: 20,
     head: [["Usuario", "IP", "Fecha/Hora"]],
     body: data.map((log) => [
-      log.email || "-",
+      log.usuario || "-",
       log.ip || "-",
       new Date(log.timestamp).toLocaleString(),
     ]),

@@ -8,10 +8,10 @@ import Signindialog from "./Signindialog";
 import Image from "next/image";
 
 const navigation = [
-  { name: "Home", href: "#home-section", current: false },
-  { name: "About us", href: "#about-section", current: false },
-  { name: "Recipe", href: "#cook-section", current: false },
-  { name: "Gallery", href: "#gallery-section", current: false },
+  { name: "Recetas", href: "/", current: false },
+  { name: "Mapa", href: "/mapa", current: false },
+  // { name: "Recipe", href: "#cook-section", current: false },
+  // { name: "Gallery", href: "#gallery-section", current: false },
 ];
 
 function classNames(...classes) {
