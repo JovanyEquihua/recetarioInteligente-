@@ -5,9 +5,9 @@ import DestacadosPage from "../Destacadas/DestacadosPage";
 
 const index = () => {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col ">
       <CarruselImagenes />
-      <div className="-z-50">
+      <div className="z-50">
  <DestacadosPage />
       </div>
      

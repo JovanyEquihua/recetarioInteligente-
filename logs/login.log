@@ -281,3 +281,5 @@
 {"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-20T05:20:07.514Z"}}
 {"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-20T05:20:23.565Z"}}
 {"level":"info","message":{"email":"l21121513@morelia.tecnm.mx","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-20T06:21:59.586Z"}}
+{"level":"info","message":{"email":"aguimtz.2003@gmail.com","ip":"::1","reason":"Contraseña errada","status":"error","timestamp":"2025-05-21T01:58:44.789Z"}}
+{"level":"info","message":{"email":"aguimtz.2003@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-21T01:59:12.299Z"}}
