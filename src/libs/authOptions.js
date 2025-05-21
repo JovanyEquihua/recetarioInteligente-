@@ -37,11 +37,11 @@ export const authOptions = {
         }
         const passwordMatch = await bcrypt.compare(credentials.contraseña, user.contrase_a)
         if (!passwordMatch) {
-          logAction("login", { email: credentials.email, ip, status: "error", reason: "Contraseña errada" });
+          logAction("login", { usuario: `${user.nombre} ${user.apellidoP || ""} ${user.apellidoM || ""}`.trim(), ip, status: "error", reason: "Contraseña errada" });
 
           throw new Error("Credenciales inválidas")
         }
-        logAction("login", { email: credentials.email, ip, status: "success", reason: "Ingresó correctamente" });
+        logAction("login", { usuario: `${user.nombre} ${user.apellidoP || ""} ${user.apellidoM || ""}`.trim(), ip, status: "success", reason: "Ingresó correctamente" });
         return { id: user.id, nombre: user.nombre, email: user.email, rol: user.rol, primerInicioSesion: user.primerInicioSesion }
       },
     }),

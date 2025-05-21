@@ -209,3 +209,5 @@
 {"level":"info","message":{"email":"ethginrod@gmail.com","ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-13T04:16:17.977Z"}}
 {"level":"info","message":{"email":"ethginrod@gmail.com","ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-13T06:25:53.744Z"}}
 {"level":"info","message":{"email":"ethginrod@gmail.com","ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-13T06:27:41.541Z"}}
+{"level":"info","message":{"email":"ethginrod@gmail.com","ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-16T02:08:24.985Z"}}
+{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-21T00:38:00.474Z","usuario":"Ethan  Ginori Rodriguez"}}

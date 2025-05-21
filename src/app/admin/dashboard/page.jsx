@@ -69,7 +69,7 @@ export default function DashboardPage() {
           <tbody>
             {logs.map((log, index) => (
               <tr key={index}>
-                <td className="border px-4 py-2">{log.email || "-"}</td>
+                <td className="border px-4 py-2">{log.usuario || "-"}</td>
                 <td className="border px-4 py-2">{log.ip || "-"}</td>
                 <td className="border px-4 py-2">{log.timestamp || "-"}</td>
                 <td className="border px-4 py-2">{log.reason || "-"}</td>
