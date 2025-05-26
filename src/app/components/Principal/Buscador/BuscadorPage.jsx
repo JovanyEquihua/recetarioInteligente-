@@ -3,8 +3,9 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Search, X } from "lucide-react";
 import debounce from "lodash/debounce";
 import ResultadosPage from "../Resultados/ResultadosPage";
+import ResultadosBusqueda from "../Resultados/ResultadosBusqueda";
 
-const BuscadorPage = ({ isFiltered }) => {
+const BuscadorPage = ({ isFiltered, setBusquedaActiva, busquedaActiva }) => {
   const [query, setQuery] = useState("");
   const [resultados, setResultados] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -17,6 +18,7 @@ const BuscadorPage = ({ isFiltered }) => {
       if (!limpio) {
         setResultados([]);
         setMostrarResultados(false);
+        setBusquedaActiva(false);
         return;
       }
 
@@ -31,14 +33,18 @@ const BuscadorPage = ({ isFiltered }) => {
       setLoading(true);
       try {
         const res = await fetch(url.toString());
+        
         if (!res.ok) throw new Error("Error al buscar recetas");
         const data = await res.json();
         setResultados(data);
         setMostrarResultados(true); // mostrar resultados tras éxito
+        setBusquedaActiva(data.length > 0);  // activa bandera global
       } catch (error) {
         console.error("Error en la búsqueda:", error);
         setResultados([]);
         setMostrarResultados(false);
+        setBusquedaActiva(false);
+
       } finally {
         setLoading(false);
       }
@@ -54,10 +60,12 @@ const BuscadorPage = ({ isFiltered }) => {
     setQuery("");
     setResultados([]);
     setMostrarResultados(false);
+    setBusquedaActiva(false);
+
   };
 
   return (
-    <div className="relative w-full  ">
+    <div className="relative w-full  z-40">
       {/* Contenedor principal del buscador */}
       <div className="w-[550px] max-w-lg mx-auto flex items-center gap-2 border border-gray-300 bg-white bg-opacity-90 rounded-full px-3 py-2 shadow-md">
         <input
@@ -80,11 +88,14 @@ const BuscadorPage = ({ isFiltered }) => {
         <p className="text-center mt-4">Buscando...</p>
       ) : (
         mostrarResultados && (
-          <div className="absolute mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 z-50">
+         <div className="absolute left-0 right-0 mt-4  grid grid-cols-1 
+         sm:grid-cols-2 md:grid-cols-3 gap-1 px-6 ">
+
               {resultados
                 .filter((item) => item && item.imagen)
                 .map((item) => (
-                  <ResultadosPage key={item.id || item._id} receta={item} />
+                  <ResultadosBusqueda key={item.id || item._id} recetaImagen={item.imagen}
+                  recetaTiempo={item.tiempoPreparacion} recetaNombre={item.titulo} />
                 ))}
             </div>
          
