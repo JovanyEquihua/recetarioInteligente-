@@ -8,10 +8,10 @@ import Signindialog from "./Signindialog";
 import Image from "next/image";
 
 const navigation = [
-  { name: "Home", href: "#home-section", current: false },
-  { name: "About us", href: "#about-section", current: false },
-  { name: "Recipe", href: "#cook-section", current: false },
-  { name: "Gallery", href: "#gallery-section", current: false },
+  { name: "Recetas", href: "/", current: false },
+  { name: "Mapa", href: "/mapa", current: false },
+  // { name: "Recipe", href: "#cook-section", current: false },
+  // { name: "Gallery", href: "#gallery-section", current: false },
 ];
 
 function classNames(...classes) {
@@ -24,8 +24,8 @@ const Navbar = () => {
   return (
     <Disclosure as="nav" className="navbar">
       <>
-        <div className="mx-auto max-w-7xl p-3 md:p-6 lg:px-8">
-          <div className="relative flex h-12 sm:h-20 items-center">
+        <div className="mx-auto max-w-7xl p-3 md:p-6 lg:px-8  ">
+          <div className="  relative flex h-12 sm:h-20 items-center">
             <div className="flex flex-1 items-center sm:justify-between">
               {/* LOGO */}
               <div className="flex sm:hidden flex-shrink-0 items-center border-right">

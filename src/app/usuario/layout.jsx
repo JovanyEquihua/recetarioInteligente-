@@ -113,11 +113,11 @@ export default function Layout({ children }) {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 z-50">
       {showPopup && <RecetaAleatoria onClose={() => setShowPopup(false)} />}
 
       {/* Navbar moderno y minimalista */}
-      <header className="bg-white border-b border-gray-200 text-gray-700">
+      <header className="bg-white border-b border-gray-200 text-gray-700 ">
         <div className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
             {/* Logo y título */}
@@ -129,7 +129,7 @@ export default function Layout({ children }) {
             </div>
 
             {/* Menú de navegación principal */}
-            <nav className="hidden md:flex space-x-8">
+            <nav className="hidden md:flex space-x-8 ">
               <button
                 className="px-3 py-2 hover:text-[#a32c7a] transition font-medium"
                 onClick={() => router.push("/usuario")}

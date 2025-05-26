@@ -3,7 +3,7 @@ import GoogleProvider from "next-auth/providers/google";
 import { db } from "../libs/db";
 import bcrypt from "bcryptjs";
 import { limiter } from "../middleware/rateLimit";
-import logger from "../utils/logger";
+import { logAction } from "../utils/logger";
 import requestIp from "request-ip";
 
 export const authOptions = {
@@ -19,16 +19,17 @@ export const authOptions = {
         contraseña: { label: "Contraseña", type: "password" },
       },
       async authorize(credentials, req) {
-        
         if (!credentials.email || !credentials.contraseña) {
-       
-          throw new Error("Datos inválidas");
+          throw new Error("Datos inválidos");
         }
         if (!(await limiter(req))) {
           throw new Error("Demasiados intentos. Intenta más tarde.");
         }
-        const ip = requestIp.getClientIp(req) || "Desconocida";
+
+        let ip = requestIp.getClientIp(req) || "Desconocida";
+        if (ip === "::1") ip = "localhost";
         const timestamp = new Date().toISOString();
+
         const user = await db.usuario.findUnique({
           where: { email: credentials.email },
           select: {
@@ -36,43 +37,43 @@ export const authOptions = {
             nombre: true,
             email: true,
             rol: true,
-            fotoPerfil: true, // Incluye este campo
+            fotoPerfil: true,
             primerInicioSesion: true,
             contrase_a: true,
           },
         });
-       
+
         if (!user) {
-          logger.info({
+          logAction("login", {
             email: credentials.email,
             ip,
-            timestamp,
             status: "error",
             reason: "Usuario errado",
           });
           throw new Error("Credenciales inválidas");
         }
+
         const passwordMatch = await bcrypt.compare(
           credentials.contraseña,
           user.contrase_a
         );
         if (!passwordMatch) {
-          logger.info({
-            email: credentials.email,
+          logAction("login", {
+            usuario: `${user.nombre} ${(user.apellidoP || "").trim()} ${(user.apellidoM || "").trim()}`,
             ip,
-            timestamp,
             status: "error",
             reason: "Contraseña errada",
           });
           throw new Error("Credenciales inválidas");
         }
-        logger.info({
-          email: credentials.email,
+
+        logAction("login", {
+          usuario: `${user.nombre} ${(user.apellidoP || "").trim()} ${(user.apellidoM || "").trim()}`,
           ip,
-          timestamp,
           status: "success",
           reason: "Ingresó correctamente",
         });
+
         return {
           id: user.id,
           nombre: user.nombre,
@@ -85,17 +86,13 @@ export const authOptions = {
     }),
   ],
   callbacks: {
-    async session({ session, token,  }) {
+    async session({ session, token }) {
       session.user.id = token.id;
       session.user.rol = token.rol;
       session.user.nombre = token.nombre;
       session.user.email = token.email;
       session.user.fotoPerfil = token.fotoPerfil;
-      session.user.nombreUsuario = token.nombreUsuario;
-      session.user.apellidoP = token.apellidoP;
-      session.user.apellidoM = token.apellidoM;
       session.user.primerInicioSesion = token.primerInicioSesion;
-      //session.user.id = user.id;
 
       return session;
     },
@@ -106,19 +103,8 @@ export const authOptions = {
         token.nombre = user.nombre;
         token.fotoPerfil = user.fotoPerfil;
         token.primerInicioSesion = user.primerInicioSesion;
-      } else if (!token.id) {
-        // Esto sucede cuando estás autenticado con Google y se hace una recarga
-        const dbUser = await db.usuario.findUnique({
-          where: { email: token.email },
-        });
-        if (dbUser) {
-          token.id = dbUser.id;
-          token.rol = dbUser.rol;
-          token.nombre = dbUser.nombre;
-          token.primerInicioSesion = dbUser.primerInicioSesion;
-          token.fotoPerfil = dbUser.fotoPerfil;
-        }
       }
+
       return token;
     },
   },

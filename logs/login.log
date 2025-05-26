@@ -191,6 +191,29 @@
 {"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-05T22:14:31.405Z"}}
 {"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-05T23:45:50.928Z"}}
 
+{"level":"info","message":{"email":"ethginrod@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-11T02:44:29.625Z"}}
+{"level":"info","message":{"email":"ethginrod@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-11T02:49:44.113Z"}}
+{"level":"info","message":{"email":"ethginrod@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-11T05:05:23.861Z"}}
+{"level":"info","message":{"email":"ethginrod@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-11T07:01:38.821Z"}}
+{"level":"info","message":{"email":"ethginrod@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-11T07:21:25.443Z"}}
+{"level":"info","message":{"email":"ethginrod@gmail.com","ip":"::1","reason":"Usuario errado","status":"error","timestamp":"2025-05-11T22:18:17.582Z"}}
+{"level":"info","message":{"email":"ethginrod@gmail.com","ip":"::1","reason":"Usuario errado","status":"error","timestamp":"2025-05-11T22:18:21.501Z"}}
+{"level":"info","message":{"email":"ethginrod@gmail.com","ip":"::1","reason":"Contraseña errada","status":"error","timestamp":"2025-05-11T22:27:31.021Z"}}
+{"level":"info","message":{"email":"ethginrod@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"error","timestamp":"2025-05-11T22:27:40.194Z"}}
+{"level":"info","message":{"email":"ethginrod@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"error","timestamp":"2025-05-11T22:30:42.059Z"}}
+{"level":"info","message":{"email":"ethginrod@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"error","timestamp":"2025-05-11T22:48:55.268Z"}}
+{"level":"info","message":{"email":"ethginrod@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"error","timestamp":"2025-05-11T22:56:13.016Z"}}
+{"level":"info","message":{"email":"ethginrod@gmail.com","ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-11T23:06:46.045Z"}}
+{"level":"info","message":{"email":"floresvegadiegoadrian@gmail.com","ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-11T23:54:27.016Z"}}
+{"level":"info","message":{"email":"floresvegadiegoadrian@gmail.com","ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-14T04:23:13.478Z"}}
+{"level":"info","message":{"email":"floresvegadiegoadrian@gmail.com","ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-14T07:53:56.099Z"}}
+{"level":"info","message":{"email":"floresvegadiegoadrian@gmail.com","ip":"localhost","reason":"Contraseña errada","status":"error","timestamp":"2025-05-20T02:07:01.661Z"}}
+{"level":"info","message":{"email":"a@b.com","ip":"localhost","reason":"Usuario errado","status":"error","timestamp":"2025-05-20T02:07:09.370Z"}}
+{"level":"info","message":{"email":"floresvegadiegoadrian@gmail.com","ip":"localhost","reason":"Contraseña errada","status":"error","timestamp":"2025-05-20T03:41:05.022Z"}}
+{"level":"info","message":{"email":"floresvegadiegoadrian@gmail.com","ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-20T03:41:19.559Z"}}
+{"level":"info","message":{"email":"floresvegadiegoadrian@gmail.com","ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-20T05:44:46.366Z"}}
+=======
+
 {"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::ffff:192.168.1.7","reason":"Contraseña errada","status":"error","timestamp":"2025-05-11T17:26:50.708Z"}}
 {"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::ffff:192.168.1.7","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-11T17:27:08.160Z"}}
 {"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-11T17:29:55.409Z"}}
@@ -281,3 +304,12 @@
 {"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-20T05:20:07.514Z"}}
 {"level":"info","message":{"email":"jovanyequihua@hotmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-20T05:20:23.565Z"}}
 {"level":"info","message":{"email":"l21121513@morelia.tecnm.mx","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-20T06:21:59.586Z"}}
+{"level":"info","message":{"email":"aguimtz.2003@gmail.com","ip":"::1","reason":"Contraseña errada","status":"error","timestamp":"2025-05-21T01:58:44.789Z"}}
+{"level":"info","message":{"email":"aguimtz.2003@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-21T01:59:12.299Z"}}
+
+{"level":"info","message":{"email":"l21121513@morelia.tecnm.mx","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-21T06:41:36.375Z"}}
+{"level":"info","message":{"email":"equicerjoal@gmail.com","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-21T06:44:17.149Z"}}
+{"level":"info","message":{"email":"l21121513@morelia.tecnm.mx","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-21T07:05:09.701Z"}}
+{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-21T07:15:52.892Z","usuario":"Alex  "}}
+{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-21T07:25:29.361Z","usuario":"Jenifers  "}}
+{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-26T00:36:42.548Z","usuario":"Jenifers  "}}
