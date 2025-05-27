@@ -9,6 +9,9 @@ export default function ListaCompras({ usuarioId }) {
   const [grabando, setGrabando] = useState(false);
   const [notificacion, setNotificacion] = useState({ mensaje: '', tipo: '' });
   const reconocimientoVoz = useRef(null);
+const [mostrarAyudaVoz, setMostrarAyudaVoz] = useState(false);
+  const [ultimoComando, setUltimoComando] = useState('');
+  const [transcripcion, setTranscripcion] = useState('');
 
   // Cargar items iniciales
   useEffect(() => {
@@ -25,17 +28,23 @@ export default function ListaCompras({ usuarioId }) {
     setTimeout(() => setNotificacion({ mensaje: '', tipo: '' }), 3000);
   };
 
-  const cargarItems = async () => {
-    try {
-      const res = await fetch(`/api/lista-compras?usuarioId=${usuarioId}`);
-      const data = await res.json();
+ const cargarItems = async () => {
+  try {
+    const res = await fetch(`/api/lista-compras?usuarioId=${usuarioId}`);
+    const data = await res.json();
+    if (Array.isArray(data)) {
       setItems(data);
       localStorage.setItem('listaComprasTemp', JSON.stringify(data));
-    } catch (error) {
-      console.error("Error cargando lista:", error);
-      mostrarNotificacion('Error cargando la lista', 'error');
+    } else {
+      console.error("La respuesta de la API no es un arreglo:", data);
+      setItems([]);
     }
-  };
+  } catch (error) {
+    console.error("Error cargando lista:", error);
+    mostrarNotificacion('Error cargando la lista', 'error');
+    setItems([]);
+  }
+};
 
   const setupReconocimientoVoz = () => {
     if ('webkitSpeechRecognition' in window) {
@@ -218,51 +227,104 @@ export default function ListaCompras({ usuarioId }) {
   };
 
   return (
-    <div className="max-w-md mx-auto p-4 bg-white rounded-xl shadow-lg">
-      <h1 className="text-2xl font-bold text-[#8B1C62] mb-2">Lista de Compras</h1>
+      <div
+ className="min-h-screen min-w-full flex items-center justify-center"
+      style={{
+        backgroundImage: "url('/images/fondo-lista6.png')", // Ruta de la imagen
+        backgroundSize: "cover", // Asegura que la imagen cubra toda la pantalla
+        backgroundPosition: "center", // Centra la imagen
+        backgroundRepeat: "no-repeat", // Evita que la imagen se repita
       
+      }}
+    >
+     
+      {/* <div className="max-w-md mx-auto bg-white/80 backdrop-blur-md p-6 rounded-3xl shadow-2xl"> */}
+       <div className="  max-w-md mx-auto bg-white p-6 rounded-3xl shadow-2xl">
+      <h1 className="text-3xl font-bold text-[#8B1C62] mb-4 text-center">🛒 Lista de Compras</h1>
+      {/* Sección de comandos de voz */}
+        <div className="mb-6 relative">
+          <div className="flex justify-between items-center mb-2">
+            <h3 className="text-lg font-semibold text-[#8B1C62]">Comandos de voz</h3>
+            <button 
+              onClick={() => setMostrarAyudaVoz(!mostrarAyudaVoz)}
+              className="text-sm text-[#6B8E23] hover:text-[#8B1C62] flex items-center gap-1"
+            >
+              {mostrarAyudaVoz ? 'Ocultar ayuda' : 'Mostrar ayuda'}
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d={mostrarAyudaVoz ? "M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" : "M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"} clipRule="evenodd" />
+              </svg>
+            </button>
+          </div>
+
+          <AnimatePresence>
+            {mostrarAyudaVoz && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                className="overflow-hidden"
+              >
+                <div className="bg-[#f8f5f9] p-4 rounded-lg mb-3">
+                  <h4 className="font-medium text-[#6B8E23] mb-2">Ejemplos de comandos:</h4>
+                  <ul className="space-y-2 text-sm">
+                     <li className="flex items-start">
+                      <span className="bg-[#8B1C62] text-white rounded-full px-2 py-1 text-xs mr-2">1</span>
+                      <span>"<span className="font-semibold">3 litros de leche guardar</span>"</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="bg-[#8B1C62] text-white rounded-full px-2 py-1 text-xs mr-2">2</span>
+                      <span>"<span className="font-semibold">agregar 2 litros de leche</span>"</span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="bg-[#8B1C62] text-white rounded-full px-2 py-1 text-xs mr-2">3</span>
+                      <span>"<span className="font-semibold">1kg de carne listo</span>"</span>
+                    </li>
+                  </ul>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
       {notificacion.mensaje && (
-        <div className={`p-2 mb-3 rounded ${
-          notificacion.tipo === 'error' ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800'
+        <div className={`p-3 mb-4 rounded-lg text-sm font-medium transition-all ${
+          notificacion.tipo === 'error' ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'
         }`}>
           {notificacion.mensaje}
         </div>
       )}
 
-      <div className="mb-6 p-4 bg-[#faf5f9] rounded-lg border border-[#f0e6ed]">
+      <div className="mb-6 p-4 bg-white border border-[#e8ddea] rounded-xl shadow-inner">
         <div className="flex gap-2 mb-3">
           <input
             type="number"
             min="1"
             value={cantidad}
             onChange={(e) => setCantidad(Number(e.target.value))}
-            className="w-16 px-2 py-1 border border-[#8B1C62]/30 rounded text-center"
+            className="w-16 px-2 py-2 border border-[#8B1C62]/30 rounded-lg text-center focus:outline-none focus:ring-2 focus:ring-[#8B1C62]/40"
           />
           <input
             type="text"
             value={nuevoItem}
             onChange={(e) => setNuevoItem(e.target.value)}
             placeholder="Ej: tomates, lechuga..."
-            className="flex-1 px-3 py-1 border border-[#8B1C62]/30 rounded"
+            className="flex-1 px-4 py-2 border border-[#8B1C62]/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8B1C62]/40"
             onKeyPress={(e) => e.key === 'Enter' && agregarItem()}
           />
         </div>
-        
+
         <div className="flex gap-2">
           <button
             onClick={agregarItem}
-            className="flex-1 bg-[#8B1C62] text-white px-4 py-2 rounded hover:bg-[#6B8E23] transition"
+            className="flex-1 bg-[#8B1C62] text-white px-4 py-2 rounded-lg hover:bg-[#731751] transition"
           >
             Agregar
           </button>
-          
           <button
             onClick={iniciarDictado}
             disabled={grabando}
-            className={`flex items-center gap-1 px-3 py-2 rounded transition ${
+            className={`flex items-center gap-2 px-4 py-2 rounded-lg transition ${
               grabando 
                 ? 'bg-red-500 text-white animate-pulse' 
-                : 'bg-[#6B8E23] text-white hover:bg-[#5a7d1a]'
+                : 'bg-[#6B8E23] text-white hover:bg-[#55761a]'
             }`}
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -273,56 +335,57 @@ export default function ListaCompras({ usuarioId }) {
         </div>
       </div>
 
-      <div className="space-y-2 mb-4">
+      <div className="space-y-3 mb-5">
         <AnimatePresence>
-          {items.length === 0 ? (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-center py-8 text-gray-500"
-            >
-              Tu lista de compras está vacía
-            </motion.div>
-          ) : (
-            items.map((item) => (
-              <motion.div
-                key={item.id}
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="flex justify-between items-center p-3 bg-white border border-[#f0e6ed] rounded-lg hover:shadow-sm"
-              >
-                <span className="flex-1">
-                  <span className="font-medium text-[#8B1C62]">{item.cantidad}</span> {item.nombreIngrediente}
-                </span>
-                <button
-                  onClick={() => eliminarItem(item.id)}
-                  className="text-red-500 hover:text-red-700 p-1"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
-                  </svg>
-                </button>
-              </motion.div>
-            ))
-          )}
+          
+         {Array.isArray(items) && items.length === 0 ? (
+  <motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    className="text-center py-6 text-gray-500 italic"
+  >
+    Tu lista de compras está vacía
+  </motion.div>
+) : (
+  Array.isArray(items) &&
+  items.map((item) => (
+    <motion.div
+      key={item.id}
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, x: -20 }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      className="flex justify-between items-center p-3 bg-white border border-[#f0e6ed] rounded-xl hover:shadow-sm"
+    >
+      <span className="flex-1 text-[#444]">
+        <span className="font-semibold text-[#8B1C62]">{item.cantidad}</span> {item.nombreIngrediente}
+      </span>
+      <button
+        onClick={() => eliminarItem(item.id)}
+        className="text-red-500 hover:text-red-700 p-1"
+        title="Eliminar"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M6 2a1 1 0 011-1h6a1 1 0 011 1v1h4v2H2V3h4V2zm3 6a1 1 0 00-2 0v7a1 1 0 002 0V8zm4 0a1 1 0 10-2 0v7a1 1 0 002 0V8z" />
+        </svg>
+      </button>
+    </motion.div>
+  ))
+)}
         </AnimatePresence>
       </div>
 
-      <button
-        onClick={enviarWhatsApp}
-        disabled={items.length === 0}
-        className={`w-full py-2 rounded transition ${
-          items.length === 0
-            ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-            : 'bg-green-500 text-white hover:bg-green-600'
-        }`}
-      >
-        Enviar por WhatsApp
-      </button>
-
-      
+      <div className="flex justify-between gap-2">
+       
+        <button
+          onClick={enviarWhatsApp}
+          className="flex-1 bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition"
+        >
+          Enviar a WhatsApp
+        </button>
+      </div>
     </div>
-  );
+  </div>
+  </div>
+);
 }
