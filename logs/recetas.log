@@ -1,0 +1,3 @@
+{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-26T00:43:33.383Z","usuario":"Ethan"}}
+{"level":"info","message":{"accion":"Receta eliminada correctamente","recetaId":"14","status":"success","timestamp":"2025-05-27T17:30:49.976Z","usuarioId":1}}
+{"level":"info","message":{"accion":"Ingredientes de receta actualizados","recetaId":"13","status":"success","timestamp":"2025-05-27T17:33:18.278Z","usuarioId":1}}

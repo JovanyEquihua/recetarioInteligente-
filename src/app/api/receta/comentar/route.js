@@ -1,6 +1,6 @@
 //API para comentar receta
-import { db } from "@/libs/db";
-
+import { db } from "../../../../libs/db";
+import { logAction } from "../utils/logger"
 
 // Manejador para solicitudes POST
 export async function POST(req) {
@@ -19,7 +19,7 @@ export async function POST(req) {
                 status: 404, // Código de estado HTTP 404 (No encontrado)
             });
         }
-    
+
         // Crea un nuevo comentario en la base de datos
         const nuevoComentario = await db.comentario.create({
             data: {
@@ -28,7 +28,13 @@ export async function POST(req) {
                 recetaId,   // ID de la receta asociada
             },
         });
-    
+        logAction("comentarios", {
+            usuario,                            // Usuario que comentó
+            recetaId,                           // Receta comentada
+            comentario,                         // Contenido del comentario
+            timestamp: new Date().toISOString() // Hora exacta del comentario
+        });        
+        
         // Devuelve el comentario recién creado con un código de estado 201 (Creado)
         return new Response(JSON.stringify(nuevoComentario), { status: 201 });
     } catch (error) {

@@ -24,8 +24,8 @@ export const logAction = (type, message) => {
   // Mapea los tipos de acción a archivos de log específicos
   const fileMap = {
     login: "login.log",
-    receta: "recetas.log",
-    comentario: "comentarios.log",
+    recetas: "recetas.log",
+    comentarios: "comentarios.log",
     admin: "admin.log",
   };
 

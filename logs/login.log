@@ -312,12 +312,10 @@
 {"level":"info","message":{"email":"l21121513@morelia.tecnm.mx","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-21T07:05:09.701Z"}}
 {"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-21T07:15:52.892Z","usuario":"Alex  "}}
 {"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-21T07:25:29.361Z","usuario":"Jenifers  "}}
-{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-26T00:36:42.548Z","usuario":"Jenifers  "}}
-{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-26T01:05:32.777Z","usuario":"Jenifers  "}}
-{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-26T07:01:02.619Z","usuario":"Jenifers  "}}
-{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-26T23:14:11.014Z","usuario":"Jenifers  "}}
-{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-27T02:24:50.890Z","usuario":"Alex  "}}
-{"level":"info","message":{"ip":"localhost","reason":"Contraseña errada","status":"error","timestamp":"2025-05-27T02:32:38.049Z","usuario":"Jenifers  "}}
-{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-27T02:32:52.416Z","usuario":"Jenifers  "}}
-{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-27T03:31:42.478Z","usuario":"Jenifers  "}}
-{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-27T03:49:38.279Z","usuario":"Alex  "}}
+
+{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-26T00:43:33.383Z","usuario":"Ethan   "}}
+{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-26T03:00:13.355Z","usuario":"Ethan   "}}
+{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-27T02:01:25.977Z","usuario":"Jenifers  "}}
+{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-27T17:24:36.512Z","usuario":"Jenifers  "}}
+{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-27T17:29:59.246Z","usuario":"Jenifers  "}}
+
