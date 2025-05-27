@@ -113,7 +113,8 @@ export default function Layout({ children }) {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 z-50">
+<div className="min-h-screen bg-gray-50">
+
       {showPopup && <RecetaAleatoria onClose={() => setShowPopup(false)} />}
 
       {/* Navbar moderno y minimalista */}
@@ -321,8 +322,8 @@ export default function Layout({ children }) {
           )}
         </div>
       </header>
-
-      <main className="container mx-auto px-4 py-8">{children}</main>
+  {/* <main className="container mx-auto px-4 py-8">{children}</main> */}
+  <main className="container">{children}</main> 
       {/* Mostrar el wizard solo si es el primer inicio de sesión */}
       {showWizard && (
         <PreferenciasWizard
