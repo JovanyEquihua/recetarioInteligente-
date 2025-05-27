@@ -1,6 +1,6 @@
 //API para comentar receta
-import { db } from "../../../../libs/db";
-import { logAction } from "../utils/logger"
+import { db } from "@/libs/db"; // Importa la base de datos
+import { logAction } from "@/utils/logger";
 
 // Manejador para solicitudes POST
 export async function POST(req) {
