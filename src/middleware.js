@@ -5,39 +5,63 @@ export async function middleware(req) {
   const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
   const { pathname } = req.nextUrl;
 
-  // Rutas públicas permitidas sin autenticación
-  const publicRoutes = ["/", "/login", "/registrarse", "/verificar","/restablecer-contrasena"];
   const isStaticAsset =
     pathname.startsWith("/_next") ||
     pathname.startsWith("/api") ||
     pathname.includes(".");
 
-  // Permitir acceso a rutas públicas o recursos estáticos
-  if (publicRoutes.includes(pathname) || isStaticAsset) {
-    // Pero si estás en "/" y ya tienes token, redirige según rol
+  if (isStaticAsset) {
+    return NextResponse.next();
+  }
+
+  const publicRoutes = ["/", "/login", "/registrarse", "/verificar", "/restablecer-contrasena"];
+  const dynamicPublicRoutes = ["/receta", "/mapa"];
+
+  const isPublic =
+    publicRoutes.includes(pathname) ||
+    dynamicPublicRoutes.some((route) => pathname.startsWith(route));
+
+  if (isPublic) {
     if (pathname === "/" && token) {
-      const expectedPath = token.rol === "ADMIN" ? "/admin" : "/usuario";
+      const expectedPath = getRoleBasePath(token.rol);
       return NextResponse.redirect(new URL(expectedPath, req.url));
     }
     return NextResponse.next();
   }
 
-  // Si no hay token, redirige a login
+  // Si no hay token y la ruta no es pública, redirige a login
   if (!token) {
-    return NextResponse.redirect(new URL("/login", req.url));
+    return NextResponse.redirect(new URL("/", req.url));
   }
 
-  // Redirigir según el rol si intenta ir a otra ruta
-  const expectedPath = token.rol === "ADMIN" ? "/admin" : "/usuario";
-  if (!pathname.startsWith(expectedPath)) {
-    return NextResponse.redirect(new URL(expectedPath, req.url));
+  const roleBasePath = getRoleBasePath(token.rol);
+
+  // Si está accediendo a una ruta que no corresponde con su rol, redirigir
+  if (
+    pathname.startsWith("/admin") && token.rol !== "ADMIN" ||
+    pathname.startsWith("/usuario") && token.rol !== "USUARIO" ||
+    pathname.startsWith("/moderador") && token.rol !== "MODERADOR"
+  ) {
+    return NextResponse.redirect(new URL(roleBasePath, req.url));
   }
 
   return NextResponse.next();
 }
 
+// Helper para obtener ruta base por rol
+function getRoleBasePath(rol) {
+  switch (rol) {
+    case "ADMIN":
+      return "/admin";
+    case "MODERADOR":
+      return "/moderador";
+    default:
+      return "/usuario";
+  }
+}
+
 export const config = {
   matcher: [
-    "/((?!_next|api|trpc|[^?]\\.(?:\\w+$)).)",
+    "/((?!_next|api|trpc|[^?]\\.(?:\\w+$)).*)",
   ],
 };
