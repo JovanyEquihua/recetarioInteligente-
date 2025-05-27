@@ -28,7 +28,7 @@ export async function POST(req) {
                 recetaId,   // ID de la receta asociada
             },
         });
-        logAction("comentario", {
+        logAction("comentarios", {
             usuario,                            // Usuario que comentó
             recetaId,                           // Receta comentada
             comentario,                         // Contenido del comentario

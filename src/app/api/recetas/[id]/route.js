@@ -1,5 +1,5 @@
 import { db } from "@/libs/db";
-import { logAction } from "@/utils/logger"; // Importa tu logger
+import { logAction } from "../utils/logger"; // Importa tu logger
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/libs/authOptions";
 
