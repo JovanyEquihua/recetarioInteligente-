@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 
-const ResultadosBusqueda = ({ recetaImagen, recetaTiempo,recetaNombre, key }) => {
+const ResultadosBusqueda = ({ recetaImagen, receta}) => {
   return (
     <div
       className="bg-white rounded-lg 
@@ -20,9 +20,9 @@ const ResultadosBusqueda = ({ recetaImagen, recetaTiempo,recetaNombre, key }) =>
       </div>
 
       <div className="p-2 text-center ">
-        <Link href={`/usuario/recetas/${key}`}>
+        <Link href={`/usuario/recetas/${receta.id}`}>
           <button className="text-xs font-bold text-[#8B1C62] group-hover:text-[#A32C7A] hover:underline transition-colors">
-            {recetaNombre}
+            {receta.titulo}
           </button>
         </Link>
       </div>

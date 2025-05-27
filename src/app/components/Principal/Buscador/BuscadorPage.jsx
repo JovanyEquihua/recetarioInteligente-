@@ -94,8 +94,8 @@ const BuscadorPage = ({ isFiltered, setBusquedaActiva, busquedaActiva }) => {
               {resultados
                 .filter((item) => item && item.imagen)
                 .map((item) => (
-                  <ResultadosBusqueda key={item.id || item._id} recetaImagen={item.imagen}
-                  recetaTiempo={item.tiempoPreparacion} recetaNombre={item.titulo} />
+                  <ResultadosBusqueda key={item.id || item._id} recetaImagen={item.imagen} receta={item}
+                    />
                 ))}
             </div>
          
