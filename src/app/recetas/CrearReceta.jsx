@@ -571,6 +571,6 @@ export default function CrearReceta({ onSave }) {
         </form>
       </div>
     </div>
-    </div>
+  
   );
 }
