@@ -169,7 +169,17 @@ export default function CrearReceta({ onSave }) {
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-md">
+     <div
+      className="min-h-screen min-w-full flex items-center justify-center"
+      style={{
+        backgroundImage: "url('/images/fondo-lista6.png')", // Ruta de la imagen
+        backgroundSize: "cover", // Asegura que la imagen cubra toda la pantalla
+        backgroundPosition: "center", // Centra la imagen
+        backgroundRepeat: "no-repeat", // Evita que la imagen se repita
+      }}
+    >
+    <div className="max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-md my-5">
+      
       <h1 className="text-2xl font-bold mb-6 flex items-center gap-2">
         <PlusCircle size={24} /> Crear Nueva Receta
       </h1>
@@ -544,6 +554,7 @@ export default function CrearReceta({ onSave }) {
           </button>
         </div>
       </form>
+    </div>
     </div>
   );
 }
