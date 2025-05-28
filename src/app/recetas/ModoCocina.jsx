@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { RiUserVoiceLine } from "react-icons/ri";
 
 export default function ModoCocina({ pasos }) {
   const [modoActivo, setModoActivo] = useState(false);
@@ -89,7 +90,7 @@ export default function ModoCocina({ pasos }) {
   }
 
   return (
-    <div className="mt-6 bg-white border border-[#f0e6ed] p-8 rounded-2xl shadow-sm max-w-2xl mx-auto">
+    <div className="mt-6 bg-white border border-[#6B8E23] p-8 rounded-2xl shadow-sm max-w-2xl mx-auto">
       {!modoActivo ? (
         <div className="text-center">
           {recetaCompletada ? (
@@ -108,7 +109,10 @@ export default function ModoCocina({ pasos }) {
             onClick={() => setModoActivo(true)}
             className="bg-[#8B1C62] text-white px-8 py-3 rounded-lg hover:bg-[#7a1756] transition-all text-lg font-medium shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#8B1C62] focus:ring-opacity-50"
           >
-            Iniciar Modo Cocina
+            <span className="flex items-center gap-2 justify-center">
+              <RiUserVoiceLine />
+              Iniciar 
+            </span>
           </button>
         </div>
       ) : (

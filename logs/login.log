@@ -312,3 +312,11 @@
 {"level":"info","message":{"email":"l21121513@morelia.tecnm.mx","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-21T07:05:09.701Z"}}
 {"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-21T07:15:52.892Z","usuario":"Alex  "}}
 {"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-21T07:25:29.361Z","usuario":"Jenifers  "}}
+{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-27T04:53:48.668Z","usuario":"Agui Judith  "}}
+{"level":"info","message":{"ip":"localhost","reason":"Contraseña errada","status":"error","timestamp":"2025-05-27T05:36:39.067Z","usuario":"Agui Judith  "}}
+{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-27T05:36:58.875Z","usuario":"Agui Judith  "}}
+{"level":"info","message":{"ip":"localhost","reason":"Contraseña errada","status":"error","timestamp":"2025-05-27T05:49:50.193Z","usuario":"Agui Judith  "}}
+{"level":"info","message":{"ip":"localhost","reason":"Contraseña errada","status":"error","timestamp":"2025-05-27T05:50:08.381Z","usuario":"Agui Judith  "}}
+{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-27T05:50:25.763Z","usuario":"Agui Judith  "}}
+{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-27T06:06:20.952Z","usuario":"Agui Judith  "}}
+{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-27T06:12:25.389Z","usuario":"Agui Judith  "}}
