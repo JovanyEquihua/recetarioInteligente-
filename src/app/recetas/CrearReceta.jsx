@@ -172,6 +172,7 @@ export default function CrearReceta({ onSave }) {
   };
 
   return (
+
     <div
       className="min-h-screen min-w-full flex items-center justify-center"
       style={{
@@ -191,6 +192,7 @@ export default function CrearReceta({ onSave }) {
           <div className="flex flex-col items-start">
             <label className="block text-sm font-medium mb-2">
               Imagen de la Receta
+
             </label>
             <div className="relative w-full h-64 group">
               <Image
@@ -568,6 +570,7 @@ export default function CrearReceta({ onSave }) {
           </div>
         </form>
       </div>
+    </div>
     </div>
   );
 }
