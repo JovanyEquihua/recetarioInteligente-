@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic'
 import React from 'react'
 
 // Importa el componente de forma dinámica sin SSR
-const MapaRecetas = dynamic(() => import('@/app/recetas/MapaRecetas'), {
+const MapaRecetas = dynamic(() => import('@/app/recetas/MapaRecetasP'), {
   ssr: false,
 })
 
