@@ -1,111 +1,74 @@
 import Link from "next/link";
-import Image from "next/image";
+import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
 
 const socialLinks = [
-  {
-    imgSrc: '/images/Footer/facebook.svg',
-    link: 'https://facebook.com',
-    width: 10,
-  },
-  {
-    imgSrc: '/images/Footer/insta.svg',
-    link: 'https://instagram.com',
-    width: 14,
-  },
-  {
-    imgSrc: '/images/Footer/twitter.svg',
-    link: 'https://twitter.com',
-    width: 14,
-  },
-];
-
-const products = [
-  {
-    id: 1,
-    section: "Company",
-    link: ['About', 'Careers', 'Mobile', 'Blog', 'How we work?'],
-  },
-  {
-    id: 2,
-    section: "Contact",
-    link: ['Help/FAQ', 'Press', 'Affiliates', 'Hotel owners', 'Partners'],
-  },
-  {
-    id: 3,
-    section: "More",
-    link: ['Recipe', 'Chef', 'Food', 'Support'],
-  },
+  { Icon: FaFacebookF, link: "https://facebook.com/chefpick" },
+  { Icon: FaInstagram, link: "https://instagram.com/chefpick" },
+  { Icon: FaTwitter, link: "https://twitter.com/chefpick" },
 ];
 
 const Footer = () => {
-  return (
-    <div className="mx-auto max-w-2xl pt-24 px-4 sm:px-6 lg:max-w-7xl lg:px-8 ">
-      <div className="my-12 grid grid-cols-1 gap-y-10 sm:grid-cols-6 lg:grid-cols-12">
-        {/* COLUMN-1 */}
-        <div className="sm:col-span-6 lg:col-span-5">
-          <div className="flex flex-shrink-0 items-center border-right">
-            <Image src="/images/Logo/logo.png" alt="logo" width={56} height={56} />
-            <Link href="/" className="text-2xl font-semibold text-black ml-4">
-              ChefPick
-            </Link>
-          </div>
-          <h3 className="text-textbl  text-xs font-medium mt-5 mb-4 lg:mb-16">
-          Conectamos tus ingredientes disponibles con recetas creativas, <br/>fomentando una alimentación sostenible<br/> y reduciendo el desperdicio de comida. 
-          </h3>
+   return (
+    <footer className="bg-[#FAF5F8] pt-16 pb-8 border-t border-[#f0e0ea]">
+      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
+        {/* Frase destacada - Izquierda */}
+        <div className="text-center md:text-left">
+          <h2 className="text-3xl font-bold text-[#8B1C62] mb-4 leading-tight">
+            "Transforma ingredientes<br />en experiencias"
+          </h2>
+          <p className="text-lg text-[#2D2D2D]">
+            Descubre el chef que llevas dentro
+          </p>
+        </div>
 
-          <h3 className="font-semibold text-xs  mt-5 mb-4 lg:mb-16">
-          "ChefPick: porque ‘no sé qué hacer’ ya no es excusa."
-          </h3>
+        {/* Logo y redes - Centro */}
+        <div className="flex flex-col items-center space-y-6">
+          <div className="bg-white shadow-lg rounded-full p-3 border-2 border-[#8B1C62]">
+            <img src="/images/Logo/logo.png" alt="logo" width={80} height={80} />
+          </div>
           <div className="flex gap-4">
-            {socialLinks.map((items, i) => (
-              <Link href={items.link} key={i}>
-                <div className="bg-white h-10 w-10 shadow-xl text-base rounded-full flex items-center justify-center footer-icons hover:bg-pink">
-                  <Image src={items.imgSrc} alt={items.imgSrc} width={items.width} height={2} className="sepiaa" />
+            {[FaFacebookF, FaInstagram, FaTwitter].map((Icon, i) => (
+              <Link key={i} href={socialLinks[i].link} target="_blank">
+                <div className="h-12 w-12 rounded-full flex items-center justify-center bg-white shadow-md hover:bg-[#8B1C62] transition-colors duration-300">
+                  <Icon className="text-[#2D2D2D] hover:text-white text-xl transition-colors duration-300" />
                 </div>
               </Link>
             ))}
           </div>
         </div>
 
-        {/* COLUMN-2/3/4 */}
-        {products.map((product) => (
-          <div key={product.id} className="sm:col-span-2">
-            <p className="text-black text-xl font-semibold mb-9">{product.section}</p>
-            <ul>
-              {product.link.map((link, index) => (
-                <li key={index} className="mb-5">
-                  <Link href="/" className="text-footerlinks text-base font-normal mb-6 space-links">
-                    {link}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+        {/* Enlaces y políticas - Derecha */}
+        <div className="grid grid-cols-2 gap-6 text-center md:text-right">
+          <div className="space-y-3">
+            <h3 className="text-[#6B8E23] font-semibold mb-2">Explorar</h3>
+            <Link href="/mapa" className="block text-[#2D2D2D] hover:text-[#8B1C62] transition">
+              Mapa
+            </Link>
+            <Link href="/recetas" className="block text-[#2D2D2D] hover:text-[#6B8E23] transition">
+              Recetas
+            </Link>
           </div>
-        ))}
-      </div>
-
-      {/* All Rights Reserved */}
-      <div className="py-10 md:flex items-center justify-between border-t border-t-bordertop">
-        <h4 className="text-darkgrey text-sm text-center md:text-start font-normal">
-          @2025 - ChefPick by Agui Martínez | Jovany Equihua | Ethan Ginori | Adrian Flores | Marco Ruiz | Roberto González
-     
-        </h4>
-        <div className="flex gap-5 mt-5 md:mt-0 justify-center md:justify-start">
-          <h4 className="text-darkgrey text-sm font-normal">
-            <Link href="/" target="_blank">
-              Privacy policy
+          <div className="space-y-3">
+            <h3 className="text-[#6B8E23] font-semibold mb-2">Legal</h3>
+            <Link href="/politica-privacidad" className="block text-[#2D2D2D] hover:text-[#8B1C62] transition">
+              Privacidad
             </Link>
-          </h4>
-          <div className="h-5 bg-bordertop w-0.5"></div>
-          <h4 className="text-darkgrey text-sm font-normal">
-            <Link href="/" target="_blank">
-              Terms & conditions
+            <Link href="/terminos" className="block text-[#2D2D2D] hover:text-[#6B8E23] transition">
+              Términos
             </Link>
-          </h4>
+            <Link href="/cookies" className="block text-[#2D2D2D] hover:text-[#8B1C62] transition">
+              Cookies
+            </Link>
+          </div>
         </div>
       </div>
-    </div>
+
+      {/* Créditos */}
+      <div className="text-center text-sm text-gray-600 mt-12 pt-6 border-t border-[#e8d8e2]">
+        © 2025 ChefPick – Agui Martínez | Jovany Equihua | Ethan Ginori | Adrian
+        Flores | Marco Ruiz | Roberto González
+      </div>
+    </footer>
   );
 };
-
 export default Footer;
