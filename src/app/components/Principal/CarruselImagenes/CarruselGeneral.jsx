@@ -11,8 +11,10 @@ const CarruselGeneral = ({
   setMostrarFiltrar,
   busquedaActiva,
   setBusquedaActiva,
+   usuarioId,
 }) => {
   // const [mostrarFiltrar, setMostrarFiltrar] = useState(false);
+
 
   return (
     <div className="relative  w-full max-w-7xl mx-auto mt-10 flex transition-all duration-500 z">
@@ -26,7 +28,7 @@ const CarruselGeneral = ({
           >
             X
           </button>
-          <Filtrar busquedaActiva={busquedaActiva} />
+          <Filtrar busquedaActiva={busquedaActiva}  usuarioId={ usuarioId}/>
         </div>
       )}
 
@@ -91,6 +93,7 @@ const CarruselGeneral = ({
                       isFiltered={mostrarFiltrar}
                       setBusquedaActiva={setBusquedaActiva}
                       busquedaActiva={busquedaActiva}
+                       usuarioId={ usuarioId}
                     />
                   </div>
                   {!mostrarFiltrar && (

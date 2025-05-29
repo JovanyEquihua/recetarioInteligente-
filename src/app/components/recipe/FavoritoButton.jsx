@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 export default function FavoritoButton({ recetaId, usuarioId, esFavoritoInicial = false }) {
+   const [hover, setHover] = useState(false);
   const [esFavorita, setEsFavorita] = useState(esFavoritoInicial);
   const [cargando, setCargando] = useState(false);
 
@@ -33,6 +34,38 @@ export default function FavoritoButton({ recetaId, usuarioId, esFavoritoInicial 
       setCargando(false);
     }
   };
+
+
+
+
+  if (!usuarioId) {
+    return (
+      <div
+        className="relative flex flex-col items-center gap-2 group"
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
+      >
+        <button
+          className="p-2 rounded-full bg-gradient-to-br from-[#faf5f9] to-[#f3e6f0] shadow-inner cursor-not-allowed"
+        >
+          <motion.div className="h-8 w-8 flex items-center justify-center text-[#8B1C62]">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <path d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+            </svg>
+          </motion.div>
+        </button>
+        <span className="text-xs text-gray-400">Guardar</span>
+
+        {/* Tooltip flotante */}
+        {hover && (
+          <div className="absolute w-52 -top-4 z-20 bg-[#b6d37d] text-sm text-white shadow-md px-2 py-1.5 rounded-md border border-gray-200">
+            Inicia sesión para guardar recetas como favoritas
+          </div>
+        )}
+      </div>
+    );
+  }
+
 
   return (
     <div className="flex flex-col items-center gap-2">

@@ -28,24 +28,28 @@ const cardData = [
   },
 ];
 
-const DestacadosPage = () => {
+const DestacadosPage = ( {usuarioId}) => {
   const router = useRouter();
 
-  const handleClick = async (idTipoSabor) => {
-    try {
-      const res = await fetch(
-        `/api/receta/destacadasSabor?tipoSaborId=${idTipoSabor}`
-      );
-      const data = await res.json();
-      if (res.ok) {
+const handleClick = async (idTipoSabor) => {
+  try {
+    const res = await fetch(
+      `/api/receta/destacadasSabor?tipoSaborId=${idTipoSabor}`
+    );
+    const data = await res.json();
+    if (res.ok && data.id) {
+      if (usuarioId) {
         router.push(`/usuario/recetas/${data.id}`);
       } else {
-        router.push("/not-found"); // Redirige a la página not-found
+        router.push(`/RecetaCompleta/recetas/${data.id}`);
       }
-    } catch (error) {
-      router.push("/not-found"); // También redirige en caso de error
+    } else {
+      router.push("/not-found");
     }
-  };
+  } catch (error) {
+    router.push("/not-found");
+  }
+};
   return (
     <div className="relative  mx-auto max-w-7xl py-20 px-6  " >
       <div className="text-center mb-14 ">

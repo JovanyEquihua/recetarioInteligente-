@@ -1,7 +1,11 @@
 import Link from "next/link";
 import React from "react";
 
-const ResultadosBusqueda = ({ recetaImagen, receta}) => {
+const ResultadosBusqueda = ({ recetaImagen, receta,usuarioId}) => {
+    // Determina la ruta según si el usuario está loggeado
+  const ruta = usuarioId
+    ? `/usuario/recetas/${receta.id}`
+    : `/RecetaCompleta/recetas/${receta.id}`;
   return (
     <div
       className="bg-white rounded-lg 
@@ -20,7 +24,7 @@ const ResultadosBusqueda = ({ recetaImagen, receta}) => {
       </div>
 
       <div className="p-2 text-center ">
-        <Link href={`/usuario/recetas/${receta.id}`}>
+         <Link href={ruta}>
           <button className="text-xs font-bold text-[#8B1C62] group-hover:text-[#A32C7A] hover:underline transition-colors">
             {receta.titulo}
           </button>

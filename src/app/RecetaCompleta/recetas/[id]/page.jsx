@@ -7,7 +7,7 @@ import ModoCocina from "@/app/recetas/ModoCocina";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/libs/authOptions";
 import { db as prisma } from "@/libs/db";
-
+import ComentariosPage from "@/app/components/Comentarios/ComentariosPage";
 
 async function getReceta(id) {
   const receta = await prisma.receta.findUnique({
@@ -33,13 +33,12 @@ async function getReceta(id) {
 }
 
 export default async function RecetaPage({ params }) {
-  const recetaId = parseInt(params.id);
 
+  const recetaId = parseInt(params.id);
   const receta = await getReceta(recetaId);
-  //console.log("Receta:", receta);
   const session = await getServerSession(authOptions);
   const usuarioId = session?.user?.id;
-  const usuarioNombre = session?.user?.nombre;
+  const nombreUsuario = session?.user?.nombre || "Invitado";
 
   let esFavoritoInicial = false;
 
@@ -56,11 +55,13 @@ export default async function RecetaPage({ params }) {
   return (
     <div className="max-w-4xl mx-auto p-6 sm:p-10 relative ">
       <div className="absolute top-6 right-6 z-10">
-        <FavoritoButton
-          recetaId={params.id}
-          usuarioId={usuarioId}
-          esFavoritoInicial={esFavoritoInicial}
-        />
+
+          <FavoritoButton
+            recetaId={recetaId}
+            usuarioId={usuarioId}
+            esFavoritoInicial={esFavoritoInicial}
+          />
+     
       </div>
 
       <HeaderReceta receta={receta} />
@@ -78,6 +79,11 @@ export default async function RecetaPage({ params }) {
       </div>
 
       <PasosSection pasosPreparacion={receta.pasosPreparacion} />
+
+    
+        <ComentariosPage recetaId={recetaId} usuario={{ id: usuarioId, nombre: nombreUsuario }} />
+
+     
     </div>
   );
 }

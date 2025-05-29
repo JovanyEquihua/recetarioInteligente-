@@ -5,7 +5,7 @@ import debounce from "lodash/debounce";
 import ResultadosPage from "../Resultados/ResultadosPage";
 import ResultadosBusqueda from "../Resultados/ResultadosBusqueda";
 
-const BuscadorPage = ({ isFiltered, setBusquedaActiva, busquedaActiva }) => {
+const BuscadorPage = ({ isFiltered, setBusquedaActiva, busquedaActiva,usuarioId }) => {
   const [query, setQuery] = useState("");
   const [resultados, setResultados] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -94,7 +94,8 @@ const BuscadorPage = ({ isFiltered, setBusquedaActiva, busquedaActiva }) => {
               {resultados
                 .filter((item) => item && item.imagen)
                 .map((item) => (
-                  <ResultadosBusqueda key={item.id || item._id} recetaImagen={item.imagen} receta={item}
+                  <ResultadosBusqueda key={item.id || item._id} recetaImagen={item.imagen}
+                   receta={item} usuarioId={usuarioId}
                     />
                 ))}
             </div>

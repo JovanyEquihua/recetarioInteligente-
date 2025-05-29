@@ -4,16 +4,13 @@ import { db } from "@/libs/db";
 export async function GET(req) {
   const { searchParams } = new URL(req.url);
   const recetaId = searchParams.get("recetaId");
-console.log("🔍 Buscando comentarios para recetaId:", recetaId); // 👈 Agrega esto
 
   try {
     const comentarios = await db.comentario.findMany({
-    where: { recetaId: parseInt(recetaId) },
-  include: { usuario: true }, 
-  orderBy: { fechaComentario: "asc" },// Opcional: orden por fecha ascendente
+      where: { recetaId: parseInt(recetaId) },
+      include: { usuario: true },
+      orderBy: { fechaComentario: "asc" },
     });
-
-    console.log("📦 Comentarios encontrados:", comentarios.length); // 👈 Agrega esto
 
     return new Response(JSON.stringify(comentarios), { status: 200 });
   } catch (error) {
@@ -64,4 +61,62 @@ export async function POST(req) {
     );
   }
 }
+
+// PUT: editar un comentario existente
+export async function PUT(req) {
+  const { comentarioId, comentario, usuarioId } = await req.json();
+
+  try {
+    const existente = await db.comentario.findUnique({
+      where: { id: comentarioId },
+    });
+
+    if (!existente || existente.usuarioId !== usuarioId) {
+      return new Response(JSON.stringify({ error: "No autorizado" }), {
+        status: 403,
+      });
+    }
+
+    const actualizado = await db.comentario.update({
+      where: { id: comentarioId },
+      data: { comentario },
+    });
+
+    return new Response(JSON.stringify(actualizado), { status: 200 });
+  } catch (error) {
+    return new Response(
+      JSON.stringify({ error: "Error al editar comentario" }),
+      { status: 500 }
+    );
+  }
+}
+
+// DELETE: eliminar un comentario existente
+export async function DELETE(req) {
+  const { comentarioId, usuarioId } = await req.json();
+
+  try {
+    const existente = await db.comentario.findUnique({
+      where: { id: comentarioId },
+    });
+
+    if (!existente || existente.usuarioId !== usuarioId) {
+      return new Response(JSON.stringify({ error: "No autorizado" }), {
+        status: 403,
+      });
+    }
+
+    await db.comentario.delete({
+      where: { id: comentarioId },
+    });
+
+    return new Response(null, { status: 204 });
+  } catch (error) {
+    return new Response(
+      JSON.stringify({ error: "Error al eliminar comentario" }),
+      { status: 500 }
+    );
+  }
+}
+
 

@@ -90,7 +90,7 @@ export default function ModoCocina({ pasos }) {
   }
 
   return (
-    <div className="mt-6 bg-white border border-[#6B8E23] p-8 rounded-2xl shadow-sm max-w-2xl mx-auto">
+    <div className="mt-6 bg-white border border-[#8B1C62] p-8 rounded-2xl shadow-lg max-w-2xl mx-auto">
       {!modoActivo ? (
         <div className="text-center">
           {recetaCompletada ? (
@@ -107,7 +107,7 @@ export default function ModoCocina({ pasos }) {
           )}
           <button
             onClick={() => setModoActivo(true)}
-            className="bg-[#8B1C62] text-white px-8 py-3 rounded-lg hover:bg-[#7a1756] transition-all text-lg font-medium shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#8B1C62] focus:ring-opacity-50"
+            className="bg-[#6B8E23] text-white px-8 py-3 rounded-lg hover:bg-[#738b43] transition-all text-lg font-medium shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#8B1C62] focus:ring-opacity-50"
           >
             <span className="flex items-center gap-2 justify-center">
               <RiUserVoiceLine />

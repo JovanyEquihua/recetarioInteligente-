@@ -2,8 +2,13 @@
 import React, { useState } from "react";
 import CarruselImagenes from "../CarruselImagenes/CarruselGeneral";
 import DestacadosPage from "../Destacadas/DestacadosPage";
+import { useSession } from "next-auth/react";
 
 const Index = () => {
+  const { data: session } = useSession();
+  const usuarioId = session?.user?.id; 
+
+
   const [mostrarFiltrar, setMostrarFiltrar] = useState(false);
   const [busquedaActiva, setBusquedaActiva] = useState(false);
 
@@ -15,6 +20,7 @@ const Index = () => {
           setMostrarFiltrar={setMostrarFiltrar}
           busquedaActiva={busquedaActiva}
           setBusquedaActiva={setBusquedaActiva}
+          usuarioId={usuarioId}
         />
       </div>
 
@@ -27,7 +33,7 @@ const Index = () => {
               : "opacity-100"
           }`}
         >
-          <DestacadosPage />
+          <DestacadosPage  usuarioId={usuarioId} />
         </div>
       )}
     </div>

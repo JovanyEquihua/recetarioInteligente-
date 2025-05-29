@@ -3,7 +3,12 @@
 import React from "react";
 import Link from "next/link";
 
-const RecetaCard = ({ receta, onViewRecipe }) => {
+const RecetaCard = ({ receta, onViewRecipe,usuarioId }) => {
+   // Determina la ruta según si el usuario está loggeado
+  const ruta = usuarioId
+    ? `/usuario/recetas/${receta.id}`
+    : `/RecetaCompleta/recetas/${receta.id}`;
+
   return (
     <div className=" bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group ">
       <div className="relative h-60 overflow-hidden">
@@ -33,7 +38,7 @@ const RecetaCard = ({ receta, onViewRecipe }) => {
             {receta.tipoComida?.nombre}
           </span>
 
-          <Link href={`/usuario/recetas/${receta.id}`}>
+           <Link href={ruta}>
             <button
               // onClick={() => onViewRecipe(receta.id)}
               className="text-[#8B1C62] hover:text-[#A32C7A] font-medium text-sm flex items-center"
