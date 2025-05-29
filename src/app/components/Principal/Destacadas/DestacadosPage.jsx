@@ -44,7 +44,7 @@ const handleClick = async (idTipoSabor) => {
         router.push(`/RecetaCompleta/recetas/${data.id}`);
       }
     } else {
-      router.push("/not-found");
+      router.push("/not-found");d
     }
   } catch (error) {
     router.push("/not-found");

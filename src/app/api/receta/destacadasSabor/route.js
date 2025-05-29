@@ -14,7 +14,11 @@ export async function GET(req) {
     const recetas = await db.receta.findMany({
       where: { idTipoSabor: parseInt(tipoSaborId, 10) },
       include: {
-        calificaciones: true,
+         calificaciones: {
+    select: {
+      puntuacion: true,
+    },
+  },
         tipoComida: true,
         tipoSabor: true,
       },
@@ -26,22 +30,38 @@ export async function GET(req) {
       });
     }
 
-    // Calcular el promedio de calificaciones y obtener la receta con el mayor
     const recetaDestacada = recetas
-      .map((receta) => {
-        const total = receta.calificaciones.reduce((sum, c) => sum + c.valor, 0);
-        const promedio =
-          receta.calificaciones.length > 0 ? total / receta.calificaciones.length : 0;
+  .map((receta) => {
+    const calificacionesValidas = receta.calificaciones.filter(
+      (c) => typeof c.puntuacion === "number" && !isNaN(c.puntuacion)
+    );
 
-  // Aquí haces el console.log del promedio de cada receta
-  console.log(`Receta ID: ${receta.id}, Promedio: ${promedio}`);
+    const total = calificacionesValidas.reduce(
+      (sum, c) => sum + c.puntuacion,
+      0
+    );
 
-        return {
-          ...receta,
-          promedioCalificacion: promedio,
-        };
-      })
-      .sort((a, b) => b.promedioCalificacion - a.promedioCalificacion)[0]; // la mejor calificada
+    const promedio =
+      calificacionesValidas.length > 0
+        ? total / calificacionesValidas.length
+        : 0;
+
+    console.log(
+      `➡️ Receta ID ${receta.id}: Calificaciones = [${calificacionesValidas.map(
+        (c) => c.puntuacion
+      )}], Promedio = ${promedio.toFixed(2)}`
+    );
+
+    return {
+      ...receta,
+      promedioCalificacion: promedio,
+    };
+  })
+  .sort((a, b) => b.promedioCalificacion - a.promedioCalificacion)[0]; // la mejor calificada
+
+    
+
+    
 
     return new Response(JSON.stringify(recetaDestacada), {
       status: 200,

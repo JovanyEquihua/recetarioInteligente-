@@ -33,8 +33,8 @@ async function getReceta(id) {
 }
 
 export default async function RecetaPage({ params }) {
-
-  const recetaId = parseInt(params.id);
+const { id } = await params;
+  const recetaId = parseInt(id);
   const receta = await getReceta(recetaId);
   const session = await getServerSession(authOptions);
   const usuarioId = session?.user?.id;
