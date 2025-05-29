@@ -185,6 +185,7 @@ model Reporte {
 enum UserRole {
   ADMIN
   USUARIO
+  MODERADOR
 }
 
 enum TipoIngrediente {
