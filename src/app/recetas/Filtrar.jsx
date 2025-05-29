@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 
 import ResultadosPage from "../components/Principal/Resultados/ResultadosPage";
 
-const Filtrar = () => {
+const Filtrar = ({ busquedaActiva, usuarioId }) => {
   const router = useRouter();
 
   const handleViewRecipe = (id) => {
@@ -220,20 +220,21 @@ const Filtrar = () => {
         </div>
       </div>
       {/* Resultados */}
-      <div className=" ">
-      
-        {resultados.length > 0 && (
-          <div className="absolute  left-1/2 transform translate-x-52 top-[200px]  w-[900px] 
-           overflow-hidden">
+      <div>
+        {!busquedaActiva && resultados.length > 0 && (
+          <div className="absolute left-1/2 transform translate-x-52 top-[200px] w-[900px] overflow-hidden">
             <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
               {resultados.map((receta) => (
-                <ResultadosPage key={receta.id} receta={receta} />
+                <ResultadosPage
+                  key={receta.id}
+                  receta={receta}
+                  usuarioId={usuarioId}
+                />
               ))}
             </div>
           </div>
         )}
       </div>
-      
     </div>
   );
 };

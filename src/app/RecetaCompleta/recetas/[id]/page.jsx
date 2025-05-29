@@ -34,20 +34,17 @@ async function getReceta(id) {
 }
 
 export default async function RecetaPage({ params }) {
-  const { id } = params;
+ const { id } = params;
 
   const recetaId = parseInt(id);
-
   const receta = await getReceta(recetaId);
-  //console.log("Receta:", receta);
   const session = await getServerSession(authOptions);
   const usuarioId = session?.user?.id;
-  const usuarioNombre = session?.user?.nombre;
+  const nombreUsuario = session?.user?.nombre || "Invitado";
 
   const calificaciones = receta.calificaciones ?? [];
   const total = calificaciones.reduce((acc, c) => acc + c.puntuacion, 0);
   const promedio = calificaciones.length ? total / calificaciones.length : 0;
-
 
   let esFavoritoInicial = false;
 
@@ -62,9 +59,8 @@ export default async function RecetaPage({ params }) {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6 sm:p-10 relative">
-
-        <div className="mb-4">
+    <div className="max-w-4xl mx-auto p-6 sm:p-10 relative ">
+      <div className="mb-4">
        
         <CalificarEstrellas
           promedio={promedio}
@@ -76,19 +72,20 @@ export default async function RecetaPage({ params }) {
 
       <div className="absolute top-6 right-6 z-10">
         <FavoritoButton
-          recetaId={params.id}
+          recetaId={recetaId}
           usuarioId={usuarioId}
           esFavoritoInicial={esFavoritoInicial}
         />
       </div>
 
       <HeaderReceta receta={receta} />
-        <div className="mb-14">
-              {Array.isArray(receta.pasosPreparacion) &&
-                receta.pasosPreparacion.length > 0 && (
-                  <ModoCocina pasos={receta.pasosPreparacion} />
-                )}
-            </div>
+
+      <div className="mb-14">
+        {Array.isArray(receta.pasosPreparacion) &&
+          receta.pasosPreparacion.length > 0 && (
+            <ModoCocina pasos={receta.pasosPreparacion} />
+          )}
+      </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-10">
         <IngredientesSection ingredientes={receta.ingredientes} />
@@ -99,7 +96,7 @@ export default async function RecetaPage({ params }) {
 
       <ComentariosPage
         recetaId={recetaId}
-        usuario={usuarioId ? { id: usuarioId, nombre: usuarioNombre } : null}
+        usuario={{ id: usuarioId, nombre: nombreUsuario }}
       />
     </div>
   );

@@ -2,10 +2,11 @@
 import React from "react";
 import RecetaCard from "@/app/recetas/RecetaCard";
 
-const ResultadosPage = ({ receta }) => {
+const ResultadosPage = ({ receta,usuarioId }) => {
+
   return (
     
-    <RecetaCard receta={receta} />
+    <RecetaCard receta={receta} usuarioId={usuarioId} />
   );
 };
 

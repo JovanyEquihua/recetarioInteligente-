@@ -28,27 +28,31 @@ const cardData = [
   },
 ];
 
-const DestacadosPage = () => {
+const DestacadosPage = ( {usuarioId}) => {
   const router = useRouter();
 
-  const handleClick = async (idTipoSabor) => {
-    try {
-      const res = await fetch(
-        `/api/receta/destacadasSabor?tipoSaborId=${idTipoSabor}`
-      );
-      const data = await res.json();
-      if (res.ok) {
+const handleClick = async (idTipoSabor) => {
+  try {
+    const res = await fetch(
+      `/api/receta/destacadasSabor?tipoSaborId=${idTipoSabor}`
+    );
+    const data = await res.json();
+    if (res.ok && data.id) {
+      if (usuarioId) {
         router.push(`/usuario/recetas/${data.id}`);
       } else {
-        router.push("/not-found"); // Redirige a la página not-found
+        router.push(`/RecetaCompleta/recetas/${data.id}`);
       }
-    } catch (error) {
-      router.push("/not-found"); // También redirige en caso de error
+    } else {
+      router.push("/not-found");d
     }
-  };
+  } catch (error) {
+    router.push("/not-found");
+  }
+};
   return (
-    <div className="mx-auto max-w-7xl py-20 px-6" id="about-section">
-      <div className="text-center mb-14">
+    <div className="relative  mx-auto max-w-7xl py-20 px-6  " >
+      <div className="text-center mb-14 ">
         <Fade direction="up" delay={400} cascade damping={0.1} triggerOnce>
           <h3 className="text-pink text-lg font-normal mb-3 ls-51 uppercase">
             Recetas
@@ -66,11 +70,14 @@ const DestacadosPage = () => {
           {cardData.map((items, i) => (
             <div
              key={i}
-  className="card-b p-8 relative rounded-3xl cursor-pointer shadow-md transition-transform duration-300 transform hover:scale-105 hover:shadow-xl hover:ring-2 hover:ring-[#8B1C62]"
+  className="card-b p-8 relative rounded-3xl cursor-pointer 
+  shadow-md transition-transform duration-300 transform hover:scale-105 hover:shadow-xl
+   hover:ring-2 hover:ring-[#8B1C62]"
   onClick={() => handleClick(items.idTipoSabor)}
             >
              <div
-  className="flex justify-center absolute top-[-80%] sm:top-[-40%] md:top-[-55%] lg:top-[-45%] left-[0%] w-full"
+  className="flex justify-center absolute top-[-80%] 
+  sm:top-[-40%] md:top-[-55%] lg:top-[-45%] left-[0%] w-full"
 >
   <div className="bg-white rounded-full w-32 h-32 flex items-center justify-center shadow-md">
     <Image
@@ -94,7 +101,7 @@ const DestacadosPage = () => {
                 que conquistará tu paladar.
               </p>
               <div className="flex items-center justify-center ">
-                <p className="text-center text-lg font-medium mt-2 text-[#8B1C62]">
+                <p className="text-center text-lg font-medium mt-2 text-[#8B1C62] ">
                   Ver
                 </p>
               </div>

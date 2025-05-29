@@ -6,11 +6,18 @@ import CarruselPage from "./Carrusel/CarruselPage";
 import BuscadorPage from "../Buscador/BuscadorPage";
 import Filtrar from "@/app/recetas/Filtrar";
 
-const CarruselGeneral = ({ mostrarFiltrar, setMostrarFiltrar }) => {
+const CarruselGeneral = ({
+  mostrarFiltrar,
+  setMostrarFiltrar,
+  busquedaActiva,
+  setBusquedaActiva,
+   usuarioId,
+}) => {
   // const [mostrarFiltrar, setMostrarFiltrar] = useState(false);
 
+
   return (
-    <div className="relative  w-full max-w-7xl mx-auto mt-10 flex transition-all duration-500">
+    <div className="relative  w-full max-w-7xl mx-auto mt-10 flex transition-all duration-500 z">
       {/* Panel de filtrado */}
       {mostrarFiltrar && (
         <div className="relative  bg-white rounded-xl shadow-2xl p-6 min-w-[300px] max-w-[350px] transition-all duration-500">
@@ -21,7 +28,7 @@ const CarruselGeneral = ({ mostrarFiltrar, setMostrarFiltrar }) => {
           >
             X
           </button>
-          <Filtrar />
+          <Filtrar busquedaActiva={busquedaActiva}  usuarioId={ usuarioId}/>
         </div>
       )}
 
@@ -33,12 +40,12 @@ const CarruselGeneral = ({ mostrarFiltrar, setMostrarFiltrar }) => {
             : "w-full"
         }`}
       >
-        <div className="relative">
+        <div className="relative ">
           <CarruselPage isFiltered={mostrarFiltrar} />
 
           {/* Overlay con texto y buscador */}
           <div
-            className={`absolute inset-0 flex flex-col items-center justify-center px-6 text-center text-white transition-all duration-500 ${
+            className={`absolute inset-0  flex flex-col items-center justify-center px-6 text-center text-white transition-all duration-500 ${
               mostrarFiltrar ? "py-10  " : "mt-16"
             }`}
           >
@@ -75,12 +82,19 @@ const CarruselGeneral = ({ mostrarFiltrar, setMostrarFiltrar }) => {
               {/* Buscador y botón */}
               <div
                 className={` px-2 ${
-                  mostrarFiltrar ? "max-w-md mx-auto  flex justify-center items-center mt-0 " : "mt-16"
+                  mostrarFiltrar
+                    ? "max-w-md mx-auto  flex justify-center items-center mt-0 "
+                    : "mt-16"
                 }`}
               >
-                <div className="flex justify-between items-center">
-                  <div className="w-full max-w-2xl">
-                    <BuscadorPage isFiltered={mostrarFiltrar} />
+                <div className="flex justify-between items-center ">
+                  <div className="w-full max-w-2xl ">
+                    <BuscadorPage
+                      isFiltered={mostrarFiltrar}
+                      setBusquedaActiva={setBusquedaActiva}
+                      busquedaActiva={busquedaActiva}
+                       usuarioId={ usuarioId}
+                    />
                   </div>
                   {!mostrarFiltrar && (
                     <div className="ml-4">
@@ -95,6 +109,7 @@ const CarruselGeneral = ({ mostrarFiltrar, setMostrarFiltrar }) => {
                   )}
                 </div>
               </div>
+              {/* Cierre buscador */}
             </Fade>
           </div>
         </div>
