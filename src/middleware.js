@@ -15,7 +15,7 @@ export async function middleware(req) {
   }
 
   const publicRoutes = ["/", "/login", "/registrarse", "/verificar", "/restablecer-contrasena"];
-  const dynamicPublicRoutes = ["/receta", "/mapa"];
+  const dynamicPublicRoutes = ["/receta", "/mapa","/RecetaCompleta/recetas"];
 
   const isPublic =
     publicRoutes.includes(pathname) ||
