@@ -1,41 +1,91 @@
-//API para calificar receta
 import { db } from "@/libs/db";
 
+export async function GET(req) {
+  const { searchParams } = new URL(req.url);
+  const recetaId = parseInt(searchParams.get("recetaId"));
+  const usuarioId = parseInt(searchParams.get("usuarioId"));
 
-// Manejador para solicitudes POST
+  if (!recetaId) {
+    return new Response(JSON.stringify({ error: "recetaId es obligatorio" }), { status: 400 });
+  }
+
+  try {
+    let calificacionUsuario = null;
+    if (usuarioId) {
+      calificacionUsuario = await db.calificacion.findFirst({
+        where: { recetaId, usuarioId },
+      });
+    }
+
+    const promedioObj = await db.calificacion.aggregate({
+      where: { recetaId },
+      _avg: { puntuacion: true },
+    });
+
+    const promedio = promedioObj._avg.puntuacion || 0;
+
+    return new Response(
+      JSON.stringify({
+        promedio,
+        calificacionUsuario: calificacionUsuario?.puntuacion || null,
+      }),
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Error al obtener calificación:", error);
+    return new Response(JSON.stringify({ error: "Error al obtener calificación" }), {
+      status: 500,
+    });
+  }
+}
 
 export async function POST(req) {
-    // Extrae los datos enviados en el cuerpo de la solicitud
+  try {
     const { recetaId, calificacion, usuario } = await req.json();
-    
-    try {
-        // Busca la receta en la base de datos por su ID
-        const receta = await db.receta.findUnique({
-            where: { id: recetaId }, // Busca una receta con el ID proporcionado
-        });
-    
-        // Si la receta no existe, devuelve un error 404
-        if (!receta) {
-            return new Response(JSON.stringify({ error: "Receta no encontrada" }), {
-                status: 404, // Código de estado HTTP 404 (No encontrado)
-            });
-        }
-    
-        // Crea una nueva calificación en la base de datos
-        const nuevaCalificacion = await db.calificacion.create({
-            data: {
-                calificacion, // Contenido de la calificación
-                usuario,       // Usuario que realiza la calificación
-                recetaId,      // ID de la receta asociada
-            },
-        });
-    
-        // Devuelve la calificación recién creada con un código de estado 201 (Creado)
-        return new Response(JSON.stringify(nuevaCalificacion), { status: 201 });
-    } catch (error) {
-        // Si ocurre un error, devuelve un mensaje de error con un código de estado 500
-        return new Response(JSON.stringify({ error: "Error al calificar" }), {
-            status: 500, // Código de estado HTTP 500 (Error interno del servidor)
-        });
+
+    if (!recetaId || !calificacion || !usuario) {
+      return new Response(JSON.stringify({ error: "Faltan datos obligatorios" }), { status: 400 });
     }
+
+    // Verifica si ya existe una calificación previa
+    const existente = await db.calificacion.findFirst({
+      where: {
+        recetaId,
+        usuarioId: usuario,
+      },
+    });
+
+    if (existente) {
+      // Actualiza la calificación existente
+      await db.calificacion.update({
+        where: { id: existente.id },
+        data: {
+          puntuacion: calificacion,
+          fechaCalificacion: new Date(),
+        },
+      });
+    } else {
+      // Crea una nueva calificación
+      await db.calificacion.create({
+        data: {
+          recetaId,
+          usuarioId: usuario,
+          puntuacion: calificacion,
+          fechaCalificacion: new Date(),
+        },
+      });
+    }
+
+    return new Response(JSON.stringify({ message: "Calificación guardada con éxito" }), {
+      status: 200,
+    });
+  } catch (error) {
+    console.error("Error al guardar calificación:", error);
+    return new Response(JSON.stringify({ error: "Error al guardar calificación" }), {
+      status: 500,
+    });
+  }
 }
+
+
+
