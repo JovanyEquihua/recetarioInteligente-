@@ -8,6 +8,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/libs/authOptions";
 import { db as prisma } from "@/libs/db";
 import ComentariosPage from "@/app/components/Comentarios/ComentariosPage";
+import CalificarEstrellas from "@/app/components/recipe/CalificarEstrellas";
 
 async function getReceta(id) {
   const receta = await prisma.receta.findUnique({
@@ -33,12 +34,17 @@ async function getReceta(id) {
 }
 
 export default async function RecetaPage({ params }) {
-const { id } = await params;
+ const { id } = params;
+
   const recetaId = parseInt(id);
   const receta = await getReceta(recetaId);
   const session = await getServerSession(authOptions);
   const usuarioId = session?.user?.id;
   const nombreUsuario = session?.user?.nombre || "Invitado";
+
+  const calificaciones = receta.calificaciones ?? [];
+  const total = calificaciones.reduce((acc, c) => acc + c.puntuacion, 0);
+  const promedio = calificaciones.length ? total / calificaciones.length : 0;
 
   let esFavoritoInicial = false;
 
@@ -54,14 +60,22 @@ const { id } = await params;
 
   return (
     <div className="max-w-4xl mx-auto p-6 sm:p-10 relative ">
-      <div className="absolute top-6 right-6 z-10">
+      <div className="mb-4">
+       
+        <CalificarEstrellas
+          promedio={promedio}
+          recetaId={recetaId}
+          usuarioId={usuarioId}
+          editable={!!usuarioId}
+        />
+      </div>
 
-          <FavoritoButton
-            recetaId={recetaId}
-            usuarioId={usuarioId}
-            esFavoritoInicial={esFavoritoInicial}
-          />
-     
+      <div className="absolute top-6 right-6 z-10">
+        <FavoritoButton
+          recetaId={recetaId}
+          usuarioId={usuarioId}
+          esFavoritoInicial={esFavoritoInicial}
+        />
       </div>
 
       <HeaderReceta receta={receta} />
@@ -80,10 +94,10 @@ const { id } = await params;
 
       <PasosSection pasosPreparacion={receta.pasosPreparacion} />
 
-    
-        <ComentariosPage recetaId={recetaId} usuario={{ id: usuarioId, nombre: nombreUsuario }} />
-
-     
+      <ComentariosPage
+        recetaId={recetaId}
+        usuario={{ id: usuarioId, nombre: nombreUsuario }}
+      />
     </div>
   );
 }
