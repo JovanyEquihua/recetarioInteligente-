@@ -19,6 +19,10 @@ import {
 } from "react-icons/fi";
 import RecetaAleatoria from "../recetas/RecetaAleatoria";
 import Notificaciones from "../components/Notificaciones/Notificaciones";
+import Footer from "../components/Footer/Footer";
+
+
+
 
 export default function Layout({ children }) {
   const { data: session } = useSession();
@@ -251,27 +255,27 @@ export default function Layout({ children }) {
               <div className="flex flex-col space-y-3">
                 <button
                   className="flex items-center space-x-2 px-3 py-2 hover:bg-gray-50 rounded-lg text-left"
-                  onClick={() => router.push("/explore")}
+                  onClick={() => router.push("/usuario")}
                 >
-                  <span>Explore</span>
+                  <span>Recetas</span>
                 </button>
                 <button
                   className="flex items-center space-x-2 px-3 py-2 hover:bg-gray-50 rounded-lg text-left"
-                  onClick={() => router.push("/recipes")}
+                  onClick={() => router.push("/usuario/mapa")}
                 >
-                  <span>Recipes</span>
+                  <span>Mapa Global</span>
                 </button>
                 <button
                   className="flex items-center space-x-2 px-3 py-2 hover:bg-gray-50 rounded-lg text-left"
-                  onClick={() => router.push("/ingredients")}
+                  onClick={() => router.push("/usuario/listaCompras")}
                 >
-                  <span>Ingredients</span>
+                  <span>Lista de compras</span>
                 </button>
                 <button
                   className="flex items-center space-x-2 px-3 py-2 hover:bg-gray-50 rounded-lg text-left"
-                  onClick={() => router.push("/community")}
+                  onClick={() => router.push("/usuario/crearReceta")}
                 >
-                  <span>Community</span>
+                  <span>Crear Receta</span>
                 </button>
 
                 {session?.user && (
@@ -298,7 +302,7 @@ export default function Layout({ children }) {
                         onClick={() => router.push("/usuario/perfil")}
                       >
                         <FiUser className="text-gray-600" />{" "}
-                        <span>My Profile</span>
+                        <span>Mi perfil</span>
                       </button>
                       <button
                         className="flex items-center space-x-2 px-3 py-2 hover:bg-gray-50 rounded-lg w-full text-left"
@@ -324,6 +328,7 @@ export default function Layout({ children }) {
       </header>
   {/* <main className="container mx-auto px-4 py-8">{children}</main> */}
   <main className="container">{children}</main> 
+  <Footer />
       {/* Mostrar el wizard solo si es el primer inicio de sesión */}
       {showWizard && (
         <PreferenciasWizard
