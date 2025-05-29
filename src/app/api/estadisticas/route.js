@@ -1,4 +1,4 @@
-import { db } from "../../../../libs/db";
+import { db } from "@/libs/db";
 import { NextResponse } from "next/server";
 import { subDays, subWeeks, formatISO } from "date-fns";
 

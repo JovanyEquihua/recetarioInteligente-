@@ -312,28 +312,16 @@
 {"level":"info","message":{"email":"l21121513@morelia.tecnm.mx","ip":"::1","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-21T07:05:09.701Z"}}
 {"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-21T07:15:52.892Z","usuario":"Alex  "}}
 {"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-21T07:25:29.361Z","usuario":"Jenifers  "}}
-{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-27T04:53:48.668Z","usuario":"Agui Judith  "}}
-{"level":"info","message":{"ip":"localhost","reason":"Contraseña errada","status":"error","timestamp":"2025-05-27T05:36:39.067Z","usuario":"Agui Judith  "}}
-{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-27T05:36:58.875Z","usuario":"Agui Judith  "}}
-{"level":"info","message":{"ip":"localhost","reason":"Contraseña errada","status":"error","timestamp":"2025-05-27T05:49:50.193Z","usuario":"Agui Judith  "}}
-{"level":"info","message":{"ip":"localhost","reason":"Contraseña errada","status":"error","timestamp":"2025-05-27T05:50:08.381Z","usuario":"Agui Judith  "}}
-{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-27T05:50:25.763Z","usuario":"Agui Judith  "}}
-{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-27T06:06:20.952Z","usuario":"Agui Judith  "}}
-{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-27T06:12:25.389Z","usuario":"Agui Judith  "}}
-{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-28T22:21:00.137Z","usuario":"Agui Judith  "}}
-{"level":"info","message":{"ip":"localhost","reason":"Contraseña errada","status":"error","timestamp":"2025-05-28T22:22:26.945Z","usuario":"Agui Judith  "}}
-{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-28T22:22:44.928Z","usuario":"Agui Judith  "}}
-{"level":"info","message":{"ip":"localhost","reason":"Contraseña errada","status":"error","timestamp":"2025-05-28T22:27:12.219Z","usuario":"Agui Judith  "}}
-{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-28T22:27:45.206Z","usuario":"Agui Judith  "}}
-{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-28T22:30:33.077Z","usuario":"Agui Judith  "}}
-{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-28T22:46:40.475Z","usuario":"Agui Judith  "}}
-{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-28T23:22:31.002Z","usuario":"Agui Judith  "}}
-{"level":"info","message":{"ip":"localhost","reason":"Contraseña errada","status":"error","timestamp":"2025-05-28T23:32:26.850Z","usuario":"Agui Judith  "}}
-{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-28T23:38:49.447Z","usuario":"Agui Judith  "}}
-{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-28T23:46:16.704Z","usuario":"Agui Judith  "}}
-{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-28T23:48:55.229Z","usuario":"Agui Judith  "}}
-{"level":"info","message":{"ip":"localhost","reason":"Contraseña errada","status":"error","timestamp":"2025-05-29T01:37:35.523Z","usuario":"Agui Judith  "}}
-{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-29T01:37:52.226Z","usuario":"Agui Judith  "}}
-{"level":"info","message":{"ip":"localhost","reason":"Contraseña errada","status":"error","timestamp":"2025-05-29T02:25:46.067Z","usuario":"Agui Judith  "}}
-{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-29T02:26:02.199Z","usuario":"Agui Judith  "}}
-{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-29T02:31:48.579Z","usuario":"Agui Judith  "}}
+
+
+{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-26T00:43:33.383Z","usuario":"Ethan   "}}
+{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-26T03:00:13.355Z","usuario":"Ethan   "}}
+{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-27T02:01:25.977Z","usuario":"Jenifers  "}}
+{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-27T17:24:36.512Z","usuario":"Jenifers  "}}
+{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-27T17:29:59.246Z","usuario":"Jenifers  "}}
+
+{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-29T02:43:02.387Z","usuario":"Jovany  "}}
+{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-29T02:51:07.863Z","usuario":"Jovany  "}}
+{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-29T03:01:39.351Z","usuario":"Jovany  "}}
+{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-29T03:08:26.086Z","usuario":"Jovany  "}}
+

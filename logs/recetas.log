@@ -1,0 +1,6 @@
+{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-26T00:43:33.383Z","usuario":"Ethan"}}
+{"level":"info","message":{"accion":"Receta eliminada correctamente","recetaId":"14","status":"success","timestamp":"2025-05-27T17:30:49.976Z","usuarioId":1}}
+{"level":"info","message":{"accion":"Ingredientes de receta actualizados","recetaId":"13","status":"success","timestamp":"2025-05-27T17:33:18.278Z","usuarioId":1}}
+{"level":"info","message":{"accion":"Detalles de receta actualizados","recetaId":"16","status":"success","timestamp":"2025-05-28T05:27:41.282Z","usuarioId":1}}
+{"level":"info","message":{"accion":"Detalles de receta actualizados","recetaId":"15","status":"success","timestamp":"2025-05-28T05:43:17.182Z","usuarioId":1}}
+{"level":"info","message":{"accion":"Receta eliminada correctamente","recetaId":"17","status":"success","timestamp":"2025-05-28T05:43:23.757Z","usuarioId":1}}

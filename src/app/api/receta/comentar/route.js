@@ -1,9 +1,11 @@
+
 import { db } from "@/libs/db";
 
 // GET: obtener comentarios por receta
 export async function GET(req) {
   const { searchParams } = new URL(req.url);
   const recetaId = searchParams.get("recetaId");
+
 
   try {
     const comentarios = await db.comentario.findMany({
@@ -23,6 +25,7 @@ export async function GET(req) {
 
 // POST: agregar un nuevo comentario
 export async function POST(req) {
+
   const { recetaId, comentario, usuarioId } = await req.json();
 
   if (!usuarioId) {
@@ -75,6 +78,7 @@ export async function PUT(req) {
       return new Response(JSON.stringify({ error: "No autorizado" }), {
         status: 403,
       });
+
     }
 
     const actualizado = await db.comentario.update({
