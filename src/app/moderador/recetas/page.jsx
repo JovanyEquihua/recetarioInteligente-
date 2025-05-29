@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
-export default function RecetasPage({ id }) {
+export default function RecetasPage() {
   const [recetas, setRecetas] = useState([]);
 
   useEffect(() => {
@@ -12,7 +12,7 @@ export default function RecetasPage({ id }) {
       setRecetas(Array.isArray(data) ? data : [data]); // por si solo es una receta
     };
     fetchRecetas();
-  }, [id]);
+  }, []);
 
   const handleDelete = async (idReceta) => {
     if (confirm('¿Seguro que quieres eliminar esta receta?')) {
