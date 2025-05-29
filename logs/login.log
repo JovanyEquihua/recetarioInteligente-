@@ -319,3 +319,7 @@
 {"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-27T17:24:36.512Z","usuario":"Jenifers  "}}
 {"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-27T17:29:59.246Z","usuario":"Jenifers  "}}
 
+{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-29T02:43:02.387Z","usuario":"Jovany  "}}
+{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-29T02:51:07.863Z","usuario":"Jovany  "}}
+{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-29T03:01:39.351Z","usuario":"Jovany  "}}
+{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-29T03:08:26.086Z","usuario":"Jovany  "}}
