@@ -325,3 +325,6 @@
 {"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-29T03:01:39.351Z","usuario":"Jovany  "}}
 {"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-29T03:08:26.086Z","usuario":"Jovany  "}}
 
+{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-29T04:18:16.755Z","usuario":"Jovany  "}}
+{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-29T04:34:49.778Z","usuario":"Jenifers  "}}
+{"level":"info","message":{"ip":"localhost","reason":"Ingresó correctamente","status":"success","timestamp":"2025-05-29T05:13:37.756Z","usuario":"Jovany  "}}
