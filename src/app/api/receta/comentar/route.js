@@ -56,6 +56,22 @@ export async function POST(req) {
       },
     });
 
+  // Obtener información del autor del comentario
+    const usuario = await db.usuario.findUnique({
+      where: { id: usuarioId },
+      select: { nombreUsuario: true },
+    });
+
+    // Si el usuario que comenta no es el dueño de la receta, enviar notificación
+    if (receta.usuarioId !== usuarioId) {
+      await db.notificacion.create({
+        data: {
+          usuarioId: receta.usuarioId, // Dueño de la receta
+          mensaje: `${usuario.nombreUsuario} comentó tu receta.`,
+        },
+      });
+    }
+
     return new Response(JSON.stringify(nuevoComentario), { status: 201 });
   } catch (error) {
     return new Response(

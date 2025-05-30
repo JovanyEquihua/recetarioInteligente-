@@ -70,33 +70,19 @@ export default function ModeratorLayout({ children }) {
                 <>
                   <nav className="flex space-x-1 bg-white/80 rounded-full p-1 shadow-inner">
                     <button 
-                      className={`px-4 py-2 rounded-full transition-all flex items-center space-x-1 ${pathname === "/moderator" ? 'bg-blue-500 text-white shadow-md' : 'text-gray-600 hover:text-blue-500'}`}
-                      onClick={() => router.push("/moderator")}
-                    >
-                      <FiHome className="text-lg" />
-                      <span>Dashboard</span>
-                    </button>
-                    <button 
-                      className={`px-4 py-2 rounded-full transition-all flex items-center space-x-1 ${pathname.includes("reportes") ? 'bg-blue-500 text-white shadow-md' : 'text-gray-600 hover:text-blue-500'}`}
-                      onClick={() => router.push("/moderator/reportes")}
-                    >
-                      <FiAlertTriangle className="text-lg" />
-                      <span>Reports</span>
-                      <span className="bg-red-500 text-white text-xs px-2 py-0.5 rounded-full animate-pulse">3</span>
-                    </button>
-                    <button 
-                      className={`px-4 py-2 rounded-full transition-all flex items-center space-x-1 ${pathname.includes("revision") ? 'bg-blue-500 text-white shadow-md' : 'text-gray-600 hover:text-blue-500'}`}
-                      onClick={() => router.push("/moderator/revision")}
+                      className={`px-4 py-2 rounded-full transition-all flex items-center space-x-1 ${pathname.includes("revision/recetas") ? 'bg-blue-500 text-white shadow-md' : 'text-gray-600 hover:text-blue-500'}`}
+                      onClick={() => router.push("/moderador/recetas")}
                     >
                       <FiCheckCircle className="text-lg" />
-                      <span>Review</span>
+                      <span>Recetas</span>
                     </button>
+
                     <button 
-                      className={`px-4 py-2 rounded-full transition-all flex items-center space-x-1 ${pathname.includes("mensajes") ? 'bg-blue-500 text-white shadow-md' : 'text-gray-600 hover:text-blue-500'}`}
-                      onClick={() => router.push("/moderator/mensajes")}
+                      className={`px-4 py-2 rounded-full transition-all flex items-center space-x-1 ${pathname.includes("revision/comentarios") ? 'bg-blue-500 text-white shadow-md' : 'text-gray-600 hover:text-blue-500'}`}
+                      onClick={() => router.push("/moderador/comentarios")}
                     >
                       <FiMessageSquare className="text-lg" />
-                      <span>Messages</span>
+                      <span>Comentarios</span>
                     </button>
                   </nav>
 

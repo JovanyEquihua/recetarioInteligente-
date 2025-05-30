@@ -6,7 +6,7 @@ export default async function () {
   const session = await getServerSession(authOptions);
   const usuarioId = session?.user?.id;
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen ">
       <ListaCompras usuarioId={usuarioId} />
     </div>
   );

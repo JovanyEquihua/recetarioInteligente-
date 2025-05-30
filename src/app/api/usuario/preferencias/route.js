@@ -48,14 +48,17 @@ const tipo = searchParams.get("tipo"); // puede ser "favoritos"
   }
 
   try {
+     //  Obtenemos el rol del usuario
     const usuario = await db.usuario.findUnique({
       where: { id: session.user.id },
-      select: { preferencias: true },
+      select: { preferencias: true, rol: true },
     })
 
     if (!usuario) {
       return Response.json({ error: "Usuario no encontrado" }, { status: 404 })
     }
+
+    const esModerador = usuario.rol === "moderador" || usuario.rol === "admin";
     
     if (tipo === "favoritos") {
       const recetasFavoritas = await db.receta.findMany({
@@ -72,16 +75,15 @@ const tipo = searchParams.get("tipo"); // puede ser "favoritos"
           tiempoPreparacion: true,
           porciones: true,
           dificultad: true,
-          
         },
       });
   
       return Response.json({ recetas: recetasFavoritas });
     }
   
-
+    // 🔥 Ajustamos la consulta de recetas según el rol
     const recetas = await db.receta.findMany({
-      where: { usuarioId: session.user.id },
+      where: esModerador ? {} : { usuarioId: session.user.id },
       select: {
         id: true,
     titulo: true,
@@ -94,7 +96,11 @@ const tipo = searchParams.get("tipo"); // puede ser "favoritos"
       },
     });
 
-    return Response.json({ preferencias: usuario.preferencias,recetas })
+    return Response.json({
+      preferencias: usuario.preferencias,
+      recetas,
+    })
+
   } catch (error) {
     console.error("Error al obtener preferencias:", error)
     return Response.json(
@@ -106,4 +112,3 @@ const tipo = searchParams.get("tipo"); // puede ser "favoritos"
     )
   }
 }
-
