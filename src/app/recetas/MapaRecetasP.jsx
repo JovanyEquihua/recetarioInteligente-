@@ -187,9 +187,9 @@ export default function MapaRecetasCompactoP() {
         )}
       </div>
 
-      <div className="flex flex-col lg:flex-row gap-4">
+      <div className="flex flex-col lg:flex-row gap-4  ">
         {/* Mapa */}
-        <div className="lg:w-2/3 shadow-lg shadow-[#6B8E23]">
+        <div className="lg:w-2/3 shadow-lg shadow-[#6B8E23] z-[1]">
           <MapContainer
             center={mapCenter}
             zoom={mapZoom}
