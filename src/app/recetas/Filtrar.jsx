@@ -176,27 +176,7 @@ const Filtrar = ({ busquedaActiva, usuarioId }) => {
             </div>
           </div>
 
-          {/* Preferencias Dietéticas */}
-          <div className="mb-6">
-            <h2 className="text-lg font-semibold mb-3">
-              Preferencias Dietéticas
-            </h2>
-            <div className="flex flex-wrap gap-2">
-              {diets.map((diet) => (
-                <button
-                  key={diet.value}
-                  onClick={() => handleDietClick(diet.value)}
-                  className={`px-3 py-1 rounded-full border ${
-                    filters.preferencias.includes(diet.value)
-                      ? "bg-[#e4d5da] border-[#a61139]"
-                      : "border-gray-300"
-                  } text-sm`}
-                >
-                  {diet.name}
-                </button>
-              ))}
-            </div>
-          </div>
+         
 
           {/* Ingredientes */}
           <div className="mb-6">
@@ -224,7 +204,7 @@ const Filtrar = ({ busquedaActiva, usuarioId }) => {
 <div>
   {!busquedaActiva && resultados.length > 0 && (
     <div className="absolute left-1/2 transform translate-x-52 top-[200px] w-[900px] ">
-      <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  overflow-y-scroll max-h-[600px] p-4 rounded-lg shadow-lg">
+      <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  overflow-y-scroll max-h-[480px] p-4 rounded-lg shadow-lg">
         {resultados.map((receta) => (
           <ResultadosPage
             key={receta.id}

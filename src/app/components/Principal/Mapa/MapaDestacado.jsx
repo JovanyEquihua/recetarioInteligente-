@@ -2,13 +2,18 @@ import { motion } from "framer-motion";
 import { Typewriter } from "react-simple-typewriter";
 import Link from "next/link";
 
-export default function MapaDestacado() {
+export default function MapaDestacado({ usuarioId }) {
+
+   const ruta = usuarioId
+    ? `/usuario/mapa`
+    : `/mapa`;
+   
   return (
     <div
-      className="py-16 px-6  mb-1 bg-[#8B1C62]"
+      className="py-16 px-20   mb-1 bg-[#8B1C62]"
 
     >
-      <div className="flex flex-col items-center justify-center text-center space-y-6">
+      <div className="flex flex-col  items-center  justify-center text-center space-y-6">
         {/* Título con animación */}
         <motion.h2
           className="text-4xl sm:text-5xl font-bold text-white"
@@ -41,7 +46,7 @@ export default function MapaDestacado() {
         </motion.p>
 
         {/* Botón a mapaRecetas */}
-        <Link href="/mapa">
+        <Link href={ruta}>
           <motion.div
             className="bg-[#6B8E23] text-white font-semibold px-10 py-3 
             rounded-xl shadow-lg hover:bg-[#b0eb3ca8] transition cursor-pointer"

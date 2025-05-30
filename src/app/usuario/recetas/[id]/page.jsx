@@ -9,6 +9,7 @@ import { authOptions } from "@/libs/authOptions";
 import { db as prisma } from "@/libs/db";
 import ComentariosPage from "@/app/components/Comentarios/ComentariosPage";
 import CalificarEstrellas from "@/app/components/recipe/CalificarEstrellas";
+import Calificar from "@/app/components/recipe/Calificar";
 
 async function getReceta(id) {
   const receta = await prisma.receta.findUnique({
@@ -48,7 +49,6 @@ export default async function RecetaPage({ params }) {
   const total = calificaciones.reduce((acc, c) => acc + c.puntuacion, 0);
   const promedio = calificaciones.length ? total / calificaciones.length : 0;
 
-
   let esFavoritoInicial = false;
 
   if (usuarioId) {
@@ -63,9 +63,7 @@ export default async function RecetaPage({ params }) {
 
   return (
     <div className="max-w-4xl mx-auto p-6 sm:p-10 relative">
-
-        <div className="mb-4">
-       
+      <div className="mb-4">
         <CalificarEstrellas
           promedio={promedio}
           recetaId={recetaId}
@@ -83,12 +81,12 @@ export default async function RecetaPage({ params }) {
       </div>
 
       <HeaderReceta receta={receta} />
-        <div className="mb-14">
-              {Array.isArray(receta.pasosPreparacion) &&
-                receta.pasosPreparacion.length > 0 && (
-                  <ModoCocina pasos={receta.pasosPreparacion} />
-                )}
-            </div>
+      <div className="mb-14">
+        {Array.isArray(receta.pasosPreparacion) &&
+          receta.pasosPreparacion.length > 0 && (
+            <ModoCocina pasos={receta.pasosPreparacion} />
+          )}
+      </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-10">
         <IngredientesSection ingredientes={receta.ingredientes} />
@@ -96,7 +94,14 @@ export default async function RecetaPage({ params }) {
       </div>
 
       <PasosSection pasosPreparacion={receta.pasosPreparacion} />
-
+      <div className="mt-6">
+        <Calificar  
+        promedio={promedio}
+          recetaId={recetaId}
+          usuarioId={usuarioId}
+          editable={!!usuarioId} />
+      </div>
+      
       <ComentariosPage
         recetaId={recetaId}
         usuario={usuarioId ? { id: usuarioId, nombre: usuarioNombre } : null}
