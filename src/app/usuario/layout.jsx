@@ -327,7 +327,8 @@ export default function Layout({ children }) {
         </div>
       </header>
   {/* <main className="container mx-auto px-4 py-8">{children}</main> */}
-  <main className="container">{children}</main> 
+<main className="container mx-auto px-4 py-8">{children}</main>
+
   <Footer />
       {/* Mostrar el wizard solo si es el primer inicio de sesión */}
       {showWizard && (
