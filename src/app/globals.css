@@ -147,3 +147,13 @@ html:not([data-scroll="0"]) .navbar {
   background-color: #6B8E23;
   border-radius: 8px;
 }
+
+/* Scroll personalizado */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #6B8E23;
+  border-radius: 8px;
+}
