@@ -14,21 +14,17 @@ const Index = () => {
   const [busquedaActiva, setBusquedaActiva] = useState(false);
   const [recetasTop, setRecetasTop] = useState([]);
 
-   useEffect(() => {
+  useEffect(() => {
     async function fetchTop() {
       try {
         const res = await fetch("/api/recetas/top");
         const data = await res.json();
-  
 
         if (Array.isArray(data)) {
           setRecetasTop(data);
         } else {
-        
         }
-      } catch (error) {
-       
-      }
+      } catch (error) {}
     }
 
     fetchTop();
@@ -58,10 +54,12 @@ const Index = () => {
           >
             <DestacadosPage usuarioId={usuarioId} />
           </div>
-          <MapaDestacado />
+
+          <MapaDestacado usuarioId={usuarioId}  />
+
           <div className="">
-          <RecetasCard  recetas={recetasTop} usuarioId={usuarioId}/>
-           </div>
+            <RecetasCard recetas={recetasTop} usuarioId={usuarioId} />
+          </div>
         </div>
       )}
     </div>

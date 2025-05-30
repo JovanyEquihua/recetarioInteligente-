@@ -3,6 +3,7 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { useEffect, useState, useMemo } from "react";
+import { Fade } from "react-awesome-reveal";
 
 // Configuración de iconos
 function createIcon(iconUrl, color) {
@@ -110,9 +111,20 @@ export default function MapaRecetasCompacto() {
 
   return (
     <div className="container mx-auto px-4 py-6">
-      <h1 className="text-2xl font-bold text-center mb-4 text-gray-800">
-        Recetas del Mundo 🌍
-      </h1>
+      <div className="text-center mb-14 ">
+             <Fade direction="up" delay={400} cascade damping={0.1} triggerOnce>
+               <h3 className="text-pink text-lg font-normal mb-3 ls-51 uppercase">
+                 Conoce recetas
+               </h3>
+             </Fade>
+             <Fade direction="up" delay={800} cascade damping={0.1} triggerOnce>
+               <div className="flex items-center justify-center gap-4">
+                 <p className="text-3xl lg:text-5xl font-semibold text-lightgrey m-0 text-[#8B1C62]">
+                   De todo el mundo
+                 </p>
+               </div>
+             </Fade>
+           </div>
 
       {/* Controles de búsqueda */}
       <div className="bg-white rounded-lg shadow-sm p-3 mb-4">
@@ -124,9 +136,9 @@ export default function MapaRecetasCompacto() {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <button
+           <button
             onClick={resetMapView}
-            className="bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm py-2 px-3 rounded-md transition"
+            className="bg-[#6B8E23] hover:bg-[#95b94cb2] text-white text-sm py-2 px-3 rounded-md transition"
           >
             Resetear Mapa
           </button>
@@ -156,9 +168,9 @@ export default function MapaRecetasCompacto() {
         )}
       </div>
 
-      <div className="flex flex-col lg:flex-row gap-4">
+      <div className="flex flex-col lg:flex-row gap-4 ">
         {/* Mapa */}
-        <div className="lg:w-2/3">
+         <div className="lg:w-2/3 shadow-lg shadow-[#6B8E23] z-[1]">
           <MapContainer
             center={mapCenter}
             zoom={mapZoom}
@@ -230,7 +242,9 @@ export default function MapaRecetasCompacto() {
 
         {/* Panel lateral informativo (sin favoritos) */}
         <div className="lg:w-1/3 bg-white rounded-lg shadow-sm p-3 h-fit sticky top-4">
-          <h2 className="text-lg font-semibold mb-2">Explora recetas</h2>
+           <h2 className="text-lg font-semibold mb-2 text-[#8B1C62]">
+            Explora recetas
+          </h2>
           <p className="text-sm text-gray-600 mb-3">
             Haz clic en los marcadores del mapa o en los países arriba para ver
             las recetas.
