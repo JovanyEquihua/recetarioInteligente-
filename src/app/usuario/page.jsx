@@ -9,9 +9,6 @@ import Principal from "../components/Principal/Principal/page";
 const page = () => {
   return (
     <div >
-    
-    {/* <Filtrar />
-    <Busqueda /> */}
     <Principal/>
     
   
