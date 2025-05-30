@@ -6,6 +6,7 @@ const ResultadosBusqueda = ({ recetaImagen, receta,usuarioId}) => {
   const ruta = usuarioId
     ? `/usuario/recetas/${receta.id}`
     : `/RecetaCompleta/recetas/${receta.id}`;
+   
   return (
     <div
       className="bg-white rounded-lg 
