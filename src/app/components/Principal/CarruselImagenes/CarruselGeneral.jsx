@@ -20,7 +20,7 @@ const CarruselGeneral = ({
     <div className="relative  w-full max-w-7xl mx-auto mt-10 flex transition-all duration-500 z">
       {/* Panel de filtrado */}
       {mostrarFiltrar && (
-        <div className="relative  mb-10 rounded-xl shadow-2xl p-6 min-w-[300px] max-w-[350px] transition-all duration-500">
+        <div className="relative  mb-10 rounded-xl  shadow-2xl p-6 min-w-[300px] max-w-[350px] transition-all duration-500">
           <button
             className="text-gray-500 hover:text-[#8B1C62] text-2xl font-bold mb-2 translate-x-72"
             onClick={() => setMostrarFiltrar(false)}
