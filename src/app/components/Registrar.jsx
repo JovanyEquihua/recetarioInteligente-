@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { z } from "zod";
+import { useRouter } from "next/navigation";
 
 // Esquema de validación con Zod
 const registroSchema = z.object({
@@ -20,6 +21,7 @@ const registroSchema = z.object({
 });
 
 export default function Registrar() {
+   const router = useRouter(); 
   const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState({
     nombre: "",
@@ -74,13 +76,23 @@ export default function Registrar() {
   // Cerrar el pop-up
   const handleClose = () => {
     setIsOpen(false);
+     router.push("/");
   };
 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50">
-      <div className="relative bg-white shadow-lg rounded-xl p-8 w-full max-w-md">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4  "
+    style={{
+    backgroundImage: "url('/images/fondo-lista6.png')",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+  }}>
+    {/* Overlay negro sutil */}
+  <div className="absolute inset-0 bg-black opacity-30 z-0"></div>
+
+      <div className="relative bg-white shadow-2xl rounded-xl p-8 w-full max-w-md shadow-[#6B8E23]">
+        
         <button
           onClick={handleClose}
           className="absolute top-4 right-4 text-gray-500  hover:text-red-500 transition-transform transform hover:rotate-90"
@@ -101,18 +113,21 @@ export default function Registrar() {
           </svg>
         </button>
 
-        <h2 className="text-3xl font-bold text-center text-black mb-6">
-          Registro
-        </h2>
-        <div className="flex flex-col items-center">
-          <Image
-            src="/images/Logo/logo.png"
-            alt="logo"
-            width={200}
-            height={200}
-          />
-        </div>
-
+        
+             <div className="flex flex-col items-center">
+                           <Image
+                             src="/images/Logo/logo.png"
+                             alt="logo"
+                             width={200}
+                             height={200}
+                           />
+                           <h2 className="mt-3 text-2xl font-bold text-gray-800">
+                             Bienvenido
+                           </h2>
+                           <p className="text-sm text-gray-500">
+                             Ingresa tus datos para registrarte
+                           </p>
+                         </div>
         <form onSubmit={handleSubmit} className="space-y-4 mt-4">
           <div className="grid grid-cols-2 gap-3">
             <input
@@ -169,7 +184,7 @@ export default function Registrar() {
 
           <button
             type="submit"
-            className="w-full py-2 font-semibold text-white bg-[#8B1C62] rounded-lg hover:bg-[#A44572] transition-all duration-300 transform hover:scale-105 shadow-md"
+            className="w-full py-2 font-semibold text-white bg-[#8B1C62] rounded-lg hover:bg-[#A44572] transition-all duration-300 transform hover:scale-105 shadow-lg"
           >
             Registrarse
           </button>
