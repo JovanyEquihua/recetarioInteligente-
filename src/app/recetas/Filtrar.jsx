@@ -220,21 +220,23 @@ const Filtrar = ({ busquedaActiva, usuarioId }) => {
         </div>
       </div>
       {/* Resultados */}
-      <div>
-        {!busquedaActiva && resultados.length > 0 && (
-          <div className="absolute left-1/2 transform translate-x-52 top-[200px] w-[900px] overflow-hidden">
-            <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-              {resultados.map((receta) => (
-                <ResultadosPage
-                  key={receta.id}
-                  receta={receta}
-                  usuarioId={usuarioId}
-                />
-              ))}
-            </div>
-          </div>
-        )}
+   
+<div>
+  {!busquedaActiva && resultados.length > 0 && (
+    <div className="absolute left-1/2 transform translate-x-52 top-[200px] w-[900px] ">
+      <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  overflow-y-scroll max-h-[600px] p-4 rounded-lg shadow-lg">
+        {resultados.map((receta) => (
+          <ResultadosPage
+            key={receta.id}
+            receta={receta}
+            usuarioId={usuarioId}
+          />
+        ))}
       </div>
+    </div>
+  )}
+</div>
+
     </div>
   );
 };
