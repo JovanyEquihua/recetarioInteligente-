@@ -103,18 +103,7 @@ export default function AdminLayout({ children }) {
                           <p className="font-medium text-gray-900">Sesión activa</p>
                           <p className="text-xs text-gray-500 truncate">{session.user.email}</p>
                         </div>
-                        <button
-                          onClick={() => router.push("/admin/perfil")}
-                          className="flex items-center px-4 py-2 text-gray-800 hover:bg-gray-100 w-full text-left"
-                        >
-                          <FiUser className="mr-2 text-gray-600" /> Mi Perfil
-                        </button>
-                        <button
-                          onClick={() => router.push("/admin/configuracion")}
-                          className="flex items-center px-4 py-2 text-gray-800 hover:bg-gray-100 w-full text-left"
-                        >
-                          <FiSettings className="mr-2 text-gray-600" /> Configuración
-                        </button>
+                        
                         <div className="border-t border-gray-200">
                           <button
                             onClick={handleSignOut}
@@ -177,18 +166,8 @@ export default function AdminLayout({ children }) {
                     >
                       <FiUsers /> <span>Usuarios</span>
                     </button>
-                    <button 
-                      className="flex items-center space-x-2 px-3 py-2 hover:bg-gray-700 rounded-lg"
-                      onClick={() => router.push("/admin/config")}
-                    >
-                      <FiShield /> <span>Seguridad</span>
-                    </button>
-                    <button 
-                      className="flex items-center space-x-2 px-3 py-2 hover:bg-gray-700 rounded-lg"
-                      onClick={() => router.push("/admin/perfil")}
-                    >
-                      <FiUser /> <span>Perfil</span>
-                    </button>
+                    
+                   
                     
                     <div className="border-t border-gray-700 pt-2">
                       <button
