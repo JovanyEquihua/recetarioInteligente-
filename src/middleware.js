@@ -14,8 +14,10 @@ export async function middleware(req) {
     return NextResponse.next();
   }
 
-  const publicRoutes = ["/", "/login", "/registrarse", "/verificar", "/restablecer-contrasena","/politica-privacidad","/terminos","/cookies"];
-  const dynamicPublicRoutes = ["/receta", "/mapa","/RecetaCompleta/recetas"];
+
+  const publicRoutes = ["/", "/login", "/registrarse", "/verificar", "/restablecer-contrasena","/politica-privacidad","/terminos","/cookies","/pasos"];
+  const dynamicPublicRoutes = ["/receta", "/mapa","/RecetaCompleta"];
+
 
   const isPublic =
     publicRoutes.includes(pathname) ||
