@@ -46,7 +46,7 @@ export default function ModeratorLayout({ children }) {
             {/* Logo */}
             <div 
               className="flex items-center space-x-3 cursor-pointer group"
-              onClick={() => router.push("/moderator")}
+              onClick={() => router.push("/moderador")}
             >
               <div className="relative group-hover:rotate-12 transition-transform duration-300">
                 <Image 
@@ -54,13 +54,13 @@ export default function ModeratorLayout({ children }) {
                   alt="ChefPick Moderador" 
                   width={48} 
                   height={48} 
-                  className="rounded-full border-2 border-white shadow-md group-hover:border-blue-400 transition-colors duration-300"
+                  className="rounded-full border-2 border-white shadow-md group-hover:border-[#D16A96] transition-colors duration-300"
                 />
                 <div className="absolute inset-0 rounded-full border-2 border-transparent group-hover:border-blue-300 group-hover:animate-ping opacity-0 group-hover:opacity-70 transition-all duration-700 pointer-events-none"></div>
               </div>
               <div className="transform group-hover:translate-x-1 transition-transform duration-300">
-                <h1 className="text-xl font-bold bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">ChefPick</h1>
-                <p className="text-xs font-medium text-blue-400">Moderation Panel</p>
+                <h1 className="text-xl font-bold bg-gradient-to-r from-[#8B1C62] to-[#D16A96] bg-clip-text text-transparent">ChefPick</h1>
+  <p className="text-xs font-medium text-[#D16A96]">Panel de moderador</p>
               </div>
             </div>
 
@@ -93,7 +93,7 @@ export default function ModeratorLayout({ children }) {
                       onClick={() => setIsMenuOpen(!isMenuOpen)}
                     >
                       <div className="relative">
-                        <FiBell className="text-xl text-gray-500 hover:text-blue-500 transition-colors" />
+                        <FiBell className="text-xl text-gray-500 hover:text-[#D16A96]transition-colors" />
                         <span className="absolute -top-1 -right-1 h-3 w-3 bg-red-500 rounded-full border-2 border-white"></span>
                       </div>
                       {session.user.image ? (
@@ -103,12 +103,12 @@ export default function ModeratorLayout({ children }) {
                             alt="Moderador"
                             className="w-10 h-10 rounded-full object-cover border-2 border-white shadow-md group-hover:border-blue-400 transition-colors"
                           />
-                          <span className="absolute -bottom-1 -right-1 bg-blue-500 text-white text-xs p-1 rounded-full border-2 border-white">
+                          <span className="absolute -bottom-1 -right-1 bg-[#D16A96] text-white text-xs p-1 rounded-full border-2 border-white">
                             <FiCheckCircle />
                           </span>
                         </div>
                       ) : (
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center border-2 border-white shadow-md">
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#8B1C62] to-[#D16A96] flex items-center justify-center border-2 border-white shadow-md">
                           <FiUser className="text-white text-lg" />
                         </div>
                       )}
@@ -117,7 +117,7 @@ export default function ModeratorLayout({ children }) {
                     {/* Dropdown */}
                     {isMenuOpen && (
                       <div className="absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-xl py-2 z-50 border border-gray-100 overflow-hidden">
-                        <div className="px-4 py-3 bg-gradient-to-r from-blue-500 to-blue-400 text-white">
+                        <div className="px-4 py-3 bg-gradient-to-r  from-[#8B1C62] to-[#D16A96]  text-white">
                           <p className="font-medium">Sesión de moderador</p>
                           <p className="text-xs opacity-90 truncate">{session.user.email}</p>
                         </div>

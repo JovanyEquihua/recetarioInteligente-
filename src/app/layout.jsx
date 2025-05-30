@@ -29,6 +29,9 @@ export default function RootLayout({ children }) {
 
   // Verifica si la ruta actual es /usuario o una subruta de /usuario
   const isUsuarioRoute = pathname.startsWith("/usuario");
+  const isAdminRoute = pathname.startsWith("/admin");
+  const isModeradorRoute = pathname.startsWith("/moderador");
+
 
   return (
     <html lang="en">
@@ -37,9 +40,9 @@ export default function RootLayout({ children }) {
       >
         <SessionProvider>
          {/* Renderiza el Navbar solo si no estás en una ruta de usuario */}
-         {!isUsuarioRoute && <SafeNavbarin />}
+         {!isUsuarioRoute && !isAdminRoute && !isModeradorRoute && <SafeNavbarin />}
           {children}
-          {!isUsuarioRoute && <Footer />}
+          {!isUsuarioRoute  && !isAdminRoute && !isModeradorRoute && <Footer />}
         </SessionProvider>
         
       </body>
