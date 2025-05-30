@@ -220,12 +220,7 @@ export default function Layout({ children }) {
                       >
                         <FiUser className="mr-2" /> Mi perfil
                       </button>
-                      <button
-                        onClick={() => router.push("/usuario/configuracion")}
-                        className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-50 w-full text-left text-sm"
-                      >
-                        <FiSettings className="mr-2" /> Configuración
-                      </button>
+                      
                       <button
                         onClick={handleSignOut}
                         className="flex items-center px-4 py-2 text-gray-700 hover:bg-gray-50 w-full text-left text-sm border-t border-gray-100"
@@ -304,19 +299,13 @@ export default function Layout({ children }) {
                         <FiUser className="text-gray-600" />{" "}
                         <span>Mi perfil</span>
                       </button>
-                      <button
-                        className="flex items-center space-x-2 px-3 py-2 hover:bg-gray-50 rounded-lg w-full text-left"
-                        onClick={() => router.push("/usuario/configuracion")}
-                      >
-                        <FiSettings className="text-gray-600" />{" "}
-                        <span>Settings</span>
-                      </button>
+                     
                       <button
                         onClick={handleSignOut}
                         className="flex items-center space-x-2 px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-lg w-full text-left"
                       >
                         <FiLogOut className="text-gray-600" />{" "}
-                        <span>Sign out</span>
+                        <span>Cerrar sesión</span>
                       </button>
                     </div>
                   </>
