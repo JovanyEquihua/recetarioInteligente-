@@ -3,10 +3,7 @@
 import React, { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-//import RecuperarContra from "./RecuperarContra";
 import { FcGoogle } from "react-icons/fc";
-
-
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -23,13 +20,17 @@ export default function Login() {
       contraseña,
     });
 
-    if (result.error) {
-      console.error("Error al iniciar sesión:", result.error);
+    if (result.error === "NO_EXISTE") {
+      router.push("/registrarse");
+    } else if (result.error) {
       setError(result.error);
     } else {
-      console.log("Login exitoso", result);
       window.location.href = "/hola";
     }
+  };
+
+  const handleGoogleLogin = async () => {
+    await signIn("google", { callbackUrl: "/hola" });
   };
 
   return (
@@ -79,19 +80,19 @@ export default function Login() {
         <div className="space-y-4">
           <button
             className="w-full flex items-center justify-center px-4 py-2 font-semibold bg-gray-100 rounded-lg shadow-md hover:bg-gray-200 transition duration-300"
-            onClick={() => signIn("google")}
+            onClick={handleGoogleLogin}
           >
             <FcGoogle className="mr-2 text-xl" /> Iniciar sesión con Google
           </button>
         </div>
 
         <div className="text-center">
-            Recuperar contra
+          Recuperar contra
           {/* <RecuperarContra /> */}
         </div>
 
         <p className="text-sm text-center text-gray-600">
-          ¿No tienes cuenta?{' '}
+          ¿No tienes cuenta?{" "}
           <a href="#" className="text-blue-500 hover:underline">
             Regístrate
           </a>
@@ -99,6 +100,4 @@ export default function Login() {
       </div>
     </div>
   );
-};
-
-
+}
